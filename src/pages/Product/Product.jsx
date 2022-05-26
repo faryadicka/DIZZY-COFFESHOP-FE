@@ -59,8 +59,8 @@ export default class Product extends Component {
   }
   componentDidMount() {
     this.getCoffee("1")
-    this.getCoffee("2")
-    this.getCoffee("3")
+    this.getNonCoffee("2")
+    this.getFoods("3")
   }
   render() {
     return (
