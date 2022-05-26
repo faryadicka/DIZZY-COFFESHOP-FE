@@ -1,0 +1,82 @@
+*,
+::after,
+::before {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+@media only screen and (max-width: 600px) {
+  .copy-right {
+    margin: 10px 0;
+  }
+  .footer-title-component {
+    display: flex;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .copy-right {
+    margin-top: 10px;
+    color: #afb5c0;
+    font-size: 16px;
+  }
+  .footer-side {
+    flex: 2;
+  }
+  .footer-title-component {
+    display: flex;
+    margin-bottom: 15px;
+  }
+  .footer-title {
+    font-weight: bold;
+    font-size: 20px;
+    margin-left: 15px;
+  }
+  .footer-desc {
+    margin-bottom: 15px;
+    line-height: 25px;
+    font-size: 16px;
+  }
+}
+
+.footer-products {
+  padding: 80px 80px 80px;
+  width: inherit;
+  height: 450px;
+  background-color: #f8f8f8;
+  /* For browsers that do not support gradients */
+  background-image: linear-gradient(#f8f8f8, white);
+}
+
+.footer-title-signup {
+  display: flex;
+}
+
+.footer-desc {
+  margin: 10px 0;
+}
+
+.footer-title {
+  font-weight: bold;
+  font-size: 20px;
+  margin-left: 15px;
+}
+
+.list-footer-product,
+.list-footer-product > a {
+  list-style: none;
+  text-decoration: none;
+}
+
+.list-footer-product .list-title-footer {
+  font-size: 18px;
+  font-weight: 700;
+  color: #000000;
+}
+
+.list-footer-product li {
+  font-size: 16px;
+  font-weight: 400;
+  color: #4f5665;
+  line-height: 30px;
+}

@@ -1,15 +1,12 @@
 import React, { Component } from 'react'
 import { Link, BrowserRouter as Router } from "react-router-dom";
-import { Navbar, Container, Form, FormControl, Nav } from "react-bootstrap"
+import { Navbar, Container, Button, Nav } from "react-bootstrap"
 
 // assets
-import '../../components/Navbars/Navbars.scoped.css'
+import '../../components/Navbars/NavbarHome.scoped.css'
 import Logo from "../../assets/img/logo.png"
-import Search from "../../assets/img/search.png"
-import Message from "../../assets/img/chat.png"
-import Profile from "../../assets/img/ava.png"
 
-export default class Navbars extends Component {
+export default class NavbarHome extends Component {
   render() {
     return (
       <Router>
@@ -36,18 +33,9 @@ export default class Navbars extends Component {
                   <Link className='text-decoration-none text-gray me-xl-4' to="#pricing">Your Cart</Link>
                   <Link className='text-decoration-none text-gray me-xl-4' to="#pricing">History</Link>
                 </Nav>
-                <div className="wrap-nav-right ms-md-5 d-flex">
-                  <Form className="d-flex position-relative justify-content-center">
-                    <img className='img-button-navbar' src={Search} alt="search-button" />
-                    <FormControl
-                      type="search"
-                      placeholder="Search"
-                      className="me-xl-2 rounded-5 ps-xl-5 ps-5 input-navbar"
-                      aria-label="Search"
-                    />
-                  </Form>
-                  <Link className='chat-navbar text-decoration-none me-md-4' to="#"><img src={Message} alt="chat-logo" /></Link>
-                  <Link className='ms-xl-2 text-decoration-none' to="#"><img src={Profile} alt="chat-logo" /></Link>
+                <div className="wrap-nav-right ms-md-5 d-flex justify-content-center">
+                  <Button variant="">Login</Button>{' '}
+                  <Button variant="warning" className='rounded-5 button-sign-up-navbar'>Sign Up</Button>{' '}
                 </div>
               </Nav>
             </Navbar.Collapse>

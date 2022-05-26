@@ -1,0 +1,83 @@
+*,
+::after,
+::before {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.first-column-products {
+  color: #6a4029;
+}
+
+.text-bg-green {
+  background-color: #88b788;
+}
+
+.text-bg-cream {
+  background-color: #f5c361;
+}
+
+.text-bg-choco {
+  background-color: #c59378;
+}
+
+.card-body-coupon {
+  display: flex;
+}
+
+.card-text-coupon {
+  font-size: 14px;
+}
+
+.menu-products {
+  text-decoration: none;
+  color: #9f9f9f;
+  border: none;
+  background-color: white;
+}
+
+.menu-products:active {
+  border: none;
+}
+
+.menu-products:hover {
+  color: #6a4029;
+  text-decoration: underline;
+  font-weight: bold;
+  border: none;
+}
+
+.btn-choco-coupon {
+  background-color: #6a4029;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-weight: bold;
+  margin-left: 0px;
+  width: 100%;
+  padding: 10px 0;
+}
+
+.desc-coupon {
+  font-size: 12px;
+}
+
+.column-coupon {
+  border-right: 1px solid #9f9f9f;
+  border-top: 1px solid #9f9f9f;
+}
+
+.column-products {
+  border-top: 1px solid #9f9f9f;
+}
+
+@media only screen and (max-width: 600px) {
+  .column-coupon {
+    border-bottom: 1px solid #9f9f9f;
+    border-right: none;
+    border-top: 1px solid #9f9f9f;
+  }
+  .title-category {
+    font-size: 12px;
+  }
+}

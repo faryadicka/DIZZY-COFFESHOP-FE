@@ -1,0 +1,44 @@
+*,
+::after,
+::before {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.text-gray {
+  color: #4f5665;
+}
+
+.text-gray:hover {
+  color: #6a4029;
+  font-weight: bold;
+}
+
+.text-gray:active {
+  color: #6a4029;
+  font-weight: bold;
+}
+
+.button-sign-up-navbar {
+  padding: 0px 30px;
+  color: #6a4029;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+@media only screen and (min-width: 1200px) {
+  .wrap-nav-right {
+    position: relative;
+    bottom: 10px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .chat-navbar {
+    margin: 0 15px;
+  }
+
+  .wrap-nav-right {
+    justify-content: center;
+  }
+}

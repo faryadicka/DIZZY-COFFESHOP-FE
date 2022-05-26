@@ -2,14 +2,14 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-// import App from "./App";
-import Navbars from "./components/Navbars/Navbars.jsx";
+import Product from "./pages/Product/Product";
+// import CardProduct from "./components/CardProducts/CardProduct";
 import reportWebVitals from "./reportWebVitals";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <Navbars />
+    <Product />
   </React.StrictMode>
 );
 

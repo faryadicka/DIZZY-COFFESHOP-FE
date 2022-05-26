@@ -1,0 +1,39 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@700;900&display=swap");
+*,
+::after,
+::before {
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+.card-products > img {
+  width: 100px;
+}
+
+.card-products {
+  border-radius: 25px;
+  width: 130px;
+  box-shadow: 5px 15px 10px 5px rgba(0, 0, 0, 0.062);
+  height: 80%;
+}
+
+.card-img-top {
+  width: 50%;
+  height: inherit;
+}
+
+.card-price {
+  font-size: 17px;
+  font-weight: 700;
+  text-align: center;
+  color: #6a4029;
+}
+
+.card-title {
+  font-size: 22px;
+  font-weight: 900;
+  line-height: 22px;
+  letter-spacing: 0em;
+  text-align: center;
+}
