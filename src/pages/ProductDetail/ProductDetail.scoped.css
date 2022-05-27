@@ -1,0 +1,12 @@
+*,
+::after,
+::before {
+  margin: 0px;
+  box-sizing: border-box;
+}
+
+.main-product-detail {
+  height: 1200px;
+  width: 100%;
+  background-color: red;
+}

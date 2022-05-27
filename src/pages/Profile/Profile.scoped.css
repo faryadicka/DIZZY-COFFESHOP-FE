@@ -1,0 +1,86 @@
+*,
+::after,
+::before {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.main-content {
+  background-image: url(../../assets/img/background.webp);
+  width: 100%;
+  height: 1300px;
+}
+
+.edit-pencil-input {
+  width: 80%;
+  height: 80%;
+}
+
+.email-profile,
+.delivery-info {
+  color: #4f5665;
+}
+
+.contacts-logo-edit {
+  display: flex;
+  justify-content: space-between;
+}
+
+.edit-column-first {
+  border-bottom: 10px solid #6a4029;
+  border-radius: 15px;
+  margin-bottom: 10px;
+}
+
+.logo-circle-first,
+.logo-circle-second {
+  width: 30px;
+  height: 28px;
+  background-color: #6a4029;
+}
+
+.form-control-profile {
+  border: none;
+  border-bottom: 1px solid black;
+  width: 100%;
+}
+.btn-choco {
+  background-color: #6a4029;
+  color: white;
+  font-weight: 700;
+}
+
+.btn-footer {
+  /* width: 330px; */
+  height: 60px;
+  border: none;
+  border-radius: 15px;
+  padding: 15px;
+}
+
+.btn-light,
+.btn-yellow {
+  color: #6a4029;
+  font-weight: 700;
+}
+
+.btn-yellow {
+  background-color: rgb(255, 193, 23);
+}
+
+.btn-edit-logo {
+  border: none;
+  background-color: #4f566500;
+}
+
+@media only screen and (min-width: 1200px) {
+  .second-row-edit {
+    margin-top: 100px;
+  }
+  .edit-column-first {
+    /* border-bottom: 10px solid #6A4029;
+    border-radius: 15px;
+    margin-bottom: 10px; */
+    height: 418px;
+  }
+}

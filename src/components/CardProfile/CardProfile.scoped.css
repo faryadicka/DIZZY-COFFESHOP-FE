@@ -1,0 +1,52 @@
+*,
+::after,
+::before {
+  margin: 0;
+  box-sizing: border-box;
+}
+.edit-column-first {
+  border-bottom: 10px solid #6a4029;
+  border-radius: 15px;
+  margin-bottom: 10px;
+}
+
+.logo-circle-first {
+  position: relative;
+  bottom: 50px;
+  left: 70px;
+}
+
+.card-img-top {
+  width: 50%;
+  height: inherit;
+}
+
+.btn-edit-logo {
+  border: none;
+  background-color: #4f566500;
+}
+
+.logo-circle-first {
+  width: 30px;
+  height: 28px;
+  background-color: #6a4029;
+}
+
+.edit-pencil-ava {
+  width: 60%;
+  height: 60%;
+}
+
+.email-profile,
+.delivery-info {
+  color: #4f5665;
+}
+
+@media only screen and (min-width: 1200px) {
+  .edit-column-first {
+    /* border-bottom: 10px solid #6A4029;
+    border-radius: 15px;
+    margin-bottom: 10px; */
+    height: 418px;
+  }
+}

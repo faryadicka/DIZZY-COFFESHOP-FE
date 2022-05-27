@@ -1,0 +1,335 @@
+*,
+::after,
+::before {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.header-brand-auth {
+  text-decoration: none;
+  color: black;
+}
+
+.normal {
+  background-color: #ffba33;
+  color: #6a4029;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.google {
+  color: #000000;
+  font-weight: 700;
+  font-size: 17px;
+  padding-bottom: 10px;
+}
+.main-form-auth {
+  display: flex;
+  flex-direction: column;
+}
+
+.label-auth {
+  font-size: 20px;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.input-auth::placeholder {
+  font-size: 20px;
+  color: #9f9f9f;
+  font-weight: 400;
+}
+
+.input-auth {
+  border-radius: 15px;
+  border: none;
+  padding-left: 1.25rem;
+  font-weight: 400;
+  margin-bottom: 1.25rem;
+}
+
+.has-account {
+  display: flex;
+}
+
+.underline {
+  flex: 1;
+  height: 1px;
+  border-bottom: 2px solid #9f9f9f;
+  position: relative;
+  top: 53px;
+}
+.login {
+  background-color: #6a4029;
+  font-weight: 700;
+  font-size: 17px;
+  color: white;
+}
+
+.already-account {
+  margin: 40px 0;
+  text-align: center;
+  color: #9f9f9f;
+  font-weight: 700;
+  padding: 0 15px;
+}
+
+@media only screen and (min-width: 1200px) {
+  .footer-content-auth {
+    padding: 50px;
+    display: flex;
+    height: 450px;
+    background-color: #f8f8f8;
+    align-items: center;
+    justify-content: space-around;
+    column-gap: 50px;
+    margin-top: 80px;
+  }
+  .info-detail {
+    color: #4f5665;
+  }
+  .product-info-auth {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 10px;
+    row-gap: 10px;
+  }
+  .title-info-footer {
+    margin: 20px 0;
+    font-weight: 700;
+  }
+  .footer-info {
+    flex: 2;
+  }
+  .copy-right {
+    margin-top: 10px;
+    color: #afb5c0;
+    font-size: 16px;
+  }
+  .footer-desc {
+    margin-bottom: 15px;
+    line-height: 25px;
+    font-size: 16px;
+  }
+  .footer-title {
+    font-weight: bold;
+    font-size: 20px;
+    margin-left: 15px;
+  }
+  .footer-title-auth {
+    margin-bottom: 15px;
+    display: flex;
+  }
+  .footer-side {
+    flex: 2;
+  }
+  .main-header-auth {
+    padding: 50px;
+    display: flex;
+  }
+  .container-auth {
+    display: flex;
+    width: 100%;
+    height: 1500px;
+  }
+  .header-brand-auth {
+    padding-top: 10px;
+    margin-left: 10px;
+    font-size: 15px;
+    flex: 5;
+    font-weight: bold;
+  }
+  .header-title-auth {
+    font-weight: bold;
+    font-size: 30px;
+    color: #6a4029;
+    flex: 2;
+  }
+  .input-auth::placeholder {
+    font-size: 20px;
+    color: #9f9f9f;
+    font-weight: 400;
+  }
+
+  .input-auth {
+    width: 505px;
+    height: 75px;
+    border-radius: 15px;
+    border: 1px solid #4f5665;
+    padding-left: 20px;
+    font-weight: 400;
+    margin-bottom: 20px;
+  }
+  .button-auth {
+    width: 505px;
+    height: 75px;
+    border-radius: 20px;
+    margin-top: 25px;
+    border: none;
+    cursor: pointer;
+  }
+  .google {
+    box-shadow: 5px 10px 18px #b3b2b2;
+  }
+  .google-button {
+    position: relative;
+    top: 5px;
+    right: 10px;
+  }
+  .main-form-auth {
+    padding: 90px;
+  }
+  .label-auth {
+    color: #4f5665;
+  }
+
+  .input-auth {
+    width: 505px;
+    height: 75px;
+    border: 1px solid #4f5665;
+  }
+  .forgot-password {
+    text-decoration: underline;
+    color: #6a4029;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 50px;
+  }
+  .image-aside-auth {
+    width: 660px;
+    height: 1625px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .image-aside-auth {
+    width: 100%;
+  }
+  .footer-content-auth {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 50px;
+    height: 517px;
+    color: white;
+    margin-top: -100px;
+  }
+  .footer-title-auth {
+    display: flex;
+  }
+  .footer-desc {
+    margin: 10px 0;
+  }
+  .copy-right {
+    margin: 10px 0;
+  }
+  .footer-info {
+    margin-top: 10px;
+  }
+  .title-info-footer {
+    margin: 10px 0;
+    font-weight: 700;
+  }
+  .product-info-auth {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 10px;
+    row-gap: 10px;
+  }
+  .header-brand-auth {
+    text-decoration: none;
+    color: white;
+  }
+
+  .header-brand-auth:hover {
+    color: rgb(75, 71, 71);
+  }
+
+  .input-auth:focus {
+    border: none;
+  }
+
+  .input-auth {
+    width: 100%;
+    height: 3.438rem;
+    border: none;
+  }
+  .label-auth {
+    color: #ffffff;
+  }
+  .main-form-auth {
+    padding: 5.625rem;
+  }
+  .google {
+    box-shadow: 5px 5px 5px #b3b2b28a;
+  }
+
+  .google-button {
+    position: relative;
+    top: 5px;
+    right: 10px;
+  }
+  .button-auth {
+    width: 100%;
+    height: 3.438rem;
+    border-radius: 20px;
+    margin-top: 25px;
+    border: none;
+    cursor: pointer;
+  }
+  .input-auth::placeholder {
+    font-size: 20px;
+    color: #9f9f9f;
+    font-weight: 400;
+  }
+
+  .input-auth:focus {
+    border: none;
+  }
+
+  .input-auth {
+    width: 100%;
+    height: 3.438rem;
+    border-radius: 15px;
+    border: none;
+    padding-left: 1.25rem;
+    font-weight: 400;
+    margin-bottom: 1.25rem;
+  }
+  .label-auth {
+    font-size: 20px;
+    color: #ffffff;
+    margin-bottom: 10px;
+    font-weight: 700;
+  }
+  .main-form-auth {
+    margin-top: -130px;
+    padding: 5.625rem;
+    display: flex;
+    flex-direction: column;
+  }
+  .containter-main-footer-auth {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    background-color: #4f566548;
+    padding: 74px 0;
+  }
+  .main-header-auth {
+    padding: 50px;
+    display: flex;
+  }
+  .header-brand-auth {
+    padding-top: 0.625rem;
+    margin-left: 0.625rem;
+    font-size: 0.938rem;
+    flex: 5;
+    font-weight: bold;
+  }
+  .header-title-auth {
+    font-weight: bold;
+    font-size: 30px;
+    color: #ffffff;
+    flex: 2;
+  }
+}

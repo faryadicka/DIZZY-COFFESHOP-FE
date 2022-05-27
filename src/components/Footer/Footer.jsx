@@ -1,12 +1,12 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 import { BrowserRouter as Router, Link } from "react-router-dom";
 
 // assets
-import "../Footer/Footer.scoped.css"
-import Logo from "../../assets/img/logo.png"
-import Instagram from "../../assets/img/instagram.png"
-import Facebook from "../../assets/img/facebook.png"
-import Twitter from "../../assets/img/twitter.png"
+import "../Footer/Footer.scoped.css";
+import Logo from "../../assets/img/logo.png";
+import Instagram from "../../assets/img/instagram.png";
+import Facebook from "../../assets/img/facebook.png";
+import Twitter from "../../assets/img/twitter.png";
 
 export default class Footer extends Component {
   render() {
@@ -20,8 +20,10 @@ export default class Footer extends Component {
                   <img src={Logo} alt="logo-coffeschop" />
                   <p class="footer-title"> Dizzy Coffee Shop</p>
                 </div>
-                <p class="footer-desc">Coffee Shop is a store that sells some good meals, and especially coffee. We provide
-                  high quality beans</p>
+                <p class="footer-desc">
+                  Coffee Shop is a store that sells some good meals, and
+                  especially coffee. We provide high quality beans
+                </p>
                 <div class="footer-logo">
                   <img src={Facebook} alt="facebook-logo" />
                   <img src={Twitter} alt="twitter-logo" />
@@ -75,8 +77,8 @@ export default class Footer extends Component {
               </div>
             </div>
           </div>
-        </footer >
-      </Router >
-    )
+        </footer>
+      </Router>
+    );
   }
 }
