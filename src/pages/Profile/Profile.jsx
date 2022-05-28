@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 // Component
-import Navbars from "../../components/Navbars/Navbars";
+import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 
 // assets
@@ -14,7 +14,7 @@ export default class Profile extends Component {
   render() {
     return (
       <>
-        <Navbars />
+        <Navbar />
         <main className="main-user">
           <div className="main-content">
             <div className="container">

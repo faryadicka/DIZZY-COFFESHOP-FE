@@ -1,0 +1,31 @@
+.navbar-brand .brand {
+  font-family: "Rubik", sans-serif;
+  font-weight: bold;
+}
+
+.logo-brand {
+  width: 15%;
+  height: 15%;
+}
+
+.img-search {
+  width: 20%;
+  left: 15px;
+}
+
+.nav-link {
+  font-weight: 500;
+  color: #4f5665;
+}
+
+.nav-link:hover {
+  font-weight: bold;
+  color: #6a4029;
+}
+
+@media only screen and (max-width: 600px) {
+  .img-search {
+    width: 15%;
+    left: 15px;
+  }
+}

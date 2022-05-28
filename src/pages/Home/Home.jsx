@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 
 // Components
-import NavbarHome from "../../components/Navbars/NavbarHome";
+import NavbarHome from "../../components/Navbar/NavbarHome";
 import Footer from "../../components/Footer/Footer";
 import CardFavorite from "../../components/CardFavorite/CardFavorite";
 import CardTesti from "../../components/CardTesti/CardTesti";
 
 // assets
-import "../Home/Home.scoped.css";
+import "./Home.scoped.css";
 import User from "../../assets/img/user.png";
 import Location from "../../assets/img/location.png";
 import Teamwork from "../../assets/img/team-work.png";

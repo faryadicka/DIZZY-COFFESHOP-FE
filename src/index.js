@@ -1,15 +1,15 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import React from "react";
 import ReactDOM from "react-dom/client";
+import App from "./App";
 import "./index.css";
-import ProductDetail from "./pages/ProductDetail/ProductDetail";
 
 // import MainRouter from "./MainRouter";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <ProductDetail />
+    <App />
   </React.StrictMode>
 );
 

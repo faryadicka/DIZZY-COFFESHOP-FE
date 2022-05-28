@@ -1,0 +1,21 @@
+*,
+::after,
+::before {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.history-title {
+  margin-top: 100px;
+}
+
+.main-history {
+  background-image: url(../../assets/img/background-history.png);
+  width: 100%;
+  height: 1100px;
+  background-repeat: no-repeat;
+}
+
+.guide-history {
+  font-size: 25px;
+}
