@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { Navbar, Container, Form, FormControl, Nav } from "react-bootstrap";
 
@@ -9,7 +10,12 @@ import Search from "../../assets/img/search.png";
 import Message from "../../assets/img/chat.png";
 import Profile from "../../assets/img/ava.png";
 
-export default function Navbars() {
+// import withSearchParams from "../../helpers/withSearchParams";
+
+export default function Navbars(props) {
+  let navigate = useNavigate();
+  // const { searchParams } = props;
+  // console.log(searchParams.get("name"));
   return (
     <Navbar expand="lg">
       <Container>
@@ -62,6 +68,26 @@ export default function Navbars() {
                   placeholder="Search"
                   className="me-xl-2 rounded-5 ps-xl-5 ps-5 input-navbar"
                   aria-label="Search"
+                  onChange={(event) => {
+                    event.preventDefault();
+                    navigate(`/products?name=${event.target.value}`);
+                    // if (props.searchParams === "1") {
+                    //   navigate(
+                    //     `/products?&name=${event.target.value}category=1`
+                    //   );
+                    // }
+                    // if (props.searchParams === "2") {
+                    //   navigate(
+                    //     `/products?&name=${event.target.value}&category=2`
+                    //   );
+                    // }
+                    // if (props.searchParams === "3") {
+                    //   navigate(
+                    //     `/products?&name=${event.target.value}&category=3`
+                    //   );
+                    // }
+                    // return event.target.value;
+                  }}
                 />
               </Form>
               <Link

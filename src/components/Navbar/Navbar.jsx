@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 // assets
 import "../Navbar/Navbar.scoped.css";
@@ -8,7 +8,8 @@ import Search from "../../assets/img/search.png";
 import Chat from "../../assets/img/chat.png";
 import Ava from "../../assets/img/ava.png";
 
-export default function Navbar() {
+export default function Navbar(props) {
+  let navigate = useNavigate();
   return (
     <nav className="navbar navbar-expand-lg navbar-light navbar-products">
       <div className="container">
@@ -56,6 +57,10 @@ export default function Navbar() {
                 className="form-control ps-5 rounded-5 bg-light"
                 id="exampleFormControlInput1"
                 placeholder="search"
+                onChange={(event) => {
+                  event.preventDefault();
+                  navigate(`/products?name=${event.target.value}`);
+                }}
               />
               <img
                 className="position-relative bottom-50 img-search"

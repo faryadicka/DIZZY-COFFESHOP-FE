@@ -133,7 +133,7 @@ export default class Home extends Component {
               </p>
             </div>
           </div>
-          <div className="row p-5 gap-3 justify-content-sm-center justify-content-md-evenly">
+          <div className="w-100 m-0 row p-5 gap-3 justify-content-sm-center justify-content-md-evenly">
             <CardFavorite
               image={ImageProduct}
               title="Nama Product"
@@ -161,7 +161,7 @@ export default class Home extends Component {
               Our Partner
             </h1>
           </div>
-          <div className="row justify-content-center mt-5 gap-5 mx-auto text-center">
+          <div className="w-100 row justify-content-center mt-5 gap-5 mx-auto text-center">
             <div className="col-6 col-md-4 col-lg-2 ">
               <img className="image-sponsored" src={Netflix} alt="netflix" />
             </div>

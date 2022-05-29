@@ -5,7 +5,7 @@ import "../CardProducts/CardProduct.scoped.css";
 
 export default function CardProduct(props) {
   return (
-    <div className="col-6 col-md-3 col-lg-3 ms-5 ms-md-0">
+    <div className="col-4 col-md-4 col-lg-3 ms-5 ms-md-0">
       <div className="card card-products border-0 align-items-center text-center mb-md-5 mb-5">
         <img
           src={props.image}
