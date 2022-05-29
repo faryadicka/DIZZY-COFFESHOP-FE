@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 // assets
 import "../Login/Login.scoped.css";
@@ -15,89 +16,89 @@ export default function Login() {
       <aside className="picture">
         <img className="image-aside-auth" src={Banner} alt="auth-aside" />
       </aside>
-      <div class="containter-main-footer-auth">
-        <main class="main-auth">
-          <header class="main-header-auth">
-            <a href="index.html">
+      <div className="containter-main-footer-auth">
+        <main className="main-auth">
+          <header className="main-header-auth">
+            <Link to="/">
               <img src={Logo} alt="logo-coffeeshop" />
-            </a>
-            <a href="index.html" class="header-brand-auth">
+            </Link>
+            <Link to="/" className="header-brand-auth">
               <p>DIZZY COFFEE SHOP</p>
-            </a>
-            <p class="header-title-auth">Login</p>
+            </Link>
+            <p className="header-title-auth">Login</p>
           </header>
-          <form class="main-form-auth">
-            <label class="label-auth" for="email">
+          <form className="main-form-auth">
+            <label className="label-auth" for="email">
               Email Address :
             </label>
             <input
-              class="input-auth"
+              className="input-auth"
               type="email"
               name="email"
               id="email"
               placeholder="Enter your email address"
             />
-            <label class="label-auth" for="password">
+            <label className="label-auth" for="password">
               Password :
             </label>
             <input
-              class="input-auth"
+              className="input-auth"
               type="password"
               name="password"
               id="password"
               placeholder="Enter your password"
             />
-            <p class="forgot-password">Forgot password?</p>
-            <button class="button-auth normal" type="submit">
+            <p className="forgot-password">Forgot password?</p>
+            <button className="button-auth normal" type="submit">
               Login
             </button>
-            <button class="button-auth google" type="submit">
-              <img class="google-button" src={Google} alt="google-logo" /> Login
-              with Google
+            <button className="button-auth google" type="submit">
+              <img className="google-button" src={Google} alt="google-logo" />{" "}
+              Login with Google
             </button>
-            <section class="has-account">
-              <div class="underline"></div>
-              <p class="already-account">Already have an account?</p>
-              <div class="underline"></div>
+            <section className="has-account">
+              <div className="underline"></div>
+              <p className="already-account">Already have an account?</p>
+              <div className="underline"></div>
             </section>
-            <button class="button-auth login" type="submit">
+            <button className="button-auth login" type="submit">
               Sign Up Here
             </button>
           </form>
         </main>
-        <footer class="footer-content-auth">
-          <div class="footer-side">
-            <div class="footer-title-auth">
+        <footer className="footer-content-auth">
+          <div className="footer-side">
+            <div className="footer-title-auth">
               <img src={Logo} alt="logo-coffeschop" />
-              <p class="footer-title">DIZZY COFFE SHOP</p>
+              <p className="footer-title">DIZZY COFFE SHOP</p>
             </div>
-            <p class="footer-desc">
+            <p className="footer-desc">
               Coffee Shop is a store that sells some good meals, and especially
               coffee. We provide high quality beans
             </p>
-            <div class="footer-logo">
+            <div className="footer-logo">
               <img src={Facebook} alt="facebook-logo" />
               <img src={Twitter} alt="twitter-logo" />
               <img src={Instagram} alt="instagram-logo" />
             </div>
-            <p class="copy-right">©DIZZY COFFEE SHOP</p>
+            <p className="copy-right">©DIZZY COFFEE SHOP</p>
           </div>
-          <div class="footer-info">
-            <p class="title-info-footer">Product</p>
-            <ul class="product-info-auth">
-              <li class="info-detail">Download</li>
-              <li class="info-detail">Pricing</li>
-              <li class="info-detail">Location</li>
-              <li class="info-detail">Countries</li>
-              <li class="info-detail">Blog</li>
+          <div className="footer-info">
+            <p className="title-info-footer">Product</p>
+            <ul className="product-info-auth">
+              <li className="info-detail">Download</li>
+              <li className="info-detail">Pricing</li>
+              <li className="info-detail">Location</li>
+              <li className="info-detail">Countries</li>
+              <li className="info-detail">Blog</li>
             </ul>
-            <p class="title-info-footer">Engange</p>
-            <ul class="product-info-auth">
-              <li class="info-detail">Coffee Shop?</li>
-              <li class="info-detail">About Us</li>
-              <li class="info-detail">FAQ</li>
-              <li class="info-detail">Privacy Policy</li>
-              <li class="info-detail">Term of Services</li>
+            <p className="title-info-footer">Engange</p>
+            <ul className="product-info-auth">
+              <li className="info-detail">Coffee Shop?</li>
+              <li className="info-detail">About Us</li>
+              <li className="info-detail">FAQ</li>
+              <li className="info-detail">Privacy Policy</li>
+              <li className="info-detail">Term of Services</li>
             </ul>
           </div>
         </footer>

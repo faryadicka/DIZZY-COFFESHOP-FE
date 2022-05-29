@@ -29,7 +29,9 @@ export class Payment extends Component {
               <div className="col-8 col-md-6">
                 <div className="card rounded-4 px-3 h-100">
                   <div className="card-body">
-                    <h4 className="card-title text-center">Old Summary</h4>
+                    <h4 className="header-payment-card card-title text-center">
+                      Old Summary
+                    </h4>
                     <CardCart
                       image={ImagePayment}
                       name="Hazelnut Latte"
@@ -88,36 +90,45 @@ export class Payment extends Component {
                     <p className="adress-payment text-white">Payment Methods</p>
                   </div>
                   <div className="card p-4 rounded-5">
-                    <div class="form-check p-3">
+                    <div className="form-check p-3">
                       <input
-                        class="form-check-input"
+                        className="form-check-input"
                         type="radio"
                         name="flexRadioDefault"
                         id="flexRadioDefault1"
                       />
-                      <label class="form-check-label" for="flexRadioDefault1">
+                      <label
+                        className="form-check-label"
+                        for="flexRadioDefault1"
+                      >
                         Card
                       </label>
                     </div>
-                    <div class="form-check form-check-mid p-3">
+                    <div className="form-check form-check-mid p-3">
                       <input
-                        class="form-check-input"
+                        className="form-check-input"
                         type="radio"
                         name="flexRadioDefault"
                         id="flexRadioDefault2"
                       />
-                      <label class="form-check-label" for="flexRadioDefault2">
+                      <label
+                        className="form-check-label"
+                        for="flexRadioDefault2"
+                      >
                         Bank Account
                       </label>
                     </div>
-                    <div class="form-check p-3">
+                    <div className="form-check p-3">
                       <input
-                        class="form-check-input"
+                        className="form-check-input"
                         type="radio"
                         name="flexRadioDefault"
                         id="flexRadioDefault2"
                       />
-                      <label class="form-check-label" for="flexRadioDefault2">
+                      <label
+                        className="form-check-label"
+                        for="flexRadioDefault2"
+                      >
                         Cash on delivery
                       </label>
                     </div>

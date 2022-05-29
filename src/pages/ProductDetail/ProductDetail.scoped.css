@@ -54,26 +54,26 @@
   width: 100%;
 }
 
-.btn-outline-warning {
+.btn-outline-order {
   border: 1px solid #9f9f9f;
   color: #9f9f9f;
 }
 
-.btn-outline-warning:hover {
+.btn-outline-order:hover {
   border: none;
   color: white;
   background-color: #6a4029;
   font-weight: bold;
 }
 
-.btn-outline-warning:active {
+.btn-outline-order:active {
   border: none;
   color: white;
   background-color: #6a4029;
   font-weight: bold;
 }
 
-.btn-outline-warning:visited {
+.btn-outline-order:visited {
   border: none;
   color: white;
   background-color: #6a4029;
@@ -90,7 +90,7 @@
     margin-top: 50px;
     width: 50%;
   }
-  .btn-outline-warning {
+  .btn-outline-order {
     border: 1px solid #9f9f9f;
     color: #9f9f9f;
   }

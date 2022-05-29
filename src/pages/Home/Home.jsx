@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 // Components
-import NavbarHome from "../../components/Navbar/NavbarHome";
+import NavbarHome from "../../components/NavbarHome/NavbarHome";
 import Footer from "../../components/Footer/Footer";
 import CardFavorite from "../../components/CardFavorite/CardFavorite";
 import CardTesti from "../../components/CardTesti/CardTesti";

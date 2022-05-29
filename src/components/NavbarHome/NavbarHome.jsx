@@ -1,15 +1,13 @@
-import React from "react";
 import { Link } from "react-router-dom";
-import { Navbar, Container, Form, FormControl, Nav } from "react-bootstrap";
+import { Navbar, Container, Button, Nav } from "react-bootstrap";
 
 // assets
-import "../../components/Navbars/Navbars.scoped.css";
+import "./NavbarHome.scoped.css";
 import Logo from "../../assets/img/logo.png";
-import Search from "../../assets/img/search.png";
-import Message from "../../assets/img/chat.png";
-import Profile from "../../assets/img/ava.png";
 
-export default function Navbars() {
+import React from "react";
+
+export default function NavbarHome() {
   return (
     <Navbar expand="lg">
       <Container>
@@ -34,7 +32,10 @@ export default function Navbars() {
               <Link className="text-decoration-none text-gray me-xl-4" to="/">
                 Home
               </Link>
-              <Link className="text-decoration-none text-gray me-xl-4" to="/">
+              <Link
+                className="text-decoration-none text-gray me-xl-4"
+                to="/products"
+              >
                 Product
               </Link>
               <Link
@@ -50,29 +51,14 @@ export default function Navbars() {
                 History
               </Link>
             </Nav>
-            <div className="wrap-nav-right ms-md-5 d-flex">
-              <Form className="d-flex position-relative justify-content-center">
-                <img
-                  className="img-button-navbar"
-                  src={Search}
-                  alt="search-button"
-                />
-                <FormControl
-                  type="search"
-                  placeholder="Search"
-                  className="me-xl-2 rounded-5 ps-xl-5 ps-5 input-navbar"
-                  aria-label="Search"
-                />
-              </Form>
-              <Link
-                className="chat-navbar text-decoration-none me-md-4"
-                to="/chat"
+            <div className="wrap-nav-right ms-md-5 d-flex justify-content-center">
+              <Button variant="">Login</Button>{" "}
+              <Button
+                variant="warning"
+                className="rounded-5 button-sign-up-navbar"
               >
-                <img src={Message} alt="chat-logo" />
-              </Link>
-              <Link className="ms-xl-2 text-decoration-none" to="/profile">
-                <img src={Profile} alt="chat-logo" />
-              </Link>
+                Sign Up
+              </Button>{" "}
             </div>
           </Nav>
         </Navbar.Collapse>

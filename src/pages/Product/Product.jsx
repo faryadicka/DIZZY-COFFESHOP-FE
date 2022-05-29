@@ -14,55 +14,19 @@ import HalloweenDay from "../../assets/img/ava-coupon-1.png";
 
 export default class Product extends Component {
   state = {
-    product: {
-      coffe: [],
-      nonCoffee: [],
-      foods: [],
-    },
-  };
-  getCoffee = (category) => {
-    const URL = `http://localhost:5000/api/products?category=${category}&page=1&limit=16`;
-    axios
-      .get(URL)
-      .then((res) => {
-        this.setState({
-          product: { ...this.product, coffee: res.data.data },
-        });
-      })
-      .catch((error) => {
-        console.log("ERROR GET FAFORITE PRODUCTS", error);
-      });
-  };
-  getNonCoffee = (category) => {
-    const URL = `http://localhost:5000/api/products?category=${category}&page=1&limit=16`;
-    axios
-      .get(URL)
-      .then((res) => {
-        this.setState({
-          product: { ...this.product, nonCoffee: res.data.data },
-        });
-      })
-      .catch((error) => {
-        console.log("ERROR GET FAFORITE PRODUCTS", error);
-      });
-  };
-  getFoods = (category) => {
-    const URL = `http://localhost:5000/api/products?category=${category}&page=1&limit=16`;
-    axios
-      .get(URL)
-      .then((res) => {
-        this.setState({
-          product: { ...this.product, foods: res.data.data },
-        });
-      })
-      .catch((error) => {
-        console.log("ERROR GET FAFORITE PRODUCTS", error);
-      });
+    product: [],
   };
   componentDidMount() {
-    this.getCoffee("1");
-    this.getNonCoffee("2");
-    this.getFoods("3");
+    axios
+      .get("http://localhost:5000/api/products?page=1&limit=8")
+      .then((res) => {
+        this.setState({
+          product: res.data.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
   render() {
     return (
@@ -116,11 +80,11 @@ export default class Product extends Component {
                     </p>
                   </div>
                 </div>
-                <button type="button" class="btn btn-choco-coupon mt-5">
+                <button type="button" className="btn btn-choco-coupon mt-5">
                   Apply Coupon
                 </button>
-                <div class="terms-condition">
-                  <p class="desc-coupon mt-4">
+                <div className="terms-condition">
+                  <p className="desc-coupon mt-4">
                     Terms and Condition
                     <br />
                     1. You can only apply 1 coupon per day
@@ -162,41 +126,17 @@ export default class Product extends Component {
                     </button>
                   </div>
                 </div>
-                <div class="row mt-5 justify-content-center">
-                  {this.getCoffee("1")
-                    ? this.product.coffee.map((item) => {
-                        return (
-                          <CardProduct
-                            image={item.image}
-                            title={item.name}
-                            price={item.price}
-                            key={item.id}
-                          />
-                        );
-                      })
-                    : this.getNonCoffee("2")
-                    ? this.product.nonCoffee.map((item) => {
-                        return (
-                          <CardProduct
-                            image={item.image}
-                            title={item.name}
-                            price={item.price}
-                            key={item.id}
-                          />
-                        );
-                      })
-                    : this.getFoods("3")
-                    ? this.product.nonCoffee.map((item) => {
-                        return (
-                          <CardProduct
-                            image={item.image}
-                            title={item.name}
-                            price={item.price}
-                            key={item.id}
-                          />
-                        );
-                      })
-                    : null}
+                <div className="row mt-5 justify-content-center">
+                  {this.state.product.map((item) => {
+                    return (
+                      <CardProduct
+                        image={item.image}
+                        title={item.name}
+                        price={item.price}
+                        key={item.id}
+                      />
+                    );
+                  })}
                 </div>
               </div>
             </div>

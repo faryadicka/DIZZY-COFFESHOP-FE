@@ -21,7 +21,7 @@ export default function CardHistory(props) {
               </div>
               <div className="col-auto">
                 <input
-                  class="form-check-input"
+                  className="form-check-input"
                   type="checkbox"
                   value=""
                   id="flexCheckDefault"
