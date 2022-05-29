@@ -12,10 +12,10 @@ export function getFavorite() {
   return axios.get(URL);
 }
 
-export function getFilterAndSearch(search, category) {
-  const URL = `http://localhost:5000/api/products?name=${search}&category=${category}&page=1&limit=12`;
-  return axios.get(URL);
-}
+// export function getFilterAndSearch(search, category) {
+//   const URL = `http://localhost:5000/api/products?name=${search}&category=${category}&page=1&limit=12`;
+//   return axios.get(URL);
+// }
 
 export function getSearch(search) {
   const URL = `http://localhost:5000/api/products?name=${search}&page=1&limit=12`;
