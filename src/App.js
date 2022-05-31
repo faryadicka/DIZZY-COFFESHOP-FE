@@ -18,6 +18,7 @@ export default function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/products" element={<Product />} />
+        <Route path="/products/:favorite" element={<Product />} />
         <Route path="/product-detail" element={<ProductDetail />} />
         <Route path="/history" element={<History />} />
         <Route path="/payment" element={<Payment />} />
