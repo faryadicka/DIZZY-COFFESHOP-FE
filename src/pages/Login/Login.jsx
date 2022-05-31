@@ -35,24 +35,26 @@ export default class Login extends Component {
       password,
     });
     const URL = "http://localhost:5000/api/auth/login";
-    axios
-      .post(URL, this.state)
-      .then((res) => {
-        this.setState({
-          isError: false,
-          succsessMsg: res.data.message,
-          isSuccess: true,
+    if (email && password) {
+      axios
+        .post(URL, this.state)
+        .then((res) => {
+          this.setState({
+            isError: false,
+            succsessMsg: res.data.message,
+            isSuccess: true,
+          });
+          console.log(this.state);
+          localStorage.setItem("sign-payload", res.data.data.token);
+        })
+        .catch((err) => {
+          console.log(err);
+          this.setState({
+            isError: true,
+            errMsg: err.response.data.message,
+          });
         });
-        console.log(this.state);
-        localStorage.setItem("sign-payload", res.data.data.token);
-      })
-      .catch((err) => {
-        console.log(err);
-        this.setState({
-          isError: true,
-          errMsg: err.response.data.message,
-        });
-      });
+    }
     // const token = localStorage.getItem("sign-payload");
   };
   render() {

@@ -38,6 +38,8 @@
 
 .menu-products:active {
   border: none;
+  color: #6a4029;
+  font-weight: bold;
 }
 
 .menu-products:hover {

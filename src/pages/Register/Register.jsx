@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import axios from "axios";
 
 // assets
@@ -38,23 +38,26 @@ export default class Register extends Component {
       phone,
     });
     const URL = "http://localhost:5000/api/auth/register";
-    axios
-      .post(URL, this.state)
-      .then((res) => {
-        console.log(res.data);
-        this.setState({
-          succsessMsg: res.data.message,
+    if (email && password && phone) {
+      axios
+        .post(URL, this.state)
+        .then((res) => {
+          console.log(res.data);
+          this.setState({
+            succsessMsg: res.data.message,
+          });
+        })
+        .catch((err) => {
+          this.setState({
+            isError: true,
+            errMsg: err.response.data.message,
+          });
         });
-      })
-      .catch((err) => {
-        this.setState({
-          isError: true,
-          errMsg: err.response.data.message,
-        });
-      });
+    }
   };
 
   render() {
+    // if (!this.state.isError) return <Navigate to="/login" />;
     return (
       <div className="container-auth">
         <aside className="picture">

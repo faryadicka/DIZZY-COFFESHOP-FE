@@ -15,9 +15,15 @@ import HalloweenDay from "../../assets/img/ava-coupon-1.png";
 
 import withSearchParams from "../../helpers/withSearchParams";
 import withLocation from "../../helpers/withLocation";
+import withParams from "../../helpers/withParams";
 
 // axios
-import { getProduct, getFavorite, getSearch } from "../../services/product";
+import {
+  getProduct,
+  getFavorite,
+  getSearch,
+  getAllProduct,
+} from "../../services/product";
 
 class Product extends Component {
   constructor(props) {
@@ -29,9 +35,22 @@ class Product extends Component {
         nonCoffe: [],
         foods: [],
         search: [],
+        allProducts: [],
       },
     };
   }
+
+  getAllProductsPage = () => {
+    getAllProduct()
+      .then((res) => {
+        this.setState({
+          products: { ...this.state.products, allProducts: res.data.data },
+        });
+      })
+      .catch((err) => {
+        console.log("ERROR GET PRODUCTS", err);
+      });
+  };
 
   getFav = () => {
     getFavorite()
@@ -94,12 +113,13 @@ class Product extends Component {
   };
 
   componentDidMount() {
-    this.getFav();
+    this.getAllProductsPage();
   }
   componentDidUpdate(prevProps) {
     const {
       location: { search },
       searchParams,
+      params,
     } = this.props;
     if (prevProps.searchParams !== searchParams) {
       this.getCoffee("1");
@@ -107,10 +127,15 @@ class Product extends Component {
       this.getFoods("3");
       this.getSearchProduct(search.slice(6));
     }
+    if (prevProps.params !== params) {
+      this.getFav();
+    }
   }
   render() {
-    const { searchParams, location } = this.props;
-    const { favorite, coffee, nonCoffe, foods, search } = this.state.products;
+    let { searchParams, location, params } = this.props;
+    const { favorite, coffee, nonCoffe, foods, search, allProducts } =
+      this.state.products;
+    // console.log(params.favorite);
     return (
       <>
         <Navbar searchParams={searchParams.get("category")} />
@@ -183,7 +208,7 @@ class Product extends Component {
               <div className="col-md-8 p-5 column-products">
                 <div className="row text-center mt-3 justify-content-between">
                   <div className="col-3 col-lg-3">
-                    <Link to="/products" className="menu-products">
+                    <Link to="/products/favorite" className="menu-products">
                       <p className="title-category">Favorite & Promo</p>
                     </Link>
                   </div>
@@ -204,18 +229,31 @@ class Product extends Component {
                   </div>
                   <div className="col-3 col-lg-2">
                     <Link to="/products" className="menu-products">
-                      <p className="title-category">Add-on</p>
+                      <p className="title-category">All</p>
                     </Link>
                   </div>
                 </div>
                 <div className="row mt-5 justify-content-center">
-                  {searchParams.get("name") === location.search.slice(6)
+                  {params.favorite === "favorite"
+                    ? favorite.map((item) => {
+                        return (
+                          <CardProduct
+                            image={`http://localhost:5000${item.image}`}
+                            discount="0%"
+                            title={item.name}
+                            price={`IDR ${item.price}`}
+                            key={item.id}
+                          />
+                        );
+                      })
+                    : searchParams.get("name") === location.search.slice(6)
                     ? search.map((item) => {
                         return (
                           <CardProduct
-                            image={item.image}
+                            image={`http://localhost:5000${item.image}`}
+                            discount="0%"
                             title={item.name}
-                            price={item.price}
+                            price={`IDR ${item.price}`}
                             key={item.id}
                           />
                         );
@@ -224,9 +262,10 @@ class Product extends Component {
                     ? coffee.map((item) => {
                         return (
                           <CardProduct
-                            image={item.image}
+                            image={`http://localhost:5000${item.image}`}
+                            discount="0%"
                             title={item.name}
-                            price={item.price}
+                            price={`IDR ${item.price}`}
                             key={item.id}
                           />
                         );
@@ -235,9 +274,10 @@ class Product extends Component {
                     ? nonCoffe.map((item) => {
                         return (
                           <CardProduct
-                            image={item.image}
+                            image={`http://localhost:5000${item.image}`}
+                            discount="0%"
                             title={item.name}
-                            price={item.price}
+                            price={`IDR ${item.price}`}
                             key={item.id}
                           />
                         );
@@ -246,19 +286,21 @@ class Product extends Component {
                     ? foods.map((item) => {
                         return (
                           <CardProduct
-                            image={item.image}
+                            image={`http://localhost:5000${item.image}`}
+                            coupon="0%"
                             title={item.name}
-                            price={item.price}
+                            price={`IDR ${item.price}`}
                             key={item.id}
                           />
                         );
                       })
-                    : favorite.map((item) => {
+                    : allProducts.map((item) => {
                         return (
                           <CardProduct
-                            image={item.image}
+                            image={`http://localhost:5000${item.image}`}
+                            coupon="0%"
                             title={item.name}
-                            price={item.price}
+                            price={`IDR ${item.price}`}
                             key={item.id}
                           />
                         );
@@ -274,4 +316,4 @@ class Product extends Component {
   }
 }
 
-export default withLocation(withSearchParams(Product));
+export default withLocation(withSearchParams(withParams(Product)));

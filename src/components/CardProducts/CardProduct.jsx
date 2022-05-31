@@ -12,6 +12,9 @@ export default function CardProduct(props) {
           className="card-img-top rounded-circle"
           alt="product-img"
         />
+        <span className="text-dark position-absolute translate-middle-y badge rounded-pill bg-white badge-position">
+          {props.discount}
+        </span>
         <div className="card-body">
           <h6 className="card-product-title">{props.title}</h6>
           <p className="card-price">{props.price}</p>
