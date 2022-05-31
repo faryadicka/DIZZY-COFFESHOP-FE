@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { Navbar, Container, Button, Nav } from "react-bootstrap";
 
 // assets
@@ -52,8 +52,20 @@ export default function NavbarHome() {
               </Link>
             </Nav>
             <div className="wrap-nav-right ms-md-5 d-flex justify-content-center">
-              <Button variant="">Login</Button>{" "}
               <Button
+                variant=""
+                href="/login"
+                // onClick={() => {
+                //   return <Navigate to="/login" />;
+                // }}
+              >
+                Login
+              </Button>{" "}
+              <Button
+                // onClick={() => {
+                //   return <Navigate to="/register" />;
+                // }}
+                href="/register"
                 variant="warning"
                 className="rounded-5 button-sign-up-navbar"
               >

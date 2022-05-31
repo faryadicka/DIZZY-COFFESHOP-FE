@@ -21,7 +21,7 @@ import { getProduct, getFavorite, getSearch } from "../../services/product";
 
 class Product extends Component {
   constructor(props) {
-    super();
+    super(props);
     this.state = {
       products: {
         favorite: [],
@@ -111,7 +111,6 @@ class Product extends Component {
   render() {
     const { searchParams, location } = this.props;
     const { favorite, coffee, nonCoffe, foods, search } = this.state.products;
-    // console.log(filter);
     return (
       <>
         <Navbar searchParams={searchParams.get("category")} />

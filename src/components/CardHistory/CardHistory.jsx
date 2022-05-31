@@ -6,11 +6,7 @@ export default function CardHistory(props) {
       <div className="card rounded-4 p-2">
         <div className="row gap-3">
           <div className="col-3">
-            <img
-              className="rounded-circle"
-              src={props.image}
-              alt="imagehistory"
-            />
+            <img className="rounded-circle" src={props.image} alt="imageH" />
           </div>
           <div className="col-8">
             <div className="card-title fw-bold">{props.name}</div>

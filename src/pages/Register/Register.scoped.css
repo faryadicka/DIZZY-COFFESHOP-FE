@@ -75,7 +75,7 @@
 }
 
 @media only screen and (min-width: 1200px) {
-  .footer-content-auth {
+  .footer-content-signup {
     padding: 50px;
     display: flex;
     height: 450px;
@@ -83,7 +83,7 @@
     align-items: center;
     justify-content: space-around;
     column-gap: 50px;
-    margin-top: 58px;
+    margin-top: 30px;
   }
   .info-detail {
     color: #4f5665;
@@ -188,9 +188,19 @@
     height: 75px;
     border: 1px solid #4f5665;
   }
+  .signup-google-text {
+    position: relative;
+    left: 230px;
+    top: 25px;
+  }
 }
 
 @media only screen and (max-width: 600px) {
+  .signup-google-text {
+    position: relative;
+    left: 180px;
+    top: 15px;
+  }
   .image-aside-auth {
     width: 100%;
   }

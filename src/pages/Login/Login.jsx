@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import React, { Component } from "react";
 
 // assets
@@ -17,17 +17,46 @@ export default class Login extends Component {
     this.state = {
       email: "",
       password: "",
+      showPass: false,
+      isError: false,
+      errMsg: "",
+      succsessMsg: "",
+      isSuccess: false,
+      token: localStorage.getItem("sign-payload"),
     };
   }
 
-  loginAuth = () => {
-    const URL = "http://http://localhost:5000/api/auth/login";
-    axios({
-      url: URL,
-      data: this.state,
+  loginAuth = (event) => {
+    event.preventDefault();
+    const email = event.target.email.value;
+    const password = event.target.password.value;
+    this.setState({
+      email,
+      password,
     });
+    const URL = "http://localhost:5000/api/auth/login";
+    axios
+      .post(URL, this.state)
+      .then((res) => {
+        this.setState({
+          isError: false,
+          succsessMsg: res.data.message,
+          isSuccess: true,
+        });
+        console.log(this.state);
+        localStorage.setItem("sign-payload", res.data.data.token);
+      })
+      .catch((err) => {
+        console.log(err);
+        this.setState({
+          isError: true,
+          errMsg: err.response.data.message,
+        });
+      });
+    // const token = localStorage.getItem("sign-payload");
   };
   render() {
+    if (this.state.isSuccess) return <Navigate to="/" />;
     return (
       <div className="container-auth">
         <aside className="picture">
@@ -44,8 +73,8 @@ export default class Login extends Component {
               </Link>
               <p className="header-title-auth">Login</p>
             </header>
-            <form className="main-form-auth">
-              <label className="label-auth" for="email">
+            <form className="main-form-auth" onSubmit={this.loginAuth}>
+              <label className="label-auth" htmlFor="email">
                 Email Address :
               </label>
               <input
@@ -54,45 +83,59 @@ export default class Login extends Component {
                 name="email"
                 id="email"
                 placeholder="Enter your email address"
-                onChange={(event) => {
-                  event.preventDefault();
-                  this.setState({
-                    email: event.target.value,
-                  });
-                }}
               />
-              <label className="label-auth" for="password">
+              <label className="label-auth" htmlFor="password">
                 Password :
               </label>
               <input
                 className="input-auth"
-                type="password"
+                type={`${this.state.showPass ? "text" : "password"}`}
                 name="password"
                 id="password"
                 placeholder="Enter your password"
-                onChange={(event) => {
-                  event.preventDefault();
-                  this.setState({
-                    password: event.target.value,
-                  });
-                }}
               />
-              <p className="forgot-password">Forgot password?</p>
+              <label>
+                <input
+                  type="checkbox"
+                  value={this.state.showPass}
+                  onChange={() => {
+                    this.setState({
+                      showPass: !this.state.showPass,
+                    });
+                  }}
+                />{" "}
+                Show Password
+              </label>
+              {this.state.isError ? (
+                <p className="text-warning">
+                  {this.state.errMsg}
+                  {"!"}
+                </p>
+              ) : (
+                <p className="text-success">{this.state.succsessMsg}</p>
+              )}
+              <Link to="/" className="mt-2 forgot-password">
+                Forgot password?
+              </Link>
               <button className="button-auth normal" type="submit">
                 Login
               </button>
-              <button className="button-auth google" type="submit">
-                <img className="google-button" src={Google} alt="google-logo" />{" "}
-                Login with Google
-              </button>
+              <Link to="/" className="button-auth google">
+                <img
+                  className="google-button-login"
+                  src={Google}
+                  alt="google-logo"
+                />{" "}
+                <p className="login-google-text">Login with Google</p>
+              </Link>
               <section className="has-account">
                 <div className="underline"></div>
                 <p className="already-account">Already have an account?</p>
                 <div className="underline"></div>
               </section>
-              <button className="button-auth login" type="submit">
-                Sign Up Here
-              </button>
+              <Link to="/register" className="button-auth login">
+                <p className="register-google-text">Sign up Here</p>
+              </Link>
             </form>
           </main>
           <footer className="footer-content-auth">

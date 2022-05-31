@@ -19,13 +19,39 @@ export default class Register extends Component {
         email: "",
         password: "",
         phone: "",
+        showPass: false,
+        isError: false,
+        errMsg: "",
+        succsessMsg: "",
       },
     };
   }
 
-  registerAuth = () => {
+  registerAuth = (event) => {
+    event.preventDefault();
+    const email = event.target.email.value;
+    const password = event.target.password.value;
+    const phone = event.target.phone.value;
+    this.setState({
+      email,
+      password,
+      phone,
+    });
     const URL = "http://localhost:5000/api/auth/register";
-    axios.post(URL, this.state);
+    axios
+      .post(URL, this.state)
+      .then((res) => {
+        console.log(res.data);
+        this.setState({
+          succsessMsg: res.data.message,
+        });
+      })
+      .catch((err) => {
+        this.setState({
+          isError: true,
+          errMsg: err.response.data.message,
+        });
+      });
   };
 
   render() {
@@ -45,8 +71,8 @@ export default class Register extends Component {
               </Link>
               <p className="header-title-auth">Sign Up</p>
             </header>
-            <form className="main-form-auth">
-              <label className="label-auth" for="email">
+            <form className="main-form-auth" onSubmit={this.registerAuth}>
+              <label className="label-auth" htmlFor="email">
                 Email Address :
               </label>
               <input
@@ -55,28 +81,30 @@ export default class Register extends Component {
                 name="email"
                 id="email"
                 placeholder="Enter your email address"
-                onChange={(event) => {
-                  this.setState({
-                    email: event.target.value,
-                  });
-                }}
               />
-              <label className="label-auth" for="password">
+              <label className="label-auth" htmlFor="password">
                 Password :
               </label>
               <input
                 className="input-auth"
-                type="password"
+                type={`${this.state.showPass ? "text" : "password"}`}
                 name="password"
                 id="password"
                 placeholder="Enter your password"
-                onChange={(event) => {
-                  this.setState({
-                    password: event.target.value,
-                  });
-                }}
               />
-              <label className="label-auth" for="phone">
+              <label>
+                <input
+                  type="checkbox"
+                  value={this.state.showPass}
+                  onChange={() => {
+                    this.setState({
+                      showPass: !this.state.showPass,
+                    });
+                  }}
+                />{" "}
+                Show Password
+              </label>
+              <label className="label-auth" htmlFor="phone">
                 Phone Number :
               </label>
               <input
@@ -85,34 +113,37 @@ export default class Register extends Component {
                 name="phone"
                 id="phone"
                 placeholder="Enter your phone number"
-                onChange={(event) => {
-                  this.setState({
-                    phone: event.target.value,
-                  });
-                }}
               />
-              <button
-                className="button-auth normal"
-                type="submit"
-                onClick={this.registerAuth}
-              >
+              {this.state.isError ? (
+                <p className="text-warning">
+                  {this.state.errMsg}
+                  {"!"}
+                </p>
+              ) : (
+                <p className="text-success">{this.state.succsessMsg}</p>
+              )}
+              <button className="button-auth normal" type="submit">
                 Sign Up
               </button>
-              <button className="button-auth google" type="submit">
-                <img className="google-button" src={Google} alt="google-logo" />{" "}
-                Sign Up with Google
-              </button>
+              <Link to="/" className="button-auth google" type="submit">
+                <img
+                  className="google-button-login"
+                  src={Google}
+                  alt="google-logo"
+                />{" "}
+                <p className="login-google-text">Login with Google</p>
+              </Link>
               <section className="has-account">
                 <div className="underline"></div>
                 <p className="already-account">Already have an account?</p>
                 <div className="underline"></div>
               </section>
-              <Link to="/login">
-                <button className="button-auth login">Login</button>
+              <Link to="/login" className="button-auth login">
+                <p className="signup-google-text">Login</p>
               </Link>
             </form>
           </main>
-          <footer className="footer-content-auth">
+          <footer className="footer-content-signup">
             <div className="footer-side">
               <div className="footer-title-auth">
                 <img src={Logo} alt="logo-coffeschop" />

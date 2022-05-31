@@ -21,9 +21,30 @@ import Slide from "../../assets/img/slide.png";
 import Left from "../../assets/img/left.png";
 import Right from "../../assets/img/right.png";
 import Map from "../../assets/img/map.png";
-import ImageProduct from "../../assets/img/creamyice.png";
 
+import { getFavoriteHome } from "../../services/product";
 export default class Home extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      favorite: [],
+    };
+  }
+  getFavoriteHomeCard = () => {
+    getFavoriteHome()
+      .then((res) => {
+        this.setState({
+          favorite: res.data.data,
+        });
+      })
+      .catch((err) => {
+        console.log("ERROR GET DATA FAVORITE", err);
+      });
+  };
+
+  componentDidMount() {
+    this.getFavoriteHomeCard();
+  }
   render() {
     return (
       <>
@@ -134,11 +155,16 @@ export default class Home extends Component {
             </div>
           </div>
           <div className="w-100 m-0 row p-5 gap-3 justify-content-sm-center justify-content-md-evenly">
-            <CardFavorite
-              image={ImageProduct}
-              title="Nama Product"
-              price="Harga"
-            />
+            {this.state.favorite.map((item) => {
+              return (
+                <CardFavorite
+                  image={item.image}
+                  title={item.name}
+                  price={item.price}
+                  key={item.id}
+                />
+              );
+            })}
           </div>
           <div className="row map-global text-center justify-content-center">
             <div className="col-md-4 mt-5">

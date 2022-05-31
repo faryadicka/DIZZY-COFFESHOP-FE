@@ -74,7 +74,7 @@ export default function Navbar(props) {
               </Link>
             </div>
             <div className="col-2 col-md-2">
-              <Link to="/profile.html">
+              <Link to="/profile">
                 <img src={Ava} alt="avatar" />
               </Link>
             </div>

@@ -8,7 +8,7 @@ export default function CardTesti(props) {
           <div className="testi-profile d-flex justify-content-between">
             <div className="d-flex">
               <img
-                class="img-avatar me-3"
+                className="img-avatar me-3"
                 src="/assets/img/1-1.png"
                 alt="profile-testi"
               />
