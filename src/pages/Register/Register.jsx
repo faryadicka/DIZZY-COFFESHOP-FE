@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 // assets
@@ -57,7 +57,6 @@ export default class Register extends Component {
   };
 
   render() {
-    // if (!this.state.isError) return <Navigate to="/login" />;
     return (
       <div className="container-auth">
         <aside className="picture">

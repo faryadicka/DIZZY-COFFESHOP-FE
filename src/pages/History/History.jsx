@@ -49,9 +49,9 @@ export default class History extends Component {
               {this.state.history.map((item) => {
                 return (
                   <CardHistory
-                    image={item.image}
+                    image={`http://localhost:5000${item.image}`}
                     name={item.name}
-                    price={item.price}
+                    price={`IDR ${item.price}`}
                     status="Delivery"
                     key={item.id}
                   />

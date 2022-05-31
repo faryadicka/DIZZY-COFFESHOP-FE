@@ -7,7 +7,9 @@ import Footer from "../../components/Footer/Footer";
 import "../ProductDetail/ProductDetail.scoped.css";
 import ImageProduct from "../../assets/img/cold-brew.png";
 
-export class ProductDetail extends Component {
+import withParams from "../../helpers/withParams";
+
+class ProductDetail extends Component {
   render() {
     return (
       <div>
@@ -150,4 +152,4 @@ export class ProductDetail extends Component {
   }
 }
 
-export default ProductDetail;
+export default withParams(ProductDetail);

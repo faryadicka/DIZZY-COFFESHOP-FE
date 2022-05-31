@@ -23,11 +23,14 @@ import Right from "../../assets/img/right.png";
 import Map from "../../assets/img/map.png";
 
 import { getFavoriteHome } from "../../services/product";
+// import Navbar from "../../components/Navbar/Navbar";
 export default class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
       favorite: [],
+      isLogin: false,
+      // availToken: localStorage.getItem("sign-payload"),
     };
   }
   getFavoriteHomeCard = () => {
@@ -48,6 +51,8 @@ export default class Home extends Component {
   render() {
     return (
       <>
+        {/* {this.state.isLogin ? <Navbar /> : <NavbarHome />}
+         */}
         <NavbarHome />
         <header className="header-home">
           <div className="header-content mb-5 border">
@@ -158,9 +163,9 @@ export default class Home extends Component {
             {this.state.favorite.map((item) => {
               return (
                 <CardFavorite
-                  image={item.image}
+                  image={`http://localhost:5000${item.image}`}
                   title={item.name}
-                  price={item.price}
+                  price={`IDR ${item.price}`}
                   key={item.id}
                 />
               );

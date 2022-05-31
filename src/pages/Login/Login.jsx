@@ -55,10 +55,11 @@ export default class Login extends Component {
           });
         });
     }
+    return alert("Tunggu Sebentar");
     // const token = localStorage.getItem("sign-payload");
   };
   render() {
-    if (this.state.isSuccess) return <Navigate to="/" />;
+    if (this.state.isSuccess) return <Navigate to="/products" />;
     return (
       <div className="container-auth">
         <aside className="picture">
@@ -116,7 +117,7 @@ export default class Login extends Component {
               ) : (
                 <p className="text-success">{this.state.succsessMsg}</p>
               )}
-              <Link to="/" className="mt-2 forgot-password">
+              <Link to="/forgot-password" className="mt-2 forgot-password">
                 Forgot password?
               </Link>
               <button className="button-auth normal" type="submit">

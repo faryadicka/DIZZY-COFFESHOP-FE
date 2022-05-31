@@ -138,7 +138,7 @@ class Product extends Component {
     // console.log(params.favorite);
     return (
       <>
-        <Navbar searchParams={searchParams.get("category")} />
+        <Navbar searchParams={searchParams.get("name")} />
         <main>
           <div className="container-fluid">
             <div className="row">
@@ -287,7 +287,7 @@ class Product extends Component {
                         return (
                           <CardProduct
                             image={`http://localhost:5000${item.image}`}
-                            coupon="0%"
+                            discount="0%"
                             title={item.name}
                             price={`IDR ${item.price}`}
                             key={item.id}
@@ -298,7 +298,7 @@ class Product extends Component {
                         return (
                           <CardProduct
                             image={`http://localhost:5000${item.image}`}
-                            coupon="0%"
+                            discount="0%"
                             title={item.name}
                             price={`IDR ${item.price}`}
                             key={item.id}
