@@ -46,17 +46,23 @@ export default class History extends Component {
               </h1>
             </div>
             <div className="row justify-content-center gap-3 mt-5">
-              {this.state.history.map((item) => {
-                return (
-                  <CardHistory
-                    image={`http://localhost:5000${item.image}`}
-                    name={item.name}
-                    price={`IDR ${item.price}`}
-                    status="Delivery"
-                    key={item.id}
-                  />
-                );
-              })}
+              {this.state.history.length === 0 ? (
+                <p className="text-white fw-bold fs-6 text-center">
+                  Belum ada Product yang di beli
+                </p>
+              ) : (
+                this.state.history.map((item) => {
+                  return (
+                    <CardHistory
+                      image={`http://localhost:5000${item.image}`}
+                      name={item.name}
+                      price={`IDR ${item.price}`}
+                      status="Delivery"
+                      key={item.id}
+                    />
+                  );
+                })
+              )}
             </div>
           </div>
         </main>

@@ -42,3 +42,20 @@
   top: 50px;
   left: 100px;
 }
+.btn-products-card {
+  border: none;
+  background-color: #6a402900;
+}
+.btn-products-card:link {
+  border: none;
+}
+
+.btn-products-card:hover {
+  border: none;
+}
+.btn-products-card:visited {
+  border: none;
+}
+.btn-products-card:active {
+  border: none;
+}

@@ -74,9 +74,43 @@ export default function Navbar(props) {
               </Link>
             </div>
             <div className="col-2 col-md-2">
-              <Link to="/profile">
-                <img src={Ava} alt="avatar" />
-              </Link>
+              <div className="dropdown">
+                <button
+                  type="button"
+                  className="btn dropdown-toggle"
+                  id="dropdownMenuButton"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <img src={Ava} alt="avatar" />
+                </button>
+                <div
+                  className="dropdown-menu"
+                  aria-labelledby="dropdownMenuButton"
+                >
+                  <ul
+                    className="dropdown-menu"
+                    aria-labelledby="dropdownMenuButton1"
+                  >
+                    <li>
+                      <Link className="dropdown-item" to="#">
+                        Action
+                      </Link>
+                    </li>
+                    <li>
+                      <Link className="dropdown-item" to="#">
+                        Another action
+                      </Link>
+                    </li>
+                    <li>
+                      <Link className="dropdown-item" to="#">
+                        Something else here
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
         </div>

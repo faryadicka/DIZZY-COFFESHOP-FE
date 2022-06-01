@@ -5,6 +5,14 @@
   box-sizing: border-box;
 }
 
+.btn-footer {
+  background-color: white;
+}
+
+.btn-footer:hover {
+  color: #744f3b;
+}
+
 .main-content {
   background-image: url(../../assets/img/background.webp);
   width: 100%;

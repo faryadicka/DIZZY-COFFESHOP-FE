@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 // Components
 import NavbarHome from "../../components/NavbarHome/NavbarHome";
+import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import CardFavorite from "../../components/CardFavorite/CardFavorite";
 import CardTesti from "../../components/CardTesti/CardTesti";
@@ -30,7 +31,7 @@ export default class Home extends Component {
     this.state = {
       favorite: [],
       isLogin: false,
-      // availToken: localStorage.getItem("sign-payload"),
+      availToken: "",
     };
   }
   getFavoriteHomeCard = () => {
@@ -51,9 +52,7 @@ export default class Home extends Component {
   render() {
     return (
       <>
-        {/* {this.state.isLogin ? <Navbar /> : <NavbarHome />}
-         */}
-        <NavbarHome />
+        {this.state.isLogin ? <Navbar /> : <NavbarHome />}
         <header className="header-home">
           <div className="header-content mb-5 border">
             <div className="container">

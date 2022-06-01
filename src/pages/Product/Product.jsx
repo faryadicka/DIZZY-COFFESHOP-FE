@@ -135,7 +135,7 @@ class Product extends Component {
     let { searchParams, location, params } = this.props;
     const { favorite, coffee, nonCoffe, foods, search, allProducts } =
       this.state.products;
-    // console.log(params.favorite);
+    // console.log(params);
     return (
       <>
         <Navbar searchParams={searchParams.get("name")} />
@@ -238,6 +238,7 @@ class Product extends Component {
                     ? favorite.map((item) => {
                         return (
                           <CardProduct
+                            id={item.id}
                             image={`http://localhost:5000${item.image}`}
                             discount="0%"
                             title={item.name}
@@ -250,6 +251,7 @@ class Product extends Component {
                     ? search.map((item) => {
                         return (
                           <CardProduct
+                            id={item.id}
                             image={`http://localhost:5000${item.image}`}
                             discount="0%"
                             title={item.name}
@@ -262,6 +264,7 @@ class Product extends Component {
                     ? coffee.map((item) => {
                         return (
                           <CardProduct
+                            id={item.id}
                             image={`http://localhost:5000${item.image}`}
                             discount="0%"
                             title={item.name}
@@ -274,6 +277,7 @@ class Product extends Component {
                     ? nonCoffe.map((item) => {
                         return (
                           <CardProduct
+                            id={item.id}
                             image={`http://localhost:5000${item.image}`}
                             discount="0%"
                             title={item.name}
@@ -286,6 +290,7 @@ class Product extends Component {
                     ? foods.map((item) => {
                         return (
                           <CardProduct
+                            id={item.id}
                             image={`http://localhost:5000${item.image}`}
                             discount="0%"
                             title={item.name}
@@ -297,6 +302,7 @@ class Product extends Component {
                     : allProducts.map((item) => {
                         return (
                           <CardProduct
+                            id={item.id}
                             image={`http://localhost:5000${item.image}`}
                             discount="0%"
                             title={item.name}
