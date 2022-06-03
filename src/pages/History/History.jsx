@@ -12,12 +12,13 @@ export default class History extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      token: localStorage.getItem("sign-payload"),
       history: [],
     };
   }
 
-  getHistoryProducts = () => {
-    getAllhistories()
+  getHistoryProducts = (token) => {
+    getAllhistories(token)
       .then((res) => {
         console.log(res.data.data);
         this.setState({
@@ -30,9 +31,11 @@ export default class History extends Component {
   };
 
   componentDidMount() {
-    this.getHistoryProducts();
+    const { token } = this.state;
+    this.getHistoryProducts(token);
   }
   render() {
+    console.log(this.state.history);
     return (
       <>
         <Navbar />

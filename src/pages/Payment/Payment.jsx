@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Footer from "../../components/Footer/Footer";
 import Navbars from "../../components/Navbars/Navbars";
-
+import axios from "axios";
 // Assets
 import "../Payment/Payment.scoped.css";
 import ImagePayment from "../../assets/img/image-payment.png";
@@ -10,9 +10,55 @@ import CardCart from "../../components/CardCart/CardCart";
 export class Payment extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      errorMsg: "",
+      successMsg: "",
+      token: localStorage.getItem("sign-payload"),
+      cart: JSON.parse(localStorage.getItem("cart")),
+    };
   }
+
+  handlePostTransaction = () => {
+    const { deliveryMethods, size, time, qty, id, price } = this.state.cart;
+    const { token } = this.state;
+    const subtotal = price * qty;
+    const taxAndFees = subtotal * 0.1;
+    const shipping = subtotal * 0.2;
+    const total = subtotal + taxAndFees + shipping;
+    const body = {
+      productsId: id,
+      deliveryMethods,
+      size,
+      time,
+      quantity: qty,
+      total,
+      subtotal,
+      shipping,
+      taxAndFees,
+    };
+    const URL = "http://localhost:5000/api/transactions";
+    axios
+      .post(URL, body, { headers: { "x-access-token": token } })
+      .then((res) => {
+        console.log(res);
+        this.setState({
+          successMsg: res.data.data.message,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        this.setState({
+          errMsg: err.response.data.message,
+        });
+      });
+  };
   render() {
+    const { size, id, qty, image, name, price } = this.state.cart;
+    const subTotal = price * qty;
+    const taxAndFees = subTotal * 0.1;
+    const shipping = subTotal * 0.2;
+    const total = subTotal + taxAndFees + shipping;
+    console.log(id);
     return (
       <>
         <Navbars />
@@ -33,32 +79,27 @@ export class Payment extends Component {
                       Old Summary
                     </h4>
                     <CardCart
-                      image={ImagePayment}
-                      name="Hazelnut Latte"
-                      qty="1"
-                      price="ID 24.0"
-                    />
-                    <CardCart
-                      image={ImagePayment}
-                      name="Hazelnut Latte"
-                      qty="1"
-                      price="ID 24.0"
+                      image={`http://localhost:5000${image}`}
+                      name={name}
+                      qty={qty}
+                      size={size}
+                      price={`IDR ${subTotal}`}
                     />
                     <div className="d-flex justify-content-between border-top border-dark pt-4">
                       <p className="subtotal">SUBTOTAL</p>
-                      <p className="price">IDR 120.000</p>
+                      <p className="price">{`IDR ${subTotal}`}</p>
                     </div>
                     <div className="d-flex justify-content-between">
                       <p className="tax-fees">TAX & FEES</p>
-                      <p className="price">IDR 120.000</p>
+                      <p className="price">{`IDR ${taxAndFees}`}</p>
                     </div>
                     <div className="d-flex justify-content-between">
                       <p className="shipping">SHIPPING</p>
-                      <p className="price">IDR 120.000</p>
+                      <p className="price">{`IDR ${shipping}`}</p>
                     </div>
                     <div className="d-flex justify-content-between mt-5">
                       <h5 className="total fw-bold">TOTAL</h5>
-                      <h5 className="price fw-bold">IDR 120.000</h5>
+                      <h5 className="price fw-bold">{`IDR ${total}`}</h5>
                     </div>
                   </div>
                 </div>
@@ -95,12 +136,9 @@ export class Payment extends Component {
                         className="form-check-input"
                         type="radio"
                         name="flexRadioDefault"
-                        id="flexRadioDefault1"
+                        id="card"
                       />
-                      <label
-                        className="form-check-label"
-                        for="flexRadioDefault1"
-                      >
+                      <label className="form-check-label" htmlFor="card">
                         Card
                       </label>
                     </div>
@@ -109,12 +147,9 @@ export class Payment extends Component {
                         className="form-check-input"
                         type="radio"
                         name="flexRadioDefault"
-                        id="flexRadioDefault2"
+                        id="bank"
                       />
-                      <label
-                        className="form-check-label"
-                        for="flexRadioDefault2"
-                      >
+                      <label className="form-check-label" htmlFor="bank">
                         Bank Account
                       </label>
                     </div>
@@ -123,19 +158,19 @@ export class Payment extends Component {
                         className="form-check-input"
                         type="radio"
                         name="flexRadioDefault"
-                        id="flexRadioDefault2"
+                        id="cod"
                       />
-                      <label
-                        className="form-check-label"
-                        for="flexRadioDefault2"
-                      >
+                      <label className="form-check-label" htmlFor="cod">
                         Cash on delivery
                       </label>
                     </div>
                   </div>
                   <div className="row justify-content-center">
                     <div className="col-5 col-md-12">
-                      <button className="w-100 btn btn-choco mt-4 py-4 rounded-4">
+                      <button
+                        onClick={this.handlePostTransaction}
+                        className="w-100 btn btn-choco mt-4 py-4 rounded-4"
+                      >
                         Confirm and Pay
                       </button>
                     </div>

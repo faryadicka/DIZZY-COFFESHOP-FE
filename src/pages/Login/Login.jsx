@@ -127,16 +127,6 @@ export default class Login extends Component {
                   id="password"
                   placeholder="Enter your password"
                 />
-                {this.state.isError ? (
-                  <p className="text-warning fw-bold text-center">
-                    {this.state.errMsg}
-                    {"!"}
-                  </p>
-                ) : (
-                  <p className="text-danger fw-bold text-center">
-                    {this.state.succsessMsg}
-                  </p>
-                )}
                 <label>
                   <input
                     type="checkbox"
@@ -149,6 +139,16 @@ export default class Login extends Component {
                   />{" "}
                   Show Password
                 </label>
+                {this.state.isError ? (
+                  <p className="text-warning fw-bold text-center">
+                    {this.state.errMsg}
+                    {"!"}
+                  </p>
+                ) : (
+                  <p className="text-danger fw-bold text-center">
+                    {this.state.succsessMsg}
+                  </p>
+                )}
                 <Link to="/forgot-password" className="mt-2 forgot-password">
                   Forgot password?
                 </Link>

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import axios from "axios";
 
 // assets
@@ -15,50 +15,41 @@ export default class Register extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: {
-        email: "",
-        password: "",
-        phone: "",
-        showPass: false,
-        isError: false,
-        errMsg: "",
-        succsessMsg: "",
-        isRegister: false,
-      },
+      email: "",
+      password: "",
+      phone: "",
+      showPass: false,
+      isError: false,
+      errMsg: "",
+      succsessMsg: "",
+      isRegister: false,
     };
   }
 
   registerAuth = async (event) => {
     event.preventDefault();
-    const email = event.target.email.value;
-    const password = event.target.password.value;
-    const phone = event.target.phone.value;
-    this.setState({
-      email,
-      password,
-      phone,
-    });
     const URL = "http://localhost:5000/api/auth/register";
-    if (email && password && phone) {
-      await axios
-        .post(URL, this.state)
-        .then((res) => {
-          console.log(res.data);
-          this.setState({
-            succsessMsg: res.data.message,
-            isError: false,
-          });
-        })
-        .catch((err) => {
-          this.setState({
-            isError: true,
-            errMsg: err.response.data.message,
-          });
+    await axios
+      .post(URL, this.state)
+      .then((res) => {
+        console.log(res.data);
+        this.setState({
+          succsessMsg: "success",
+          isError: false,
         });
-    }
+      })
+      .catch((err) => {
+        console.log(err);
+        this.setState({
+          isError: true,
+          errMsg: err.response.data.message,
+        });
+      });
   };
 
   render() {
+    if (this.state.isError) return <Navigate to="/login" />;
+    console.log(this.state);
     return (
       <>
         <div className="container-auth">
@@ -76,7 +67,7 @@ export default class Register extends Component {
                 </Link>
                 <p className="header-title-auth">Sign Up</p>
               </header>
-              <form className="main-form-auth" onSubmit={this.registerAuth}>
+              <form className="main-form-auth">
                 <label className="label-auth" htmlFor="email">
                   Email Address :
                 </label>
@@ -86,6 +77,11 @@ export default class Register extends Component {
                   name="email"
                   id="email"
                   placeholder="Enter your email address"
+                  onChange={(event) => {
+                    this.setState({
+                      email: event.target.value,
+                    });
+                  }}
                 />
                 <label className="label-auth" htmlFor="password">
                   Password :
@@ -96,6 +92,11 @@ export default class Register extends Component {
                   name="password"
                   id="password"
                   placeholder="Enter your password"
+                  onChange={(event) => {
+                    this.setState({
+                      password: event.target.value,
+                    });
+                  }}
                 />
                 <label>
                   <input
@@ -118,12 +119,18 @@ export default class Register extends Component {
                   name="phone"
                   id="phone"
                   placeholder="Enter your phone number"
+                  onChange={(event) => {
+                    this.setState({
+                      phone: event.target.value,
+                    });
+                  }}
                 />
                 <button
                   className="button-auth normal"
                   type="submit"
                   data-bs-toggle="modal"
                   data-bs-target="#exampleModal"
+                  onClick={this.registerAuth}
                 >
                   Sign Up
                 </button>
@@ -184,16 +191,16 @@ export default class Register extends Component {
           </div>
         </div>
         <div
-          class="modal fade"
+          className="modal fade"
           id="exampleModal"
-          tabindex="-1"
+          tabIndex="-1"
           aria-labelledby="exampleModalLabel"
           aria-hidden="true"
         >
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title text-center" id="exampleModalLabel">
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title text-center" id="exampleModalLabel">
                   {this.state.isError ? (
                     <p className="text-warning">
                       {this.state.errMsg}
@@ -205,15 +212,15 @@ export default class Register extends Component {
                 </h5>
                 <button
                   type="button"
-                  class="btn-close"
+                  className="btn-close"
                   data-bs-dismiss="modal"
                   aria-label="Close"
                 ></button>
               </div>
-              <div class="modal-footer">
+              <div className="modal-footer">
                 <button
                   type="button"
-                  class="btn btn-secondary"
+                  className="btn btn-secondary"
                   data-bs-dismiss="modal"
                 >
                   Close

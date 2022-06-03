@@ -21,7 +21,7 @@ class Profile extends Component {
       address: "",
       phone: "",
       birthdate: "",
-      gender: "",
+      gender: "male",
       firstName: "",
       lastName: "",
       email: "",
@@ -54,7 +54,7 @@ class Profile extends Component {
     event.preventDefault();
     const { display, address, phone, birthdate, firstName, lastName } =
       this.state;
-    console.log(this.state);
+    // console.log(this.state);
     const body = {
       display,
       address,
@@ -75,11 +75,11 @@ class Profile extends Component {
       });
   };
 
-  checkGender = (event) => {
-    this.setState({
-      gender: event.target.value,
-    });
-  };
+  // checkGender = (event) => {
+  //   this.setState({
+  //     gender: event.target.value,
+  //   });
+  // };
 
   componentDidMount() {
     this.getProfilePage();
@@ -144,7 +144,7 @@ class Profile extends Component {
                               type="email"
                               className="form-control-profile"
                               id="email"
-                              placeholder={this.state.email}
+                              // placeholder={this.state.email}
                             />
                           </div>
                           <div className="mb-lg-5">
@@ -157,7 +157,7 @@ class Profile extends Component {
                               type="text"
                               className="form-control-profile"
                               id="address"
-                              placeholder={this.state.address}
+                              value={this.state.address}
                               onChange={(event) => {
                                 this.setState({
                                   address: event.target.value,
@@ -177,7 +177,7 @@ class Profile extends Component {
                               type="text"
                               className="form-control-profile"
                               id="phone"
-                              placeholder={this.state.phone}
+                              value={this.state.phone}
                               onChange={(event) => {
                                 this.setState({
                                   phone: event.target.value,
@@ -226,7 +226,7 @@ class Profile extends Component {
                               type="text"
                               className="form-control-profile"
                               id="display-name"
-                              placeholder={this.state.display}
+                              value={this.state.display}
                               onChange={(event) => {
                                 this.setState({
                                   display: event.target.value,
@@ -244,7 +244,7 @@ class Profile extends Component {
                               type="text"
                               className="form-control-profile"
                               id="first-name"
-                              placeholder={this.state.firstName}
+                              value={this.state.firstName}
                               onChange={(event) => {
                                 this.setState({
                                   firstName: event.target.value,
@@ -262,7 +262,7 @@ class Profile extends Component {
                               type="text"
                               className="form-control-profile"
                               id="last-name"
-                              placeholder={this.state.lastName}
+                              value={this.state.lastName}
                               onChange={(event) => {
                                 this.setState({
                                   lastName: event.target.value,
@@ -281,7 +281,7 @@ class Profile extends Component {
                               type="date"
                               className="form-control-profile"
                               id="birthdate"
-                              placeholder={this.state.birthdate}
+                              value={this.state.birthdate}
                               onChange={(event) => {
                                 this.setState({
                                   birthdate: event.target.value,
@@ -289,18 +289,24 @@ class Profile extends Component {
                               }}
                             />
                           </div>
-                          <div onChange={this.checkGender.bind(this)}>
+                          <form>
                             <div className="form-check">
                               <input
                                 className="form-check-input"
                                 type="radio"
-                                name="flexRadioDefault"
-                                id="flexRadioDefault1"
+                                name="gender"
+                                id="male"
                                 value="male"
+                                checked={this.state.gender === "male"}
+                                onChange={(event) => {
+                                  this.setState({
+                                    gender: event.target.value,
+                                  });
+                                }}
                               />
                               <label
                                 className="form-check-label"
-                                htmlFor="flexRadioDefault1"
+                                htmlFor="male"
                               >
                                 Male
                               </label>
@@ -309,18 +315,24 @@ class Profile extends Component {
                               <input
                                 className="form-check-input"
                                 type="radio"
-                                name="flexRadioDefault"
-                                id="flexRadioDefault2"
+                                name="gender"
+                                id="female"
                                 value="female"
+                                checked={this.state.gender === "female"}
+                                onChange={(event) => {
+                                  this.setState({
+                                    gender: event.target.value,
+                                  });
+                                }}
                               />
                               <label
                                 className="form-check-label"
-                                htmlFor="flexRadioDefault2"
+                                htmlFor="female"
                               >
                                 Female
                               </label>
                             </div>
-                          </div>
+                          </form>
                         </div>
                       </div>
                     </div>
