@@ -5,6 +5,20 @@
   box-sizing: border-box;
 }
 
+.eye-pass {
+  width: 30px;
+}
+
+.eye-button {
+  width: 50px;
+  outline: none;
+  border: none;
+  background-color: #00000000;
+  position: relative;
+  left: 330px;
+  top: 60px;
+}
+
 .header-brand-auth {
   text-decoration: none;
   color: black;
@@ -196,6 +210,15 @@
 }
 
 @media only screen and (max-width: 600px) {
+  .eye-button {
+    width: 50px;
+    outline: none;
+    border: none;
+    background-color: #00000000;
+    position: relative;
+    left: 190px;
+    top: 50px;
+  }
   .signup-google-text {
     position: relative;
     left: 180px;
