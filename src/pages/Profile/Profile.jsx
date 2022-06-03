@@ -93,7 +93,7 @@ class Profile extends Component {
     return (
       <>
         <Navbar />
-        <main className="main-user">
+        <main className="main-user mt-5">
           <div className="main-content">
             <form
               className="container form-input-profile"

@@ -139,7 +139,7 @@ class Product extends Component {
     return (
       <>
         <Navbar searchParams={searchParams.get("name")} />
-        <main>
+        <main className="margin-main-top">
           <div className="container-fluid">
             <div className="row">
               <div className="col-12 col-md-6 col-lg-4 p-5 column-coupon">

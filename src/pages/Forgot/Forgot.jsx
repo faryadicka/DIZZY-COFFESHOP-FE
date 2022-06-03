@@ -26,7 +26,7 @@ export default class Forgot extends Component {
                     <div className="col-md-6">
                       <input
                         type="email"
-                        className="form-control ps-4 py-4 rounded-4"
+                        className="ps-4 py-4 rounded-4 bg-input-forgot"
                         placeholder="Enter your email adress to get link"
                       />
                     </div>

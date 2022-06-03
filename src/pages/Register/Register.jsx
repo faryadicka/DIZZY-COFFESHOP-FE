@@ -10,8 +10,12 @@ import Google from "../../assets/img/google.png";
 import Facebook from "../../assets/img/facebook.png";
 import Instagram from "../../assets/img/instagram.png";
 import Twitter from "../../assets/img/twitter.png";
+import Eye from "../../assets/img/eye.png";
 
-export default class Register extends Component {
+//Helper
+import withNavigate from "../../helpers/withNavigate";
+
+class Register extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -20,6 +24,7 @@ export default class Register extends Component {
       phone: "",
       showPass: false,
       isError: false,
+      isSuccess: false,
       errMsg: "",
       succsessMsg: "",
       isRegister: false,
@@ -35,7 +40,7 @@ export default class Register extends Component {
         console.log(res.data);
         this.setState({
           succsessMsg: "success",
-          isError: false,
+          isSuccess: true,
         });
       })
       .catch((err) => {
@@ -48,8 +53,8 @@ export default class Register extends Component {
   };
 
   render() {
-    if (this.state.isError) return <Navigate to="/login" />;
-    console.log(this.state);
+    // if (this.state.isSuccess) return <Navigate to="/login" />;
+    const { navigate } = this.props;
     return (
       <>
         <div className="container-auth">
@@ -85,6 +90,17 @@ export default class Register extends Component {
                 />
                 <label className="label-auth" htmlFor="password">
                   Password :
+                  <button
+                    className="eye-button"
+                    onClick={(event) => {
+                      event.preventDefault();
+                      this.setState({
+                        showPass: !this.state.showPass,
+                      });
+                    }}
+                  >
+                    <img src={Eye} alt="eye" className="eye-pass" />
+                  </button>
                 </label>
                 <input
                   className="input-auth"
@@ -92,24 +108,7 @@ export default class Register extends Component {
                   name="password"
                   id="password"
                   placeholder="Enter your password"
-                  onChange={(event) => {
-                    this.setState({
-                      password: event.target.value,
-                    });
-                  }}
                 />
-                <label>
-                  <input
-                    type="checkbox"
-                    value={this.state.showPass}
-                    onChange={() => {
-                      this.setState({
-                        showPass: !this.state.showPass,
-                      });
-                    }}
-                  />{" "}
-                  Show Password
-                </label>
                 <label className="label-auth" htmlFor="phone">
                   Phone Number :
                 </label>
@@ -220,8 +219,11 @@ export default class Register extends Component {
               <div className="modal-footer">
                 <button
                   type="button"
-                  className="btn btn-secondary"
+                  className="btn btn-success"
                   data-bs-dismiss="modal"
+                  onClick={() => {
+                    navigate("/login");
+                  }}
                 >
                   Close
                 </button>
@@ -233,3 +235,5 @@ export default class Register extends Component {
     );
   }
 }
+
+export default withNavigate(Register);

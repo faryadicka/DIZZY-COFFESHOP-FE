@@ -1,4 +1,4 @@
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import React, { Component } from "react";
 
 // assets
@@ -9,12 +9,14 @@ import Google from "../../assets/img/google.png";
 import Facebook from "../../assets/img/facebook.png";
 import Instagram from "../../assets/img/instagram.png";
 import Twitter from "../../assets/img/twitter.png";
-import axios from "axios";
+import Eye from "../../assets/img/eye.png";
 
 //  Services
 import { loginAuthService } from "../../services/login";
+//  Helpers
+import withNavigate from "../../helpers/withNavigate";
 
-export default class Login extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -31,16 +33,10 @@ export default class Login extends Component {
 
   loginAuthPage = (event) => {
     event.preventDefault();
-    const email = event.target.email.value;
-    const password = event.target.password.value;
-    this.setState({
-      email,
-      password,
-    });
     loginAuthService(this.state)
       .then((res) => {
+        console.log(this.state);
         this.setState({
-          isError: false,
           succsessMsg: res.data.message,
           isSuccess: true,
         });
@@ -55,40 +51,10 @@ export default class Login extends Component {
       });
   };
 
-  // loginAuth = (event) => {
-  //   event.preventDefault();
-  //   const email = event.target.email.value;
-  //   const password = event.target.password.value;
-  //   this.setState({
-  //     email,
-  //     password,
-  //   });
-  //   const URL = "http://localhost:5000/api/auth/login";
-  //   if (email && password) {
-  //     axios
-  //       .post(URL, this.state)
-  //       .then((res) => {
-  //         this.setState({
-  //           isError: false,
-  //           succsessMsg: res.data.message,
-  //           isSuccess: true,
-  //         });
-  //         // console.log(this.state);
-  //         localStorage.setItem("sign-payload", res.data.data.token);
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //         this.setState({
-  //           isError: true,
-  //           errMsg: err.response.data.message,
-  //         });
-  //       });
-  //   }
-  //   // const token = localStorage.getItem("sign-payload");
-  // };
   componentDidMount() {}
   render() {
-    if (this.state.isSuccess) return <Navigate to="/" />;
+    // if (this.state.isSuccess) return <Navigate to="/" />;
+    const { navigate } = this.props;
     return (
       <>
         <div className="container-auth">
@@ -106,7 +72,7 @@ export default class Login extends Component {
                 </Link>
                 <p className="header-title-auth">Login</p>
               </header>
-              <form className="main-form-auth" onSubmit={this.loginAuthPage}>
+              <form className="main-form-auth">
                 <label className="label-auth" htmlFor="email">
                   Email Address :
                 </label>
@@ -116,9 +82,25 @@ export default class Login extends Component {
                   name="email"
                   id="email"
                   placeholder="Enter your email address"
+                  onChange={(event) => {
+                    this.setState({
+                      email: event.target.value,
+                    });
+                  }}
                 />
                 <label className="label-auth" htmlFor="password">
                   Password :
+                  <button
+                    className="eye-button"
+                    onClick={(event) => {
+                      event.preventDefault();
+                      this.setState({
+                        showPass: !this.state.showPass,
+                      });
+                    }}
+                  >
+                    <img src={Eye} alt="eye" className="eye-pass" />
+                  </button>
                 </label>
                 <input
                   className="input-auth"
@@ -126,37 +108,24 @@ export default class Login extends Component {
                   name="password"
                   id="password"
                   placeholder="Enter your password"
+                  onChange={(event) => {
+                    this.setState({
+                      password: event.target.value,
+                    });
+                  }}
                 />
-                <label>
-                  <input
-                    type="checkbox"
-                    value={this.state.showPass}
-                    onChange={() => {
-                      this.setState({
-                        showPass: !this.state.showPass,
-                      });
-                    }}
-                  />{" "}
-                  Show Password
-                </label>
-                {this.state.isError ? (
-                  <p className="text-warning fw-bold text-center">
-                    {this.state.errMsg}
-                    {"!"}
-                  </p>
-                ) : (
-                  <p className="text-danger fw-bold text-center">
-                    {this.state.succsessMsg}
-                  </p>
-                )}
-                <Link to="/forgot-password" className="mt-2 forgot-password">
+                <Link
+                  to="/forgot-password"
+                  className="mt-2 forgot-password text-decoration-none"
+                >
                   Forgot password?
                 </Link>
                 <button
                   className="button-auth normal"
                   type="submit"
-                  // data-bs-toggle="modal"
-                  // data-bs-target="#exampleModal"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                  onClick={this.loginAuthPage}
                 >
                   Login
                 </button>
@@ -216,17 +185,17 @@ export default class Login extends Component {
             </footer>
           </div>
         </div>
-        {/* <div
+        <div
           class="modal fade"
           id="exampleModal"
           tabindex="-1"
           aria-labelledby="exampleModalLabel"
           aria-hidden="true"
         >
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title text-center" id="exampleModalLabel">
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title text-center" id="exampleModalLabel">
                   {this.state.isError ? (
                     <p className="text-warning">
                       {this.state.errMsg}
@@ -238,24 +207,29 @@ export default class Login extends Component {
                 </h5>
                 <button
                   type="button"
-                  class="btn-close"
+                  className="btn-close"
                   data-bs-dismiss="modal"
                   aria-label="Close"
                 ></button>
               </div>
-              <div class="modal-footer">
+              <div className="modal-footer">
                 <button
                   type="button"
-                  class="btn btn-secondary"
+                  className="btn btn-success"
                   data-bs-dismiss="modal"
+                  onClick={() => {
+                    navigate("/");
+                  }}
                 >
                   Close
                 </button>
               </div>
             </div>
           </div>
-        </div> */}
+        </div>
       </>
     );
   }
 }
+
+export default withNavigate(Login);

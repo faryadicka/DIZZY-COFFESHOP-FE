@@ -39,7 +39,7 @@ export default class History extends Component {
     return (
       <>
         <Navbar />
-        <main className="main-history">
+        <main className="main-history mt-5">
           <div className="container">
             <div className="row">
               <h1 className="history-title text-center text-white">

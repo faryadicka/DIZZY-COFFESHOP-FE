@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link, Navigate } from "react-router-dom";
 // component
-import Navbar from "../../components/Navbars/Navbars";
+import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 // assets
 import "../ProductDetail/ProductDetail.scoped.css";
@@ -12,9 +12,6 @@ import withParams from "../../helpers/withParams";
 
 // Services
 import { getProductDetail } from "../../services/product";
-
-// export const RootContext = createContext();
-// const Provider = RootContext.Provider;
 
 class ProductDetail extends Component {
   constructor(props) {
@@ -100,7 +97,7 @@ class ProductDetail extends Component {
     return (
       <div>
         <Navbar />
-        <main className="main-product-detail">
+        <main className="main-product-detail mt-5">
           {params.id ? (
             <div className="container mt-0 mt-md-5">
               <div className="row link-product-detail">

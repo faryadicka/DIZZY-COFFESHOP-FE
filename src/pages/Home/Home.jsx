@@ -181,12 +181,12 @@ export default class Home extends Component {
               </p>
             </div>
             <div className="row">
-              <div className="col-md p-md-5 mt-5">
-                <img className="map-image" src={Map} alt="map" />
+              <div className="col-md mt-5">
+                <img className="map-image w-100" src={Map} alt="map" />
               </div>
             </div>
           </div>
-          <div className="row partner-info mt-5">
+          <div className="w-100 row partner-info mt-5">
             <h1 className="title-partner-info fw-bold text-center">
               Our Partner
             </h1>
@@ -208,7 +208,7 @@ export default class Home extends Component {
               <img className="image-sponsored" src={Spotify} alt="spotify" />
             </div>
           </div>
-          <div className="row mt-5 justify-content-center">
+          <div className="row mt-5 justify-content-center w-100">
             <div className="col-md-5 text-center ">
               <h1 className="testimoni-title fw-bold">
                 Loved by Thousands of Happy Customer
