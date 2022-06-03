@@ -5,6 +5,12 @@
   box-sizing: border-box;
 }
 
+.bg-input-forgot {
+  background-color: white !important;
+  width: 100%;
+  border: none;
+}
+
 .container-forgot {
   display: flex;
   flex-direction: column;

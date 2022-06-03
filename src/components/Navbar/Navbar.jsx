@@ -11,7 +11,7 @@ import Ava from "../../assets/img/ava.png";
 export default function Navbar(props) {
   let navigate = useNavigate();
   return (
-    <nav className="navbar navbar-expand-lg navbar-light navbar-products">
+    <nav className="navbar navbar-expand-lg navbar-light navbar-products navbar-costum">
       <div className="container">
         <Link className="navbar-brand brand" to="#">
           <img src={Logo} alt="logo-brand" /> Dizzy Coffee Shop

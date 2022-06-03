@@ -5,6 +5,10 @@
   box-sizing: border-box;
 }
 
+.main-auth {
+  overflow-x: hidden;
+}
+
 .header-brand-auth {
   text-decoration: none;
   color: black;

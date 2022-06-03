@@ -1,3 +1,12 @@
+.navbar-costum {
+  background-color: #fff;
+  z-index: 1;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
 .navbar-brand .brand {
   font-family: "Rubik", sans-serif;
   font-weight: bold;
@@ -27,5 +36,13 @@
   .img-search {
     width: 15%;
     left: 15px;
+  }
+  .navbar-costum {
+    background-color: #fff;
+    z-index: 1;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    width: 100%;
   }
 }
