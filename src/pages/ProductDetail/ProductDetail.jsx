@@ -204,14 +204,16 @@ class ProductDetail extends Component {
                       <h5 className="delivery-methods-products text-center mt-5 fw-bold">
                         Choose Delivery Methods
                       </h5>
-                      <div className="d-flex flex-column flex-md-row justify-content-around mt-5">
+                      <div className="d-flex flex-column flex-md-row justify-content-around mt-5 checked-delivery-methods">
                         <input
                           type="radio"
                           className="btn-check"
                           name="options-outlined"
                           id="dinein"
                           value="Dine in"
-                          checked={this.state.gender === "dinein"}
+                          checked={
+                            this.state.cart.deliveryMethods === "Dine in"
+                          }
                           onChange={(event) => {
                             this.setState({
                               cart: {
@@ -233,6 +235,9 @@ class ProductDetail extends Component {
                           name="options-outlined"
                           id="door"
                           value="Door Delivery"
+                          checked={
+                            this.state.cart.deliveryMethods === "Door Delivery"
+                          }
                           onChange={(event) => {
                             this.setState({
                               cart: {
@@ -254,6 +259,9 @@ class ProductDetail extends Component {
                           name="options-outlined"
                           id="pick"
                           value="Pick up"
+                          checked={
+                            this.state.cart.deliveryMethods === "Pick up"
+                          }
                           onChange={(event) => {
                             this.setState({
                               cart: {

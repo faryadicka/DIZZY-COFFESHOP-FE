@@ -38,12 +38,23 @@
   color: #9f9f9f;
   border: none;
   background-color: white;
+  font-size: 17px;
 }
 
-.menu-products:active {
+.text-choco {
+  color: #6a4029;
+}
+
+.text-choco:hover {
+  color: #6a4029;
+}
+
+.isActive {
   border: none;
   color: #6a4029;
   font-weight: bold;
+  font-size: 17px;
+  text-decoration: underline;
 }
 
 .menu-products:hover {
