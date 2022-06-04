@@ -7,6 +7,13 @@
   font-family: "Poppins";
 }
 
+.checked-delivery-methods input[type="radio"]:checked + label {
+  border: none;
+  color: white;
+  background-color: #6a4029;
+  font-weight: bold;
+}
+
 .main-product-detail {
   height: 1100px;
   width: 100%;
