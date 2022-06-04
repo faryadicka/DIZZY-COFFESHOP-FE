@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import CardProduct from "../../components/CardProducts/CardProduct";
+// import CostumLink from "../../components/CostumLink/CostumLink";
 
 // assets
 import "../Product/Product.scoped.css";
@@ -23,12 +24,16 @@ import {
   getFavorite,
   getSearch,
   getAllProduct,
+  // getPaginationAll,
 } from "../../services/product";
+import axios from "axios";
+// import { Nav } from "react-bootstrap";
 
 class Product extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      isActiveFav: false,
       products: {
         favorite: [],
         coffee: [],
@@ -36,6 +41,7 @@ class Product extends Component {
         foods: [],
         search: [],
         allProducts: [],
+        pagination: [],
       },
     };
   }
@@ -135,7 +141,6 @@ class Product extends Component {
     let { searchParams, location, params } = this.props;
     const { favorite, coffee, nonCoffe, foods, search, allProducts } =
       this.state.products;
-    // console.log(params);
     return (
       <>
         <Navbar searchParams={searchParams.get("name")} />
@@ -209,27 +214,27 @@ class Product extends Component {
                 <div className="row text-center mt-3 justify-content-between">
                   <div className="col-3 col-lg-3">
                     <Link to="/products/favorite" className="menu-products">
-                      <p className="title-category">Favorite & Promo</p>
+                      Favorite & Promo
                     </Link>
                   </div>
                   <div className="col-2 col-lg-2">
                     <Link to="/products?category=1" className="menu-products">
-                      <p className="title-category">Coffee</p>
+                      Coffee
                     </Link>
                   </div>
                   <div className="col-2 col-lg-2">
                     <Link to="/products?category=2" className="menu-products">
-                      <p className="title-category">Non Coffee</p>
+                      Non Coffee
                     </Link>
                   </div>
                   <div className="col-2 col-lg-2">
                     <Link to="/products?category=3" className="menu-products">
-                      <p className="title-category">Foods</p>
+                      Foods
                     </Link>
                   </div>
                   <div className="col-3 col-lg-2">
-                    <Link to="/products" className="menu-products">
-                      <p className="title-category">All</p>
+                    <Link to="/products" className="menu-products isActive">
+                      All
                     </Link>
                   </div>
                 </div>
@@ -311,6 +316,47 @@ class Product extends Component {
                           />
                         );
                       })}
+                </div>
+                <div className="row pagination justify-content-center">
+                  <div className="col-auto">
+                    <nav aria-label="Page navigation example">
+                      <ul className="pagination">
+                        <li className="page-item">
+                          <Link
+                            className="page-link text-choco"
+                            to="#"
+                            aria-label="Previous"
+                          >
+                            <span aria-hidden="true">&laquo;</span>
+                          </Link>
+                        </li>
+                        <li className="page-item">
+                          <Link className="page-link text-choco" to="#">
+                            1
+                          </Link>
+                        </li>
+                        <li className="page-item">
+                          <Link className="page-link text-choco" to="#">
+                            2
+                          </Link>
+                        </li>
+                        <li className="page-item">
+                          <Link className="page-link text-choco" to="#">
+                            3
+                          </Link>
+                        </li>
+                        <li className="page-item">
+                          <Link
+                            className="page-link text-choco"
+                            to="#"
+                            aria-label="Next"
+                          >
+                            <span aria-hidden="true">&raquo;</span>
+                          </Link>
+                        </li>
+                      </ul>
+                    </nav>
+                  </div>
                 </div>
               </div>
             </div>
