@@ -8,9 +8,10 @@ import Footer from "../../components/Footer/Footer";
 
 // assets
 import "../Profile/Profile.scoped.css";
-import CardProfile from "../../components/CardProfile/CardProfile";
+// import CardProfile from "../../components/CardProfile/CardProfile";
 // import ProfileImage from "../../assets/img/edit-profile.webp";
 import Pencil from "../../assets/img/pancil-2.png";
+import Avatar from "../../assets/img/avatar.png";
 
 class Profile extends Component {
   constructor(props) {
@@ -21,11 +22,15 @@ class Profile extends Component {
       address: "",
       phone: "",
       birthdate: "",
-      gender: "male",
+      gender: "female",
       firstName: "",
       lastName: "",
       email: "",
+      image: "",
+      imgPreview: null,
+      useSrc: true,
     };
+    this.inputFile = React.createRef();
   }
   getProfilePage = () => {
     const URL = "http://localhost:5000/api/users/profile";
@@ -33,7 +38,7 @@ class Profile extends Component {
     axios
       .get(URL, { headers: { "x-access-token": token } })
       .then((res) => {
-        console.log(res.data.total);
+        // console.log(res.data.total);
         this.setState({
           email: res.data.total.email,
           display: res.data.total.display_name,
@@ -43,6 +48,7 @@ class Profile extends Component {
           gender: res.data.total.gender,
           firstName: res.data.total.first_name,
           lastName: res.data.total.last_name,
+          image: res.data.total.image,
         });
       })
       .catch((err) => {
@@ -50,36 +56,73 @@ class Profile extends Component {
       });
   };
 
+  handleChangeFile = (event) => {
+    event.preventDefault();
+    const file = event.target.files[0];
+    const data = { ...this.state };
+    // console.log(file.name);
+    if (file) {
+      data.image = file;
+      this.setState(data);
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.setState(
+          { imgPreview: reader.result, useSrc: false, image: file },
+          () => {
+            console.log(this.state.image);
+          }
+        );
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  updateForm = () => {
+    let body = new FormData();
+    if (this.state.image !== "") {
+      body.append("image", this.state.image);
+    }
+    if (this.state.display !== "") {
+      body.append("display", this.state.display);
+    }
+    if (this.state.address !== "") {
+      body.append("address", this.state.address);
+    }
+    if (this.state.birthdate !== "") {
+      body.append("birthdate", this.state.birthdate);
+    }
+    if (this.state.firstName !== "") {
+      body.append("firstName", this.state.firstName);
+    }
+    if (this.state.lastName !== "") {
+      body.append("lastName", this.state.lastName);
+    }
+    if (this.state.gender !== "") {
+      body.append("gender", this.state.gender);
+    }
+    return body;
+  };
+
   udpdateProfile = (event) => {
     event.preventDefault();
-    const { display, address, phone, birthdate, firstName, lastName } =
-      this.state;
-    // console.log(this.state);
-    const body = {
-      display,
-      address,
-      phone,
-      birthdate,
-      firstName,
-      lastName,
-    };
+    const body = this.updateForm();
+    console.log(body);
     const URL = "http://localhost:5000/api/users/profile";
     const token = this.state.token;
     axios
-      .patch(URL, body, { headers: { "x-access-token": token } })
+      .patch(URL, body, {
+        headers: {
+          "x-access-token": token,
+          "content-type": "multipart/form-data",
+        },
+      })
       .then((res) => {
-        // console.log(res.data.total);
+        console.log(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
   };
-
-  // checkGender = (event) => {
-  //   this.setState({
-  //     gender: event.target.value,
-  //   });
-  // };
 
   componentDidMount() {
     this.getProfilePage();
@@ -90,6 +133,8 @@ class Profile extends Component {
       return this.setState({
         isLogin: false,
       });
+
+    // console.log(this.state);
     return (
       <>
         <Navbar />
@@ -107,11 +152,48 @@ class Profile extends Component {
                 </div>
               </div>
               <div className="row first-row-edit justify-content-center">
-                <CardProfile
-                  profile={`http://localhost:5000${this.state.image_profile}`}
-                  name={this.state.display_name}
-                  email={this.state.email}
-                />
+                <div className="col-10 col-lg-4">
+                  <div className="card pt-3 text-center align-items-center edit-column-first">
+                    <img
+                      src={this.state.useSrc ? Avatar : this.state.imgPreview}
+                      className="card-img-top rounded-circle"
+                      alt="profile"
+                    />
+                    <input
+                      value=""
+                      type="file"
+                      name="image"
+                      ref={this.inputFile}
+                      id="image"
+                      hidden
+                      onChange={this.handleChangeFile}
+                    />
+                    <button
+                      className="btn-edit-logo"
+                      onClick={(event) => {
+                        this.inputFile.current.click();
+                        event.preventDefault();
+                      }}
+                    >
+                      <div className="logo-circle-first rounded-circle">
+                        <img
+                          src={Pencil}
+                          alt="edit"
+                          className="edit-pencil-ava"
+                        />
+                      </div>
+                    </button>{" "}
+                    <div className="card-body">
+                      <h5 className="display-name fw-bold">
+                        {this.state.display_name}
+                      </h5>
+                      <p className="email-profile">{this.state.email}</p>
+                      <p className="delivery-info mt-4">
+                        Has been ordered 15 products
+                      </p>
+                    </div>
+                  </div>
+                </div>
                 <div className="col-10 col-lg-8">
                   <div className="card edit-column-first">
                     <div className="card-body">
