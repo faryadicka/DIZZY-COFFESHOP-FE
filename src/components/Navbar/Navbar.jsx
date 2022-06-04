@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { Dropdown } from "react-bootstrap";
 
 // assets
 import "../Navbar/Navbar.scoped.css";
@@ -54,7 +55,7 @@ export default function Navbar(props) {
             <div className="col-4 col-md-5">
               <input
                 type="text"
-                className="form-control ps-5 rounded-5 bg-light"
+                className="form-control ps-5 rounded-5 bg-light border-0"
                 id="exampleFormControlInput1"
                 placeholder="search"
                 onChange={(event) => {
@@ -74,7 +75,23 @@ export default function Navbar(props) {
               </Link>
             </div>
             <div className="col-2 col-md-2">
-              <div className="dropdown">
+              <Dropdown>
+                <Dropdown.Toggle variant="none" id="dropdown-basic">
+                  <img src={Ava} alt="avatar" />
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu className="dropdown-navbar">
+                  <Dropdown.Item href="#/action-1">
+                    <Link
+                      to="/profile"
+                      className="text-decoration-none text-dark"
+                    >
+                      Profile
+                    </Link>
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+              {/* <div className="dropdown">
                 <button
                   type="button"
                   className="btn dropdown-toggle"
@@ -110,7 +127,7 @@ export default function Navbar(props) {
                     </li>
                   </ul>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

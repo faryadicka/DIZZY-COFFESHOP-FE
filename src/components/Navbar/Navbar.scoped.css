@@ -12,6 +12,10 @@
   font-weight: bold;
 }
 
+.dropdown-navbar {
+  position: fixed !important;
+}
+
 .logo-brand {
   width: 15%;
   height: 15%;
