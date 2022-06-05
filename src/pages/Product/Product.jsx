@@ -20,19 +20,19 @@ import withParams from "../../helpers/withParams";
 
 // axios
 import {
-  getProduct,
-  getFavorite,
-  getSearch,
   getAllProduct,
-  // getPaginationAll,
+  getFavorite,
+  getProduct,
+  getSearch,
 } from "../../services/product";
-import axios from "axios";
-// import { Nav } from "react-bootstrap";
 
 class Product extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      nextLink: null,
+      prevLink: null,
+      totalPage: 0,
       isActiveFav: false,
       products: {
         favorite: [],
@@ -49,7 +49,12 @@ class Product extends Component {
   getAllProductsPage = () => {
     getAllProduct()
       .then((res) => {
+        // console.log(res.data);
+        const nextLink = res.data.nextLink ? res.data.nextLink.slice(25) : null;
+        const prevLink = res.data.prevLink ? res.data.prevLink.slice(25) : null;
         this.setState({
+          nextLink,
+          prevLink,
           products: { ...this.state.products, allProducts: res.data.data },
         });
       })
@@ -61,7 +66,12 @@ class Product extends Component {
   getFav = () => {
     getFavorite()
       .then((res) => {
+        console.log(res.data);
+        const nextLink = res.data.nextLink ? res.data.nextLink.slice(25) : null;
+        const prevLink = res.data.prevLink ? res.data.prevLink.slice(25) : null;
         this.setState({
+          nextLink,
+          prevLink,
           products: { ...this.state.products, favorite: res.data.data },
         });
       })
@@ -73,7 +83,12 @@ class Product extends Component {
   getCoffee = (category) => {
     getProduct(category)
       .then((res) => {
+        console.log(res.data);
+        const nextLink = res.data.nextLink ? res.data.nextLink.slice(25) : null;
+        const prevLink = res.data.prevLink ? res.data.prevLink.slice(25) : null;
         this.setState({
+          nextLink,
+          prevLink,
           products: { ...this.state.products, coffee: res.data.data },
         });
       })
@@ -85,7 +100,12 @@ class Product extends Component {
   getNonCoffee = (category) => {
     getProduct(category)
       .then((res) => {
+        console.log(res.data);
+        const nextLink = res.data.nextLink ? res.data.nextLink.slice(25) : null;
+        const prevLink = res.data.prevLink ? res.data.prevLink.slice(25) : null;
         this.setState({
+          nextLink,
+          prevLink,
           products: { ...this.state.products, nonCoffe: res.data.data },
         });
       })
@@ -97,7 +117,12 @@ class Product extends Component {
   getFoods = (category) => {
     getProduct(category)
       .then((res) => {
+        console.log(res.data);
+        const nextLink = res.data.nextLink ? res.data.nextLink.slice(25) : null;
+        const prevLink = res.data.prevLink ? res.data.prevLink.slice(25) : null;
         this.setState({
+          nextLink,
+          prevLink,
           products: { ...this.state.products, foods: res.data.data },
         });
       })
@@ -119,31 +144,42 @@ class Product extends Component {
   };
 
   componentDidMount() {
-    this.getAllProductsPage();
-  }
-  componentDidUpdate(prevProps) {
     const {
       location: { search },
-      searchParams,
-      params,
     } = this.props;
+    this.getAllProductsPage();
+    if (search) {
+      this.getPaginationPage(search.slice(6));
+    }
+  }
+  componentDidUpdate(prevProps) {
+    const { location, searchParams, params } = this.props;
     if (prevProps.searchParams !== searchParams) {
       this.getCoffee("1");
       this.getNonCoffee("2");
       this.getFoods("3");
-      this.getSearchProduct(search.slice(6));
+      this.getSearchProduct(location.search.slice(6));
     }
     if (prevProps.params !== params) {
       this.getFav();
     }
   }
+
   render() {
     let { searchParams, location, params } = this.props;
-    const { favorite, coffee, nonCoffe, foods, search, allProducts } =
-      this.state.products;
+    const {
+      favorite,
+      coffee,
+      nonCoffe,
+      foods,
+      search,
+      allProducts,
+      pagination,
+    } = this.state.products;
+    console.log(this.state);
     return (
       <>
-        <Navbar searchParams={searchParams.get("name")} />
+        <Navbar />
         <main className="margin-main-top">
           <div className="container-fluid">
             <div className="row">
@@ -233,7 +269,7 @@ class Product extends Component {
                     </Link>
                   </div>
                   <div className="col-3 col-lg-2">
-                    <Link to="/products" className="menu-products isActive">
+                    <Link to="/products" className="menu-products">
                       All
                     </Link>
                   </div>
@@ -304,6 +340,19 @@ class Product extends Component {
                           />
                         );
                       })
+                    : searchParams.get("page") === location.search.slice(6)
+                    ? pagination.map((item) => {
+                        return (
+                          <CardProduct
+                            id={item.id}
+                            image={`http://localhost:5000${item.image}`}
+                            discount="0%"
+                            title={item.name}
+                            price={`IDR ${item.price}`}
+                            key={item.id}
+                          />
+                        );
+                      })
                     : allProducts.map((item) => {
                         return (
                           <CardProduct
@@ -323,32 +372,32 @@ class Product extends Component {
                       <ul className="pagination">
                         <li className="page-item">
                           <Link
+                            to={`${this.state.prevLink}`}
                             className="page-link text-choco"
-                            to="#"
                             aria-label="Previous"
                           >
                             <span aria-hidden="true">&laquo;</span>
                           </Link>
                         </li>
                         <li className="page-item">
-                          <Link className="page-link text-choco" to="#">
+                          <Link to="/" className="page-link text-choco">
                             1
                           </Link>
                         </li>
                         <li className="page-item">
-                          <Link className="page-link text-choco" to="#">
+                          <Link to="/" className="page-link text-choco">
                             2
                           </Link>
                         </li>
                         <li className="page-item">
-                          <Link className="page-link text-choco" to="#">
+                          <Link to="/" className="page-link text-choco">
                             3
                           </Link>
                         </li>
                         <li className="page-item">
                           <Link
+                            to={`${this.state.nextLink}`}
                             className="page-link text-choco"
-                            to="#"
                             aria-label="Next"
                           >
                             <span aria-hidden="true">&raquo;</span>

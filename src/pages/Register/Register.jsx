@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 // assets
@@ -55,6 +55,7 @@ class Register extends Component {
   render() {
     // if (this.state.isSuccess) return <Navigate to="/login" />;
     const { navigate } = this.props;
+    console.log(this.state);
     return (
       <>
         <div className="container-auth">
@@ -108,6 +109,11 @@ class Register extends Component {
                   name="password"
                   id="password"
                   placeholder="Enter your password"
+                  onChange={(event) => {
+                    this.setState({
+                      password: event.target.value,
+                    });
+                  }}
                 />
                 <label className="label-auth" htmlFor="phone">
                   Phone Number :

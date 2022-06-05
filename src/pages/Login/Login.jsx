@@ -55,6 +55,7 @@ class Login extends Component {
   render() {
     // if (this.state.isSuccess) return <Navigate to="/" />;
     const { navigate } = this.props;
+    console.log(navigate);
     return (
       <>
         <div className="container-auth">

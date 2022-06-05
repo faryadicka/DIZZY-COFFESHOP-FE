@@ -27,7 +27,7 @@ class Profile extends Component {
       lastName: "",
       email: "",
       image: "",
-      imgPreview: null,
+      imgPreview: Avatar,
       useSrc: true,
     };
     this.inputFile = React.createRef();
@@ -156,7 +156,7 @@ class Profile extends Component {
                   <div className="card pt-3 text-center align-items-center edit-column-first">
                     <img
                       src={
-                        this.state.useSrc
+                        this.state.imgPreview
                           ? `http://localhost:5000${this.state.image}`
                           : this.state.imgPreview
                       }
