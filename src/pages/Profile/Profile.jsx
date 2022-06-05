@@ -38,7 +38,7 @@ class Profile extends Component {
     axios
       .get(URL, { headers: { "x-access-token": token } })
       .then((res) => {
-        // console.log(res.data.total);
+        console.log(res.data.total);
         this.setState({
           email: res.data.total.email,
           display: res.data.total.display_name,
@@ -48,7 +48,7 @@ class Profile extends Component {
           gender: res.data.total.gender,
           firstName: res.data.total.first_name,
           lastName: res.data.total.last_name,
-          image: res.data.total.image,
+          image: res.data.total.image_profile,
         });
       })
       .catch((err) => {
@@ -134,7 +134,7 @@ class Profile extends Component {
         isLogin: false,
       });
 
-    // console.log(this.state);
+    console.log(this.state);
     return (
       <>
         <Navbar />
@@ -155,7 +155,11 @@ class Profile extends Component {
                 <div className="col-10 col-lg-4">
                   <div className="card pt-3 text-center align-items-center edit-column-first">
                     <img
-                      src={this.state.useSrc ? Avatar : this.state.imgPreview}
+                      src={
+                        this.state.useSrc
+                          ? `http://localhost:5000${this.state.image}`
+                          : this.state.imgPreview
+                      }
                       className="card-img-top rounded-circle"
                       alt="profile"
                     />
