@@ -2,6 +2,7 @@ import React, { Component } from "react";
 // Component
 import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
+import NavbarHome from "../../components/NavbarHome/Navbar";
 import CardHistory from "../../components/CardHistory/CardHistory";
 // Assets
 import "../History/History.scoped.css";
@@ -12,7 +13,7 @@ export default class History extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      token: localStorage.getItem("sign-payload"),
+      token: localStorage.getItem("token") || null,
       history: [],
     };
   }
@@ -32,13 +33,16 @@ export default class History extends Component {
 
   componentDidMount() {
     const { token } = this.state;
-    this.getHistoryProducts(token);
+    if (token !== null) {
+      this.getHistoryProducts(token);
+      console.log(token);
+    }
   }
   render() {
     console.log(this.state.history);
     return (
       <>
-        <Navbar />
+        {this.state.token ? <Navbar /> : <NavbarHome />}
         <main className="main-history mt-5">
           <div className="container">
             <div className="row">
@@ -51,7 +55,7 @@ export default class History extends Component {
             <div className="row justify-content-center gap-3 mt-5">
               {this.state.history.length === 0 ? (
                 <p className="text-white fw-bold fs-6 text-center">
-                  Belum ada Product yang di beli
+                  NO PRODUCTS HAVE BEEN PURCHASE
                 </p>
               ) : (
                 this.state.history.map((item) => {

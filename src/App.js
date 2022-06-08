@@ -8,6 +8,7 @@ import ProductDetail from "./pages/ProductDetail/ProductDetail";
 import History from "./pages/History/History";
 import Profile from "./pages/Profile/Profile";
 import Payment from "./pages/Payment/Payment";
+import PrivateElement from "./components/PrivateElement/PrivateElement";
 
 export default function App() {
   return (
@@ -21,8 +22,15 @@ export default function App() {
         <Route path="/products/:favorite" element={<Product />} />
         <Route path="/products/detail/:id" element={<ProductDetail />} />
         <Route path="/history" element={<History />} />
-        <Route path="/payment" element={<Payment />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/payment" element={
+          <PrivateElement redirectTo="/products/detail/:id" extraData={{ isAuthenticated: false }}>
+            <Payment />
+          </PrivateElement>} />
+        <Route path="/profile" element={
+          <PrivateElement redirectTo="/login" extraData={{ isAuthenticated: false }}>
+            <Profile />
+          </PrivateElement>} />
+        <Route path="*" element={<><h1>PAGE 404</h1></>} />
       </Routes>
     </Router>
   );

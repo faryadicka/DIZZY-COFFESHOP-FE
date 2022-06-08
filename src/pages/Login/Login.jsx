@@ -11,10 +11,14 @@ import Instagram from "../../assets/img/instagram.png";
 import Twitter from "../../assets/img/twitter.png";
 import Eye from "../../assets/img/eye.png";
 
+//components
+import ModalWarning from "../../components/ModalWarning/ModalWarning";
+
 //  Services
 import { loginAuthService } from "../../services/login";
 //  Helpers
 import withNavigate from "../../helpers/withNavigate";
+import withLocation from "../../helpers/withLocation";
 
 class Login extends Component {
   constructor(props) {
@@ -26,8 +30,9 @@ class Login extends Component {
       isError: false,
       errMsg: "",
       succsessMsg: "",
-      isSuccess: false,
-      token: localStorage.getItem("sign-payload"),
+      isLogin: false,
+      token: localStorage.getItem("token"),
+      modalShow: false,
     };
   }
 
@@ -38,9 +43,10 @@ class Login extends Component {
         console.log(this.state);
         this.setState({
           succsessMsg: res.data.message,
-          isSuccess: true,
+          isLogin: true,
         });
-        localStorage.setItem("sign-payload", res.data.data.token);
+        localStorage.setItem("token", res.data.data.token);
+        localStorage.setItem("role", res.data.data.role);
       })
       .catch((err) => {
         console.log(err);
@@ -51,11 +57,18 @@ class Login extends Component {
       });
   };
 
-  componentDidMount() {}
+  componentDidMount() {
+    const { state } = this.props.location;
+    if (state !== null && !state.isAuthenticated) {
+      this.setState({
+        modalShow: true,
+      });
+    }
+  }
   render() {
-    // if (this.state.isSuccess) return <Navigate to="/" />;
-    const { navigate } = this.props;
-    console.log(navigate);
+    const { navigate, location } = this.props;
+    console.log(this.state);
+    console.log(location);
     return (
       <>
         <div className="container-auth">
@@ -186,10 +199,19 @@ class Login extends Component {
             </footer>
           </div>
         </div>
+        <ModalWarning
+          message="You have to login first!!"
+          showModal={this.state.modalShow}
+          hideModal={() => {
+            this.setState({ modalShow: false }, () =>
+              navigate("/login", { replace: true, state: null })
+            );
+          }}
+        />
         <div
-          class="modal fade"
+          className="modal fade"
           id="exampleModal"
-          tabindex="-1"
+          tabIndex="-1"
           aria-labelledby="exampleModalLabel"
           aria-hidden="true"
         >
@@ -233,4 +255,4 @@ class Login extends Component {
   }
 }
 
-export default withNavigate(Login);
+export default withLocation(withNavigate(Login));

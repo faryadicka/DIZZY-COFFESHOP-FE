@@ -5,6 +5,10 @@
   box-sizing: border-box;
 }
 
+.link-category {
+  list-style: none;
+}
+
 .margin-main-top {
   margin-top: 110px;
 }
@@ -41,20 +45,36 @@
   font-size: 17px;
 }
 
+.menu-products-active {
+  color: #6a4029;
+  text-decoration: underline;
+  font-weight: bold;
+  font-size: 17px;
+  border: none;
+}
+
+.menu-products-active:hover {
+  color: #6a4029;
+  text-decoration: underline;
+  font-weight: bold;
+  font-size: 17px;
+  border: none;
+}
+
+.menu-products:active {
+  text-decoration: none;
+  color: #6a4029;
+  border: none;
+  background-color: white;
+  font-size: 17px;
+}
+
 .text-choco {
   color: #6a4029;
 }
 
 .text-choco:hover {
   color: #6a4029;
-}
-
-.isActive {
-  border: none;
-  color: #6a4029;
-  font-weight: bold;
-  font-size: 17px;
-  text-decoration: underline;
 }
 
 .menu-products:hover {

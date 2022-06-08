@@ -5,68 +5,43 @@ import { Link } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import CardProduct from "../../components/CardProducts/CardProduct";
-// import CostumLink from "../../components/CostumLink/CostumLink";
-
+import NavbarHome from "../../components/NavbarHome/Navbar";
 // assets
 import "../Product/Product.scoped.css";
 import MothersDay from "../../assets/img/ava-coupon-3.png";
 import SundayMorning from "../../assets/img/ava-coupon-2.png";
 import HalloweenDay from "../../assets/img/ava-coupon-1.png";
-// import ProductImg from "../../assets/img/creamyice.png";
 
 import withSearchParams from "../../helpers/withSearchParams";
 import withLocation from "../../helpers/withLocation";
 import withParams from "../../helpers/withParams";
 
 // axios
-import {
-  getAllProduct,
-  getFavorite,
-  getProduct,
-  getSearch,
-} from "../../services/product";
+import { getFavorite, getProducts } from "../../services/product";
+import withNavigate from "../../helpers/withNavigate";
 
 class Product extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      token: localStorage.getItem("token") || "",
+      role: localStorage.getItem("role") || null,
+      modalShow: false,
       nextLink: null,
       prevLink: null,
       totalPage: 0,
       isActiveFav: false,
       products: {
         favorite: [],
-        coffee: [],
-        nonCoffe: [],
-        foods: [],
-        search: [],
-        allProducts: [],
+        searchProducts: [],
         pagination: [],
       },
     };
   }
 
-  getAllProductsPage = () => {
-    getAllProduct()
-      .then((res) => {
-        // console.log(res.data);
-        const nextLink = res.data.nextLink ? res.data.nextLink.slice(25) : null;
-        const prevLink = res.data.prevLink ? res.data.prevLink.slice(25) : null;
-        this.setState({
-          nextLink,
-          prevLink,
-          products: { ...this.state.products, allProducts: res.data.data },
-        });
-      })
-      .catch((err) => {
-        console.log("ERROR GET PRODUCTS", err);
-      });
-  };
-
   getFav = () => {
     getFavorite()
       .then((res) => {
-        console.log(res.data);
         const nextLink = res.data.nextLink ? res.data.nextLink.slice(25) : null;
         const prevLink = res.data.prevLink ? res.data.prevLink.slice(25) : null;
         this.setState({
@@ -80,62 +55,12 @@ class Product extends Component {
       });
   };
 
-  getCoffee = (category) => {
-    getProduct(category)
+  getProductsPagination = (category, search, page) => {
+    getProducts(category, search, page)
       .then((res) => {
-        console.log(res.data);
-        const nextLink = res.data.nextLink ? res.data.nextLink.slice(25) : null;
-        const prevLink = res.data.prevLink ? res.data.prevLink.slice(25) : null;
+        console.log(res);
         this.setState({
-          nextLink,
-          prevLink,
-          products: { ...this.state.products, coffee: res.data.data },
-        });
-      })
-      .catch((err) => {
-        console.log("ERROR GET PRODUCTS", err);
-      });
-  };
-
-  getNonCoffee = (category) => {
-    getProduct(category)
-      .then((res) => {
-        console.log(res.data);
-        const nextLink = res.data.nextLink ? res.data.nextLink.slice(25) : null;
-        const prevLink = res.data.prevLink ? res.data.prevLink.slice(25) : null;
-        this.setState({
-          nextLink,
-          prevLink,
-          products: { ...this.state.products, nonCoffe: res.data.data },
-        });
-      })
-      .catch((err) => {
-        console.log("ERROR GET PRODUCTS", err);
-      });
-  };
-
-  getFoods = (category) => {
-    getProduct(category)
-      .then((res) => {
-        console.log(res.data);
-        const nextLink = res.data.nextLink ? res.data.nextLink.slice(25) : null;
-        const prevLink = res.data.prevLink ? res.data.prevLink.slice(25) : null;
-        this.setState({
-          nextLink,
-          prevLink,
-          products: { ...this.state.products, foods: res.data.data },
-        });
-      })
-      .catch((err) => {
-        console.log("ERROR GET PRODUCTS", err);
-      });
-  };
-
-  getSearchProduct = (search) => {
-    getSearch(search)
-      .then((res) => {
-        this.setState({
-          products: { ...this.state.products, search: res.data.data },
+          products: { ...this.state.products, pagination: res.data.data },
         });
       })
       .catch((err) => {
@@ -144,42 +69,39 @@ class Product extends Component {
   };
 
   componentDidMount() {
+    this.getFav();
+  }
+  componentDidUpdate(prevProps) {
     const {
       location: { search },
     } = this.props;
-    this.getAllProductsPage();
-    if (search) {
-      this.getPaginationPage(search.slice(6));
-    }
-  }
-  componentDidUpdate(prevProps) {
-    const { location, searchParams, params } = this.props;
-    if (prevProps.searchParams !== searchParams) {
-      this.getCoffee("1");
-      this.getNonCoffee("2");
-      this.getFoods("3");
-      this.getSearchProduct(location.search.slice(6));
-    }
-    if (prevProps.params !== params) {
-      this.getFav();
+    const category = search.slice(10, 11) || "";
+    const page = search.slice(17, 18);
+    const name = search.slice(24) || "";
+    if (prevProps.location.search !== search) {
+      this.getProductsPagination(category, name, page);
     }
   }
 
   render() {
-    let { searchParams, location, params } = this.props;
     const {
-      favorite,
-      coffee,
-      nonCoffe,
-      foods,
-      search,
-      allProducts,
-      pagination,
-    } = this.state.products;
-    console.log(this.state);
+      location: { search },
+      searchParams,
+    } = this.props;
+    const category = search.slice(10, 11) || "";
+    const page = search.slice(17, 18) || "1";
+    const name = search.slice(24) || "";
+    const { pagination, favorite } = this.state.products;
+    if (searchParams.get("category") === "1") {
+      console.log("coffee");
+    }
     return (
       <>
-        <Navbar />
+        {this.state.token ? (
+          <Navbar category={category} name={name} page={page} />
+        ) : (
+          <NavbarHome />
+        )}
         <main className="margin-main-top">
           <div className="container-fluid">
             <div className="row">
@@ -245,102 +167,73 @@ class Product extends Component {
                     <br />
                   </p>
                 </div>
+                {this.state.role !== "1" ? (
+                  <></>
+                ) : (
+                  <div className="coupon-button d-flex justify-content-around mt-5">
+                    <button className="btn btn-choco">Edit Promo</button>
+                    <button className="btn btn-choco">Create Promo</button>
+                  </div>
+                )}
               </div>
               <div className="col-md-8 p-5 column-products">
-                <div className="row text-center mt-3 justify-content-between">
-                  <div className="col-3 col-lg-3">
-                    <Link to="/products/favorite" className="menu-products">
+                <ul className="row text-center mt-3 justify-content-between wrapper-menu-category">
+                  <li className="col-3 col-lg-3 link-category">
+                    <Link
+                      to="/products/favorite"
+                      className={`${
+                        searchParams.get("category") === null
+                          ? "menu-products-active"
+                          : "menu-products"
+                      }`}
+                    >
                       Favorite & Promo
                     </Link>
-                  </div>
-                  <div className="col-2 col-lg-2">
-                    <Link to="/products?category=1" className="menu-products">
+                  </li>
+                  <li className="col-2 col-lg-2 link-category">
+                    <Link
+                      to="/products?category=1&page=1"
+                      className={`${
+                        searchParams.get("category") === "1"
+                          ? "menu-products-active"
+                          : "menu-products"
+                      }`}
+                    >
                       Coffee
                     </Link>
-                  </div>
-                  <div className="col-2 col-lg-2">
-                    <Link to="/products?category=2" className="menu-products">
+                  </li>
+                  <li className="col-2 col-lg-2 link-category">
+                    <Link
+                      to="/products?category=2&page=1"
+                      className={`${
+                        searchParams.get("category") === "2"
+                          ? "menu-products-active"
+                          : "menu-products"
+                      }`}
+                    >
                       Non Coffee
                     </Link>
-                  </div>
-                  <div className="col-2 col-lg-2">
-                    <Link to="/products?category=3" className="menu-products">
+                  </li>
+                  <li className="col-2 col-lg-2 link-category">
+                    <Link
+                      to="/products?category=3&page=1"
+                      className={`${
+                        searchParams.get("category") === "3"
+                          ? "menu-products-active"
+                          : "menu-products"
+                      }`}
+                    >
                       Foods
                     </Link>
-                  </div>
-                  <div className="col-3 col-lg-2">
-                    <Link to="/products" className="menu-products">
-                      All
+                  </li>
+                  <li className="col-3 col-lg-2 link-category">
+                    <Link to="" className="menu-products disabled-link">
+                      Add-ons
                     </Link>
-                  </div>
-                </div>
+                  </li>
+                </ul>
                 <div className="row mt-5 justify-content-center">
-                  {params.favorite === "favorite"
-                    ? favorite.map((item) => {
-                        return (
-                          <CardProduct
-                            id={item.id}
-                            image={`http://localhost:5000${item.image}`}
-                            discount="0%"
-                            title={item.name}
-                            price={`IDR ${item.price}`}
-                            key={item.id}
-                          />
-                        );
-                      })
-                    : searchParams.get("name") === location.search.slice(6)
-                    ? search.map((item) => {
-                        return (
-                          <CardProduct
-                            id={item.id}
-                            image={`http://localhost:5000${item.image}`}
-                            discount="0%"
-                            title={item.name}
-                            price={`IDR ${item.price}`}
-                            key={item.id}
-                          />
-                        );
-                      })
-                    : searchParams.get("category") === "1"
-                    ? coffee.map((item) => {
-                        return (
-                          <CardProduct
-                            id={item.id}
-                            image={`http://localhost:5000${item.image}`}
-                            discount="0%"
-                            title={item.name}
-                            price={`IDR ${item.price}`}
-                            key={item.id}
-                          />
-                        );
-                      })
-                    : searchParams.get("category") === "2"
-                    ? nonCoffe.map((item) => {
-                        return (
-                          <CardProduct
-                            id={item.id}
-                            image={`http://localhost:5000${item.image}`}
-                            discount="0%"
-                            title={item.name}
-                            price={`IDR ${item.price}`}
-                            key={item.id}
-                          />
-                        );
-                      })
-                    : searchParams.get("category") === "3"
-                    ? foods.map((item) => {
-                        return (
-                          <CardProduct
-                            id={item.id}
-                            image={`http://localhost:5000${item.image}`}
-                            discount="0%"
-                            title={item.name}
-                            price={`IDR ${item.price}`}
-                            key={item.id}
-                          />
-                        );
-                      })
-                    : searchParams.get("page") === location.search.slice(6)
+                  {searchParams.get("category") === search.slice(10, 11)
                     ? pagination.map((item) => {
                         return (
                           <CardProduct
@@ -353,7 +246,7 @@ class Product extends Component {
                           />
                         );
                       })
-                    : allProducts.map((item) => {
+                    : favorite.map((item) => {
                         return (
                           <CardProduct
                             id={item.id}
@@ -366,7 +259,14 @@ class Product extends Component {
                         );
                       })}
                 </div>
-                <div className="row pagination justify-content-center">
+                <div className="row pagination justify-content-around">
+                  {this.state.role !== "1" ? (
+                    <></>
+                  ) : (
+                    <div className="col-auto">
+                      <button className="btn btn-choco">EDIT PRODUCT</button>
+                    </div>
+                  )}
                   <div className="col-auto">
                     <nav aria-label="Page navigation example">
                       <ul className="pagination">
@@ -406,6 +306,13 @@ class Product extends Component {
                       </ul>
                     </nav>
                   </div>
+                  {this.state.role !== "1" ? (
+                    <></>
+                  ) : (
+                    <div className="col-auto">
+                      <button className="btn btn-choco">CREATE PRODUCT</button>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -417,4 +324,6 @@ class Product extends Component {
   }
 }
 
-export default withLocation(withSearchParams(withParams(Product)));
+export default withNavigate(
+  withLocation(withSearchParams(withParams(Product)))
+);

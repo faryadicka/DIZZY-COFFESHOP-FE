@@ -5,6 +5,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 // assets
 import "../ProductDetail/ProductDetail.scoped.css";
+import DefaultProducts from "../../assets/img/default.png";
 // import ImageProduct from "../../assets/img/cold-brew.png";
 
 // Helpers
@@ -12,15 +13,19 @@ import withParams from "../../helpers/withParams";
 
 // Services
 import { getProductDetail } from "../../services/product";
+import ModalWarning from "../../components/ModalWarning/ModalWarning";
+import withNavigate from "../../helpers/withNavigate";
+import withLocation from "../../helpers/withLocation";
 
 class ProductDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      showModal: false,
       isCheckOut: false,
       successMsg: "",
       errorMsg: "",
-      token: localStorage.getItem("sign-payload"),
+      token: localStorage.getItem("token"),
       cart: {
         id: "",
         name: "",
@@ -72,27 +77,39 @@ class ProductDetail extends Component {
   };
 
   checkOutHandle = () => {
-    localStorage.setItem("cart", JSON.stringify(this.state.cart));
-    console.log(
-      "Data cart berhasil disimpan di local storage! :",
-      JSON.parse(localStorage.getItem("cart"))
-    );
+    const { state } = this.props.location;
+    if (state !== null && !state.isAuthenticated) {
+      localStorage.setItem("cart", JSON.stringify(this.state.cart));
+      console.log(
+        "Data cart berhasil disimpan di local storage! :",
+        JSON.parse(localStorage.getItem("cart"))
+      );
+      this.setState({
+        isCheckOut: true,
+      });
+    }
     this.setState({
-      isCheckOut: true,
+      showModal: true,
     });
   };
 
   componentDidMount() {
     const {
       params: { id },
+      location: { state },
     } = this.props;
+    if (state !== null && !state.isAuthenticated) {
+      this.setState({
+        showModal: true,
+      });
+    }
     this.getProductDetailPage(id);
   }
 
   render() {
     const { detailProduct } = this.state.products;
-    const { params } = this.props;
-    console.log(this.state.cart);
+    const { params, navigate, location } = this.props;
+    console.log(location);
     if (this.state.isCheckOut) return <Navigate to="/payment" />;
     return (
       <div>
@@ -124,7 +141,9 @@ class ProductDetail extends Component {
                     alt=""
                   />
                   <p className="title-product-detail">{detailProduct.name}</p>
-                  <p className="price-product-detail">{`IDR ${detailProduct.price}`}</p>
+                  <p className="price-product-detail">{`IDR ${
+                    detailProduct.price || ""
+                  }`}</p>
                   <div className="row justify-content-center mt-5">
                     <button
                       type="submit"
@@ -315,7 +334,10 @@ class ProductDetail extends Component {
                       <div className="col-md-2 card-col-cart ps-md-0">
                         <img
                           className="rounded-circle w-100 image-cart"
-                          src={`http://localhost:5000${detailProduct.image}`}
+                          src={
+                            `http://localhost:5000${detailProduct.image}` ||
+                            DefaultProducts
+                          }
                           alt="imageDetail"
                         />
                       </div>
@@ -381,9 +403,18 @@ class ProductDetail extends Component {
           ) : null}
         </main>
         <Footer />
+        <ModalWarning
+          message="You have to login first!!"
+          showModal={this.state.showModal}
+          hideModal={() => {
+            this.setState({ modalShow: false }, () =>
+              navigate("/login", { replace: true, state: null })
+            );
+          }}
+        />
       </div>
     );
   }
 }
 
-export default withParams(ProductDetail);
+export default withLocation(withNavigate(withParams(ProductDetail)));

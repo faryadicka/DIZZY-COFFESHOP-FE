@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 // Component
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
+import ModalWarning from "../../components/ModalWarning/ModalWarning";
 
 // assets
 import "../Profile/Profile.scoped.css";
@@ -17,7 +18,7 @@ class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      token: localStorage.getItem("sign-payload"),
+      token: localStorage.getItem("token"),
       display: "",
       address: "",
       phone: "",
@@ -29,6 +30,9 @@ class Profile extends Component {
       image: "",
       imgPreview: Avatar,
       useSrc: true,
+      successMsg: "",
+      errorMsg: "",
+      updateSuccess: false,
     };
     this.inputFile = React.createRef();
   }
@@ -118,9 +122,16 @@ class Profile extends Component {
       })
       .then((res) => {
         console.log(res.data);
+        this.setState({
+          updateSuccess: true,
+          successMsg: res.data.message,
+        });
       })
       .catch((err) => {
         console.log(err);
+        this.setState({
+          errorMsg: err.response.data.message,
+        });
       });
   };
 
@@ -134,7 +145,22 @@ class Profile extends Component {
         isLogin: false,
       });
 
-    console.log(this.state);
+    const {
+      imgPreview,
+      image,
+      email,
+      errorMsg,
+      successMsg,
+      updateSuccess,
+      display,
+      display_name,
+      address,
+      phone,
+      firstName,
+      lastName,
+      birthdate,
+      gender,
+    } = this.state;
     return (
       <>
         <Navbar />
@@ -156,9 +182,9 @@ class Profile extends Component {
                   <div className="card pt-3 text-center align-items-center edit-column-first">
                     <img
                       src={
-                        this.state.imgPreview
-                          ? `http://localhost:5000${this.state.image}`
-                          : this.state.imgPreview
+                        imgPreview
+                          ? `http://localhost:5000${image}`
+                          : imgPreview
                       }
                       className="card-img-top rounded-circle"
                       alt="profile"
@@ -188,10 +214,8 @@ class Profile extends Component {
                       </div>
                     </button>{" "}
                     <div className="card-body">
-                      <h5 className="display-name fw-bold">
-                        {this.state.display_name}
-                      </h5>
-                      <p className="email-profile">{this.state.email}</p>
+                      <h5 className="display-name fw-bold">{display_name}</h5>
+                      <p className="email-profile">{email}</p>
                       <p className="delivery-info mt-4">
                         Has been ordered 15 products
                       </p>
@@ -225,12 +249,12 @@ class Profile extends Component {
                             </label>
                             <br />
                             <input
-                              value={this.state.email}
+                              value={email}
                               name="email"
                               type="email"
                               className="form-control-profile"
                               id="email"
-                              // placeholder={this.state.email}
+                              // placeholder={email}
                             />
                           </div>
                           <div className="mb-lg-5">
@@ -243,7 +267,7 @@ class Profile extends Component {
                               type="text"
                               className="form-control-profile"
                               id="address"
-                              value={this.state.address}
+                              value={address}
                               onChange={(event) => {
                                 this.setState({
                                   address: event.target.value,
@@ -263,7 +287,7 @@ class Profile extends Component {
                               type="text"
                               className="form-control-profile"
                               id="phone"
-                              value={this.state.phone}
+                              value={phone}
                               onChange={(event) => {
                                 this.setState({
                                   phone: event.target.value,
@@ -312,7 +336,7 @@ class Profile extends Component {
                               type="text"
                               className="form-control-profile"
                               id="display-name"
-                              value={this.state.display}
+                              value={display}
                               onChange={(event) => {
                                 this.setState({
                                   display: event.target.value,
@@ -330,7 +354,7 @@ class Profile extends Component {
                               type="text"
                               className="form-control-profile"
                               id="first-name"
-                              value={this.state.firstName}
+                              value={firstName}
                               onChange={(event) => {
                                 this.setState({
                                   firstName: event.target.value,
@@ -348,7 +372,7 @@ class Profile extends Component {
                               type="text"
                               className="form-control-profile"
                               id="last-name"
-                              value={this.state.lastName}
+                              value={lastName}
                               onChange={(event) => {
                                 this.setState({
                                   lastName: event.target.value,
@@ -367,7 +391,7 @@ class Profile extends Component {
                               type="date"
                               className="form-control-profile"
                               id="birthdate"
-                              value={this.state.birthdate}
+                              value={birthdate}
                               onChange={(event) => {
                                 this.setState({
                                   birthdate: event.target.value,
@@ -383,7 +407,7 @@ class Profile extends Component {
                                 name="gender"
                                 id="male"
                                 value="male"
-                                checked={this.state.gender === "male"}
+                                checked={gender === "male"}
                                 onChange={(event) => {
                                   this.setState({
                                     gender: event.target.value,
@@ -404,7 +428,7 @@ class Profile extends Component {
                                 name="gender"
                                 id="female"
                                 value="female"
-                                checked={this.state.gender === "female"}
+                                checked={gender === "female"}
                                 onChange={(event) => {
                                   this.setState({
                                     gender: event.target.value,
@@ -456,6 +480,15 @@ class Profile extends Component {
           </div>
         </main>
         <Footer />
+        <ModalWarning
+          showModal={updateSuccess}
+          message={updateSuccess ? successMsg : errorMsg}
+          hideModal={() => {
+            this.setState({
+              updateSuccess: false,
+            });
+          }}
+        />
       </>
     );
   }

@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Dropdown } from "react-bootstrap";
 
 // assets
@@ -8,9 +8,12 @@ import Logo from "../../assets/img/logo.png";
 import Search from "../../assets/img/search.png";
 import Chat from "../../assets/img/chat.png";
 import Ava from "../../assets/img/ava.png";
+// import DropdownItem from "react-bootstrap/esm/DropdownItem";
 
 export default function Navbar(props) {
   let navigate = useNavigate();
+  let location = useLocation();
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light navbar-products navbar-costum">
       <div className="container">
@@ -60,7 +63,15 @@ export default function Navbar(props) {
                 placeholder="search"
                 onChange={(event) => {
                   event.preventDefault();
-                  navigate(`/products?name=${event.target.value}`);
+                  const { category, page } = props;
+                  if (location.search.includes("category")) {
+                    navigate(
+                      `/products?category=${category}&page=${page}&name=${event.target.value}`
+                    );
+                  }
+                  if (!location.search.includes("category")) {
+                    navigate(`/products?name=${event.target.value}`);
+                  }
                 }}
               />
               <img
@@ -82,52 +93,29 @@ export default function Navbar(props) {
 
                 <Dropdown.Menu className="dropdown-navbar">
                   <Dropdown.Item href="#/action-1">
-                    <Link
-                      to="/profile"
-                      className="text-decoration-none text-dark"
+                    <button
+                      onClick={() => {
+                        navigate(`/profile`);
+                      }}
+                      className="text-decoration-none text-dark btn border-0"
                     >
                       Profile
-                    </Link>
+                    </button>
+                  </Dropdown.Item>
+                  <Dropdown.Item>
+                    <button
+                      onClick={() => {
+                        localStorage.removeItem("token");
+                        localStorage.removeItem("role");
+                        navigate(`/`);
+                      }}
+                      className="text-decoration-none text-dark btn border-0"
+                    >
+                      Logout
+                    </button>
                   </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
-              {/* <div className="dropdown">
-                <button
-                  type="button"
-                  className="btn dropdown-toggle"
-                  id="dropdownMenuButton"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  <img src={Ava} alt="avatar" />
-                </button>
-                <div
-                  className="dropdown-menu"
-                  aria-labelledby="dropdownMenuButton"
-                >
-                  <ul
-                    className="dropdown-menu"
-                    aria-labelledby="dropdownMenuButton1"
-                  >
-                    <li>
-                      <Link className="dropdown-item" to="#">
-                        Action
-                      </Link>
-                    </li>
-                    <li>
-                      <Link className="dropdown-item" to="#">
-                        Another action
-                      </Link>
-                    </li>
-                    <li>
-                      <Link className="dropdown-item" to="#">
-                        Something else here
-                      </Link>
-                    </li>
-                  </ul>
-                </div>
-              </div> */}
             </div>
           </div>
         </div>

@@ -91,6 +91,7 @@
   }
   .info-detail {
     color: #4f5665;
+    list-style-type: none;
   }
   .product-info-auth {
     display: grid;

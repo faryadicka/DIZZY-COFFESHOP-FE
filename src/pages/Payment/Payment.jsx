@@ -4,6 +4,11 @@ import Navbar from "../../components/Navbar/Navbar";
 import axios from "axios";
 // Assets
 import "../Payment/Payment.scoped.css";
+
+//assets
+import Default from "../../assets/img/default.png";
+
+//component
 import CardCart from "../../components/CardCart/CardCart";
 
 //services
@@ -13,6 +18,14 @@ import withNavigate from "../../helpers/withNavigate";
 
 export class Payment extends Component {
   constructor(props) {
+    const defaultCart = {
+      size: "",
+      time: "",
+      qty: 0,
+      deliveryMethods: "",
+      price: 0,
+      id: "",
+    };
     super(props);
     this.state = {
       paymentMethods: "",
@@ -22,8 +35,8 @@ export class Payment extends Component {
       successMsg: "",
       isError: false,
       isSuccess: false,
-      token: localStorage.getItem("sign-payload"),
-      cart: JSON.parse(localStorage.getItem("cart")),
+      token: localStorage.getItem("token"),
+      cart: JSON.parse(localStorage.getItem("cart")) || defaultCart,
     };
   }
 
@@ -114,7 +127,7 @@ export class Payment extends Component {
                       Old Summary
                     </h4>
                     <CardCart
-                      image={`http://localhost:5000${image}`}
+                      image={`http://localhost:5000${image}` || `${Default}`}
                       name={name}
                       qty={qty}
                       size={size}
