@@ -62,7 +62,6 @@ export default function Navbar(props) {
                 id="exampleFormControlInput1"
                 placeholder="search"
                 onChange={(event) => {
-                  event.preventDefault();
                   const { category, page } = props;
                   if (location.search.includes("category")) {
                     navigate(
@@ -72,6 +71,7 @@ export default function Navbar(props) {
                   if (!location.search.includes("category")) {
                     navigate(`/products?name=${event.target.value}`);
                   }
+                  window.location.reload(false);
                 }}
               />
               <img
@@ -108,6 +108,7 @@ export default function Navbar(props) {
                         localStorage.removeItem("token");
                         localStorage.removeItem("role");
                         navigate(`/`);
+                        window.location.reload(false);
                       }}
                       className="text-decoration-none text-dark btn border-0"
                     >

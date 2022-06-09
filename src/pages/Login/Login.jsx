@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
 // assets
 import "../Login/Login.scoped.css";
@@ -16,6 +17,10 @@ import ModalWarning from "../../components/ModalWarning/ModalWarning";
 
 //  Services
 import { loginAuthService } from "../../services/login";
+
+//Redux axios
+// import { authActionRedux } from "../../redux/actionCreator/auth";
+
 //  Helpers
 import withNavigate from "../../helpers/withNavigate";
 import withLocation from "../../helpers/withLocation";
@@ -24,6 +29,7 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      data: {},
       email: "",
       password: "",
       showPass: false,
@@ -38,9 +44,25 @@ class Login extends Component {
 
   loginAuthPage = (event) => {
     event.preventDefault();
+    // const { dispatch } = this.props;
+    // dispatch(authActionRedux(this.state))
+    //   .then((res) => {
+    //     console.log(res.value);
+    //     this.setState({
+    //       succsessMsg: res.value.data.message,
+    //       isLogin: true,
+    //       token: res.value.data.data.token,
+    //     });
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //     this.setState({
+    //       isError: true,
+    //       errMsg: err.response.data.message,
+    //     });
+    //   });
     loginAuthService(this.state)
       .then((res) => {
-        console.log(this.state);
         this.setState({
           succsessMsg: res.data.message,
           isLogin: true,
@@ -66,9 +88,7 @@ class Login extends Component {
     }
   }
   render() {
-    const { navigate, location } = this.props;
-    console.log(this.state);
-    console.log(location);
+    const { navigate } = this.props;
     return (
       <>
         <div className="container-auth">
@@ -255,4 +275,4 @@ class Login extends Component {
   }
 }
 
-export default withLocation(withNavigate(Login));
+export default connect()(withLocation(withNavigate(Login)));

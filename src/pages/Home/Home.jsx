@@ -49,6 +49,7 @@ export default class Home extends Component {
     this.getFavoriteHomeCard();
   }
   render() {
+    console.log(process.env);
     return (
       <>
         {this.state.token ? <Navbar /> : <NavbarHome />}

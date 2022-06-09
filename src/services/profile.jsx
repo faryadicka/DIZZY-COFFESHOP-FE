@@ -1,18 +1,10 @@
 import axios from "axios";
+const { REACT_APP_HOST } = process.env;
 
-export const getProfile = async (token) => {
-  try {
-    const URL = "http://localhost:5000/api/users/profile";
-    const results = await axios.get(URL, {
-      headers: { "x-access-token": token },
-    });
-    return results;
-  } catch (error) {
-    console.log(error);
-  }
+export const getProfile = (token) => {
+  const URL = `${REACT_APP_HOST}/api/users/profile`;
+  const results = axios.get(URL, {
+    headers: { "x-access-token": token },
+  });
+  return results;
 };
-
-// export const postProfile = (body) => {
-//   const URL = "http://localhost:5000/api/users/profile";
-//   axios.post(URL, body);
-// };

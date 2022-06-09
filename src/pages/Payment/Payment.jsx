@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
 import axios from "axios";
@@ -18,14 +19,6 @@ import withNavigate from "../../helpers/withNavigate";
 
 export class Payment extends Component {
   constructor(props) {
-    const defaultCart = {
-      size: "",
-      time: "",
-      qty: 0,
-      deliveryMethods: "",
-      price: 0,
-      id: "",
-    };
     super(props);
     this.state = {
       paymentMethods: "",
@@ -36,7 +29,6 @@ export class Payment extends Component {
       isError: false,
       isSuccess: false,
       token: localStorage.getItem("token"),
-      cart: JSON.parse(localStorage.getItem("cart")) || defaultCart,
     };
   }
 
@@ -55,7 +47,9 @@ export class Payment extends Component {
   };
 
   handlePostTransaction = () => {
-    const { deliveryMethods, size, time, qty, id, price } = this.state.cart;
+    const {
+      cart: { delivery, size, time, qty, id, price },
+    } = this.props;
     const { token, address, phone, paymentMethods } = this.state;
     const subtotal = price * qty;
     const taxAndFees = subtotal * 0.1;
@@ -63,7 +57,7 @@ export class Payment extends Component {
     const total = subtotal + taxAndFees + shipping;
     const body = {
       productsId: id,
-      deliveryMethods,
+      deliveryMethods: delivery,
       size,
       time,
       quantity: qty,
@@ -100,12 +94,14 @@ export class Payment extends Component {
   }
 
   render() {
-    const { size, qty, image, name, price } = this.state.cart;
+    const {
+      navigate,
+      cart: { size, qty, image, price, name },
+    } = this.props;
     const subTotal = price * qty;
     const taxAndFees = subTotal * 0.1;
     const shipping = subTotal * 0.2;
     const total = subTotal + taxAndFees + shipping;
-    const { navigate } = this.props;
     console.log(this.state);
     return (
       <>
@@ -310,4 +306,11 @@ export class Payment extends Component {
   }
 }
 
-export default withNavigate(Payment);
+const mapStateToProps = (state) => {
+  const { cart } = state;
+  return {
+    cart,
+  };
+};
+
+export default connect(mapStateToProps)(withNavigate(Payment));

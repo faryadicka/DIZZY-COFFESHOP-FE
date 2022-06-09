@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link, Navigate } from "react-router-dom";
+import { connect } from "react-redux";
 // component
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
@@ -10,6 +11,19 @@ import DefaultProducts from "../../assets/img/default.png";
 
 // Helpers
 import withParams from "../../helpers/withParams";
+
+//Redux
+import {
+  increment,
+  decrement,
+  setDelivery,
+  setIdProduct,
+  setImage,
+  setName,
+  setSize,
+  setTime,
+  setPrice,
+} from "../../redux/actionCreator/addCart";
 
 // Services
 import { getProductDetail } from "../../services/product";
@@ -26,16 +40,6 @@ class ProductDetail extends Component {
       successMsg: "",
       errorMsg: "",
       token: localStorage.getItem("token"),
-      cart: {
-        id: "",
-        name: "",
-        price: 0,
-        image: "",
-        size: "",
-        deliveryMethods: "",
-        time: "",
-        qty: 0,
-      },
       products: {
         detailProduct: [],
       },
@@ -58,32 +62,21 @@ class ProductDetail extends Component {
   cartHandle = (event) => {
     event.preventDefault();
     const { detailProduct } = this.state.products;
-    const { deliveryMethods, size, time, qty } = this.state.cart;
+    console.log(detailProduct.name);
+    console.log(detailProduct.price);
     const {
       params: { id },
+      dispatch,
     } = this.props;
-    this.setState({
-      cart: {
-        id,
-        name: detailProduct.name,
-        price: detailProduct.price,
-        image: detailProduct.image,
-        deliveryMethods,
-        size,
-        time,
-        qty,
-      },
-    });
+    dispatch(setIdProduct(id));
+    dispatch(setImage(detailProduct.image));
+    dispatch(setName(detailProduct.name));
+    dispatch(setPrice(detailProduct.price));
   };
 
   checkOutHandle = () => {
-    const { state } = this.props.location;
-    if (state !== null && !state.isAuthenticated) {
-      localStorage.setItem("cart", JSON.stringify(this.state.cart));
-      console.log(
-        "Data cart berhasil disimpan di local storage! :",
-        JSON.parse(localStorage.getItem("cart"))
-      );
+    const { token } = this.state;
+    if (token) {
       this.setState({
         isCheckOut: true,
       });
@@ -108,8 +101,8 @@ class ProductDetail extends Component {
 
   render() {
     const { detailProduct } = this.state.products;
-    const { params, navigate, location } = this.props;
-    console.log(location);
+    const { params, navigate, dispatch, qty, size, delivery } = this.props;
+    console.log(qty);
     if (this.state.isCheckOut) return <Navigate to="/payment" />;
     return (
       <div>
@@ -178,12 +171,7 @@ class ProductDetail extends Component {
                           <div className="d-flex justify-content-around mt-5 mt-md-0 ">
                             <button
                               onClick={() => {
-                                this.setState({
-                                  cart: {
-                                    ...this.state.cart,
-                                    size: "Regular",
-                                  },
-                                });
+                                dispatch(setSize("Regular"));
                               }}
                               className="btn btn-warning rounded-circle"
                             >
@@ -191,12 +179,7 @@ class ProductDetail extends Component {
                             </button>
                             <button
                               onClick={() => {
-                                this.setState({
-                                  cart: {
-                                    ...this.state.cart,
-                                    size: "Large",
-                                  },
-                                });
+                                dispatch(setSize("Large"));
                               }}
                               className="btn btn-warning rounded-circle"
                             >
@@ -204,12 +187,7 @@ class ProductDetail extends Component {
                             </button>
                             <button
                               onClick={() => {
-                                this.setState({
-                                  cart: {
-                                    ...this.state.cart,
-                                    size: "Extra Large",
-                                  },
-                                });
+                                dispatch(setSize("Extra Large"));
                               }}
                               className="btn btn-warning rounded-circle"
                             >
@@ -230,16 +208,9 @@ class ProductDetail extends Component {
                           name="options-outlined"
                           id="dinein"
                           value="Dine in"
-                          checked={
-                            this.state.cart.deliveryMethods === "Dine in"
-                          }
+                          checked={delivery === "Dine in"}
                           onChange={(event) => {
-                            this.setState({
-                              cart: {
-                                ...this.state.cart,
-                                deliveryMethods: event.target.value,
-                              },
-                            });
+                            dispatch(setDelivery(event.target.value));
                           }}
                         />
                         <label
@@ -254,16 +225,9 @@ class ProductDetail extends Component {
                           name="options-outlined"
                           id="door"
                           value="Door Delivery"
-                          checked={
-                            this.state.cart.deliveryMethods === "Door Delivery"
-                          }
+                          checked={delivery === "Door Delivery"}
                           onChange={(event) => {
-                            this.setState({
-                              cart: {
-                                ...this.state.cart,
-                                deliveryMethods: event.target.value,
-                              },
-                            });
+                            dispatch(setDelivery(event.target.value));
                           }}
                         />
                         <label
@@ -278,16 +242,9 @@ class ProductDetail extends Component {
                           name="options-outlined"
                           id="pick"
                           value="Pick up"
-                          checked={
-                            this.state.cart.deliveryMethods === "Pick up"
-                          }
+                          checked={delivery === "Pick up"}
                           onChange={(event) => {
-                            this.setState({
-                              cart: {
-                                ...this.state.cart,
-                                deliveryMethods: event.target.value,
-                              },
-                            });
+                            dispatch(setDelivery(event.target.value));
                           }}
                         />
                         <label
@@ -313,12 +270,7 @@ class ProductDetail extends Component {
                             className="form-control border-top-0 w-100"
                             value={this.state.time}
                             onChange={(event) => {
-                              this.setState({
-                                cart: {
-                                  ...this.state.cart,
-                                  time: event.target.value,
-                                },
-                              });
+                              dispatch(setTime(event.target.value));
                             }}
                           />
                         </div>
@@ -344,25 +296,18 @@ class ProductDetail extends Component {
                       <div className="ms-2 col-md-5 text-md-left">
                         <p className="title fw-bold">{detailProduct.name}</p>
                         <div className="d-flex">
-                          {this.state.cart.qty !== 0 ? (
-                            <p className="qty">{`${this.state.cart.qty}x `}</p>
+                          {qty !== 0 ? (
+                            <p className="qty">{`${qty}x `}</p>
                           ) : null}
-                          <p className="size ms-md-2 ms-0">
-                            {this.state.cart.size}
-                          </p>
+                          <p className="size ms-md-2 ms-0">{size}</p>
                         </div>
                       </div>
                       <div className="col-md-4">
                         <div className="d-flex justify-content-center">
                           <button
                             onClick={() => {
-                              if (this.state.cart.qty > 0) {
-                                this.setState({
-                                  cart: {
-                                    ...this.state.cart,
-                                    qty: this.state.cart.qty - 1,
-                                  },
-                                });
+                              if (qty > 0) {
+                                dispatch(decrement());
                               }
                             }}
                             className="btn btn-choco rounded-circle"
@@ -370,16 +315,11 @@ class ProductDetail extends Component {
                             -
                           </button>
                           <div className="col-md-4 mx-3 mx-md-0 text-center mt-1 fw-bold">
-                            {this.state.cart.qty}
+                            {qty}
                           </div>
                           <button
                             onClick={() => {
-                              this.setState({
-                                cart: {
-                                  ...this.state.cart,
-                                  qty: this.state.cart.qty + 1,
-                                },
-                              });
+                              dispatch(increment());
                             }}
                             className="btn btn-choco rounded-circle"
                           >
@@ -417,4 +357,13 @@ class ProductDetail extends Component {
   }
 }
 
-export default withLocation(withNavigate(withParams(ProductDetail)));
+const mapStateToProps = (state) => {
+  const {
+    cart: { qty, size, delivery },
+  } = state;
+  return { qty, size, delivery };
+};
+
+export default connect(mapStateToProps)(
+  withLocation(withNavigate(withParams(ProductDetail)))
+);
