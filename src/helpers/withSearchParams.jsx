@@ -7,7 +7,7 @@ export default function withSearchParams(Component) {
     return (
       <Component
         searchParams={searchParams}
-        setSearchparams={setSearchparams}
+        setSearchParams={setSearchparams}
         {...props}
       />
     );
