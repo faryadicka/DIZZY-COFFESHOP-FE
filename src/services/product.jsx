@@ -16,17 +16,17 @@ export const getFavorite = () => {
   return axios.get(URL);
 };
 
-export const getProducts = (category, search, page = 1) => {
+export const getProducts = (category, search = "", page = 1) => {
   const URL = `${REACT_APP_HOST}/api/products?category=${category}&page=${page}&limit=12&name=${search}`;
   return axios.get(URL);
 };
 
-export const sortProductsMinPrice = (page = 1) => {
-  const URL = `${REACT_APP_HOST}/api/products?sort=price&order=ASC&page=${page}&limit=12`;
+export const sortProductsByPrice = (order = "", page = 1) => {
+  const URL = `${REACT_APP_HOST}/api/products?sort=price&order=${order}&page=${page}&limit=12`;
   return axios.get(URL);
 };
 
-export const sortProductsMaxPrice = (page = 1) => {
-  const URL = `${REACT_APP_HOST}/api/products?sort=price&order=DESC&page=${page}&limit=12`;
-  return axios.get(URL);
-};
+// export const sortProductsMaxPrice = (page = 1) => {
+//   const URL = `${REACT_APP_HOST}/api/products?sort=price&order=DESC&page=${page}&limit=12`;
+//   return axios.get(URL);
+// };

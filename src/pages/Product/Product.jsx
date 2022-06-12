@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Dropdown } from "react-bootstrap";
+import { connect } from "react-redux";
 
 // Component
 import Navbar from "../../components/Navbar/Navbar";
@@ -18,13 +19,19 @@ import withLocation from "../../helpers/withLocation";
 import withParams from "../../helpers/withParams";
 
 // axios
-import {
-  getFavorite,
-  getProducts,
-  sortProductsMinPrice,
-  sortProductsMaxPrice,
-} from "../../services/product";
+// import {
+//   sortProductsMinPrice,
+//   sortProductsMaxPrice,
+// } from "../../services/product";
 import withNavigate from "../../helpers/withNavigate";
+
+//redux
+import {
+  getProductsRedux,
+  getFavoriteRedux,
+  sortByPriceRedux,
+  nextLinkRedux,
+} from "../../redux/actionCreator/productList";
 
 class Product extends Component {
   constructor(props) {
@@ -37,93 +44,53 @@ class Product extends Component {
       prevLink: null,
       totalPage: 0,
       isActiveFav: false,
+      currentPage: 0,
       products: {
         favorite: [],
         minPrice: [],
         maxPrice: [],
-        pagination: [],
-        coffee: [],
-        nonCoffee: [],
-        foods: [],
+        products: [],
       },
     };
   }
 
-  getCoffee = async (category, search) => {
-    await getProducts(category, search)
+  getFavoriteProducts = () => {
+    const { dispatch } = this.props;
+    dispatch(getFavoriteRedux())
       .then((res) => {
+        console.log(res);
         this.setState({
-          products: { ...this.state.products, coffee: res.data.data },
+          products: { ...this.state.products, favorite: res.value.data.data },
         });
       })
       .catch((err) => {
-        console.log("ERROR SEARCH PRODUCT", err);
-      });
-  };
-
-  getNonCoffee = async (category, search) => {
-    await getProducts(category, search)
-      .then((res) => {
-        // console.log(res.data.data);
-        this.setState({
-          products: { ...this.state.products, nonCoffee: res.data.data },
-        });
-      })
-      .catch((err) => {
-        console.log("ERROR SEARCH PRODUCT", err);
-      });
-  };
-
-  getFoods = async (category, search) => {
-    await getProducts(category, search)
-      .then((res) => {
-        this.setState({
-          products: { ...this.state.products, foods: res.data.data },
-        });
-      })
-      .catch((err) => {
-        console.log("ERROR SEARCH PRODUCT", err);
-      });
-  };
-
-  getFav = async () => {
-    await getFavorite()
-      .then((res) => {
-        const nextLink = res.data.nextLink ? res.data.nextLink.slice(25) : null;
-        const prevLink = res.data.prevLink ? res.data.prevLink.slice(25) : null;
-        this.setState({
-          nextLink,
-          prevLink,
-          products: { ...this.state.products, favorite: res.data.data },
-        });
-      })
-      .catch((err) => {
-        console.log("ERROR GET PRODUCTS", err);
+        console.log(err);
       });
   };
 
   getProductsPagination = (category, search, page) => {
-    getProducts(category, search, page)
+    const { dispatch } = this.props;
+    dispatch(getProductsRedux(category, search, page))
       .then((res) => {
+        console.log(res);
         this.setState({
-          products: { ...this.state.products, pagination: res.data.data },
+          products: { ...this.state.products, products: res.value.data.data },
         });
       })
       .catch((err) => {
-        console.log("ERROR SEARCH PRODUCT", err);
+        console.log(err);
       });
   };
 
   handleMinPrice = (event) => {
     event.preventDefault();
-    const { navigate } = this.props;
-    sortProductsMinPrice()
+    const { setSearchParams, dispatch } = this.props;
+    dispatch(sortByPriceRedux("ASC"))
       .then((res) => {
-        console.log(res);
         this.setState({
-          products: { ...this.state.products, minPrice: res.data.data },
+          products: { ...this.state.products, minPrice: res.value.data.data },
         });
-        navigate("/products?sort=price&order=asc");
+        setSearchParams({ sort: "price", order: "asc" });
       })
       .catch((err) => {
         console.log("ERROR SEARCH PRODUCT", err);
@@ -132,45 +99,43 @@ class Product extends Component {
 
   handleMaxPrice = (event) => {
     event.preventDefault();
-    const { navigate } = this.props;
-    sortProductsMaxPrice()
+    const { dispatch, setSearchParams } = this.props;
+    dispatch(sortByPriceRedux("DESC"))
       .then((res) => {
-        console.log(res);
+        // console.log(res.value);
         this.setState({
-          products: { ...this.state.products, maxPrice: res.data.data },
+          currentPage: res.value.data.currentPage,
+          nextLink: res.value.data.nextLink,
+          prevLink: res.value.data.prevLink,
+          products: { ...this.state.products, maxPrice: res.value.data.data },
         });
-        navigate("/products?sort=price&order=desc");
+        setSearchParams({ sort: "price", order: "desc" });
       })
       .catch((err) => {
         console.log("ERROR SEARCH PRODUCT", err);
       });
   };
 
-  async componentDidMount() {
-    const {
-      location: { search },
-    } = this.props;
-    const name = search.slice(24) || "";
-    await this.getCoffee("1", name);
-    await this.getNonCoffee("2", name);
-    await this.getFoods("3", name);
-    await this.getFav();
+  handleNextLink = (event) => {
+    event.preventDefault();
+    const { navigate, dispatch, searchParams } = this.props;
+    const { nextLink, currentPage } = this.state;
+    const nextLinkPage = nextLink.slice(35);
+    navigate(nextLinkPage);
+    dispatch(nextLinkRedux(searchParams.get("order"), currentPage + 1));
+  };
+
+  componentDidMount() {
+    this.getFavoriteProducts();
   }
   componentDidUpdate(prevProps) {
-    const {
-      // location: { search },
-      searchParams,
-      // params,
-    } = this.props;
-    const category = searchParams.get("category") || "";
-    const page = searchParams.get("page") || "1";
-    const name = searchParams.get("name") || "";
+    const { searchParams } = this.props;
     if (prevProps.searchParams !== searchParams) {
-      this.getProductsPagination(category, name, page);
+      this.getProductsPagination(
+        searchParams.get("category") || "",
+        searchParams.get("name") || ""
+      );
     }
-    // if (prevProps.params !== params) {
-    //   this.getFav();
-    // }
   }
 
   render() {
@@ -181,17 +146,8 @@ class Product extends Component {
     const category = search.slice(10, 11) || "";
     const page = search.slice(17, 18) || "1";
     const name = search.slice(24) || "";
-    const {
-      pagination,
-      favorite,
-      minPrice,
-      maxPrice,
-      coffee,
-      nonCoffee,
-      foods,
-    } = this.state.products;
-    console.log(pagination);
-    console.log(searchParams.get("name"));
+    const { favorite, products, minPrice, maxPrice } = this.state.products;
+    console.log(this.state);
     return (
       <>
         {this.state.token ? (
@@ -347,34 +303,8 @@ class Product extends Component {
                   </li>
                 </ul>
                 <div className="row mt-5 justify-content-center">
-                  {searchParams.get("category") === "1"
-                    ? coffee.map((item) => {
-                        return (
-                          <CardProduct
-                            id={item.id}
-                            image={`http://localhost:5000${item.image}`}
-                            discount="0%"
-                            title={item.name}
-                            price={`IDR ${item.price}`}
-                            key={item.id}
-                          />
-                        );
-                      })
-                    : searchParams.get("category") === "2"
-                    ? nonCoffee.map((item) => {
-                        return (
-                          <CardProduct
-                            id={item.id}
-                            image={`http://localhost:5000${item.image}`}
-                            discount="0%"
-                            title={item.name}
-                            price={`IDR ${item.price}`}
-                            key={item.id}
-                          />
-                        );
-                      })
-                    : searchParams.get("category") === "3"
-                    ? foods.map((item) => {
+                  {searchParams.get("category")
+                    ? products.map((item) => {
                         return (
                           <CardProduct
                             id={item.id}
@@ -401,19 +331,6 @@ class Product extends Component {
                       })
                     : searchParams.get("order") === "desc"
                     ? maxPrice.map((item) => {
-                        return (
-                          <CardProduct
-                            id={item.id}
-                            image={`http://localhost:5000${item.image}`}
-                            discount="0%"
-                            title={item.name}
-                            price={`IDR ${item.price}`}
-                            key={item.id}
-                          />
-                        );
-                      })
-                    : searchParams.get("name") === search.slice(24)
-                    ? pagination.map((item) => {
                         return (
                           <CardProduct
                             id={item.id}
@@ -474,13 +391,9 @@ class Product extends Component {
                           </Link>
                         </li>
                         <li className="page-item">
-                          <Link
-                            to={`${this.state.nextLink}`}
-                            className="page-link text-choco"
-                            aria-label="Next"
-                          >
+                          <button className="btn" onClick={this.handleNextLink}>
                             <span aria-hidden="true">&raquo;</span>
-                          </Link>
+                          </button>
                         </li>
                       </ul>
                     </nav>
@@ -503,6 +416,6 @@ class Product extends Component {
   }
 }
 
-export default withNavigate(
-  withLocation(withSearchParams(withParams(Product)))
+export default connect()(
+  withNavigate(withLocation(withSearchParams(withParams(Product))))
 );

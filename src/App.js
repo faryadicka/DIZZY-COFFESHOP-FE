@@ -13,6 +13,7 @@ import History from "./pages/History/History";
 import Profile from "./pages/Profile/Profile";
 import Payment from "./pages/Payment/Payment";
 import PrivateElement from "./components/PrivateElement/PrivateElement";
+import NewProduct from "./pages/NewProduct/NewProduct";
 
 export default function App() {
   return (
@@ -20,6 +21,7 @@ export default function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/create" element={<NewProduct />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/forgot" element={<ForgotPassword />} />

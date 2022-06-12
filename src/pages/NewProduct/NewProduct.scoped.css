@@ -1,0 +1,11 @@
+*,
+::after,
+::before {
+  margin: 0px;
+  box-sizing: border-box;
+  font-family: "Poppins";
+}
+
+.form-container-create {
+  margin-top: 150px;
+}
