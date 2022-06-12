@@ -23,7 +23,7 @@ import {
   setSize,
   setTime,
   setPrice,
-} from "../../redux/actionCreator/addCart";
+} from "../../redux/actionCreator/cart";
 
 // Services
 import { getProductDetail } from "../../services/product";
