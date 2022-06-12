@@ -15,11 +15,15 @@ export class NewProduct extends Component {
               <Link to="/products">Link {">"} Link</Link>
             </div>
           </div>
-          <div className="row justify-content-center">
+          <div className="row justify-content-around">
             <div className="col-md-4">
               <input type="file" name="profile" id="profile" />
-              <button className="btn btn-choco">Take a picture</button>
-              <button className="btn btn-warning">Choose from gallery</button>
+              <div className="row">
+                <button className="btn btn-choco">Take a picture</button>
+              </div>
+              <div className="row mt-2">
+                <button className="btn btn-warning">Choose from gallery</button>
+              </div>
             </div>
             <div className="col-md-6">
               <div className="form-group">
@@ -119,7 +123,7 @@ export class NewProduct extends Component {
               </div>
             </div>
           </div>
-          <div className="row delivery justify-content-center mt-4">
+          <div className="row delivery justify-content-around mt-4">
             <div className="col-md-4">
               <div className="row">
                 <label htmlFor="">Delivery Hour</label>
@@ -210,7 +214,7 @@ export class NewProduct extends Component {
               </div>
             </div>
           </div>
-          <div className="row justify-content-center">
+          <div className="row justify-content-around">
             <div className="col-md-4">
               <div className="row">
                 <label htmlFor="">Input Stock</label>
