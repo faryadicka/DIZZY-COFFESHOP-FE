@@ -126,21 +126,29 @@ class Product extends Component {
   };
 
   componentDidMount() {
-    this.getFavoriteProducts();
+    const { searchParams } = this.props;
+    this.getProductsPagination(
+      searchParams.get("category") || "",
+      searchParams.get("name") || ""
+    );
   }
   componentDidUpdate(prevProps) {
-    const { searchParams } = this.props;
+    const { searchParams, params } = this.props;
     if (prevProps.searchParams !== searchParams) {
       this.getProductsPagination(
         searchParams.get("category") || "",
         searchParams.get("name") || ""
       );
     }
+    if (prevProps.params !== params) {
+      this.getFavoriteProducts();
+    }
   }
 
   render() {
     const {
       location: { search },
+      params,
       searchParams,
     } = this.props;
     const category = search.slice(10, 11) || "";
@@ -230,34 +238,32 @@ class Product extends Component {
                 )}
               </div>
               <div className="col-md-8 p-5 column-products">
-                <ul className="row text-center mt-3 justify-content-between wrapper-menu-category">
-                  <li className="col-2 col-lg-2 link-category">
-                    <Dropdown className="rounded-4">
-                      <Dropdown.Toggle variant="success" id="dropdown-basic">
-                        SORT
-                      </Dropdown.Toggle>
+                <Dropdown className="rounded-4">
+                  <Dropdown.Toggle variant="success" id="dropdown-basic">
+                    SORT
+                  </Dropdown.Toggle>
 
-                      <Dropdown.Menu>
-                        <button
-                          className="btn border-0"
-                          onClick={this.handleMinPrice}
-                        >
-                          Min Price
-                        </button>
-                        <button
-                          className="btn border-0"
-                          onClick={this.handleMaxPrice}
-                        >
-                          Max Price
-                        </button>
-                      </Dropdown.Menu>
-                    </Dropdown>
-                  </li>
+                  <Dropdown.Menu>
+                    <button
+                      className="btn border-0"
+                      onClick={this.handleMinPrice}
+                    >
+                      Min Price
+                    </button>
+                    <button
+                      className="btn border-0"
+                      onClick={this.handleMaxPrice}
+                    >
+                      Max Price
+                    </button>
+                  </Dropdown.Menu>
+                </Dropdown>
+                <ul className="row text-center mt-3 justify-content-between wrapper-menu-category">
                   <li className="col-3 col-lg-3 link-category">
                     <Link
                       to="/products/favorite"
                       className={`${
-                        searchParams.get("category") === null
+                        params.favorite === "favorite"
                           ? "menu-products-active"
                           : "menu-products"
                       }`}
@@ -301,9 +307,22 @@ class Product extends Component {
                       Foods
                     </Link>
                   </li>
+                  <li className="col-2 col-lg-2 link-category">
+                    <Link
+                      to="/products?"
+                      className={`${
+                        searchParams.get("category") === null
+                          ? "menu-products-active"
+                          : "menu-products"
+                      }`}
+                    >
+                      All
+                    </Link>
+                  </li>
                 </ul>
                 <div className="row mt-5 justify-content-center">
-                  {searchParams.get("category")
+                  {searchParams.get("category") &&
+                  searchParams.get("name") !== ""
                     ? products.map((item) => {
                         return (
                           <CardProduct
@@ -342,7 +361,20 @@ class Product extends Component {
                           />
                         );
                       })
-                    : favorite.map((item) => {
+                    : params.favorite === "favorite"
+                    ? favorite.map((item) => {
+                        return (
+                          <CardProduct
+                            id={item.id}
+                            image={`http://localhost:5000${item.image}`}
+                            discount="0%"
+                            title={item.name}
+                            price={`IDR ${item.price}`}
+                            key={item.id}
+                          />
+                        );
+                      })
+                    : products.map((item) => {
                         return (
                           <CardProduct
                             id={item.id}

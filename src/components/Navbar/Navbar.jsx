@@ -71,7 +71,6 @@ export default function Navbar(props) {
                   if (!location.search.includes("category")) {
                     navigate(`/products?name=${event.target.value}`);
                   }
-                  window.location.reload(false);
                 }}
               />
               <img
