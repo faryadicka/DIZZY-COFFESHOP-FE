@@ -3,6 +3,7 @@ export const authLogin = "AUTH_LOGIN"
 export const getProductPagination = "GET_PRODUCTS"
 export const getProductFavorite = "GET_FAVORITE"
 export const sortByPrice = "GET_PRICE"
+export const nextLink = "NEXT_LINK"
 
 // ADD CART
 export const idProduct = "SET_ID_PRODUCT"
@@ -19,5 +20,5 @@ export const priceProduct = "SET_PRICE"
 
 //Handle Promise
 export const PENDING = "_PENDING"
-export const FULLFILLED = "_FULLFILLED"
+export const FULLFILLED = "_FULFILLED"
 export const REJECTED = "_REJECTED"

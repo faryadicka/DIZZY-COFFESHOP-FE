@@ -18,7 +18,7 @@ import ModalWarning from "../../components/ModalWarning/ModalWarning";
 //  Services
 import { loginAuthService } from "../../services/login";
 
-//Redux axios
+//Redux
 // import { authActionRedux } from "../../redux/actionCreator/auth";
 
 //  Helpers
@@ -89,6 +89,7 @@ class Login extends Component {
   }
   render() {
     const { navigate } = this.props;
+    const { token } = this.state;
     return (
       <>
         <div className="container-auth">
@@ -261,7 +262,11 @@ class Login extends Component {
                   className="btn btn-success"
                   data-bs-dismiss="modal"
                   onClick={() => {
-                    navigate("/");
+                    if (this.state.isLogin) {
+                      navigate("/");
+                    } else if (!this.state.isLogin) {
+                      window.location.reload();
+                    }
                   }}
                 >
                   Close
@@ -275,4 +280,13 @@ class Login extends Component {
   }
 }
 
-export default connect()(withLocation(withNavigate(Login)));
+const mapStateToProps = (state) => {
+  const {
+    auth: { data },
+  } = state;
+  return {
+    data,
+  };
+};
+
+export default connect(mapStateToProps)(withLocation(withNavigate(Login)));

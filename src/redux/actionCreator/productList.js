@@ -1,4 +1,4 @@
-import { getProductPagination, getProductFavorite, sortByPrice } from "../../redux/actionCreator/actionString"
+import { getProductPagination, getProductFavorite, sortByPrice, nextLink } from "../../redux/actionCreator/actionString"
 import { getProducts, getFavorite, sortProductsByPrice } from "../../services/product"
 
 export const getProductsRedux = (category, search, page) => {
@@ -22,9 +22,9 @@ export const sortByPriceRedux = (order) => {
   }
 }
 
-export const nextLinkRedux = (order, page) => {
+export const nextLinkRedux = (category = "", search = "", page) => {
   return {
-    type: "NEXT_GET_PRODUCTS",
-    payload: sortProductsByPrice(order, page)
+    type: nextLink,
+    payload: getProducts(category, search, page)
   }
 }

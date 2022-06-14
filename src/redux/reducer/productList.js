@@ -1,11 +1,15 @@
-import { getProductPagination, PENDING, FULLFILLED, REJECTED } from "../actionCreator/actionString";
+import { getProductPagination, sortByPrice, getProductFavorite, PENDING, FULLFILLED, REJECTED, nextLink } from "../actionCreator/actionString";
 
 const initialState = {
-  data: [],
+  products: [],
+  favorite: [],
+  price: [],
   err: null,
   isLoading: false,
   prevLink: "",
-  nextLink: ""
+  nextLink: "",
+  currentPage: 0,
+  totalPage: 0
 }
 
 const productReducer = (state = initialState, action) => {
@@ -13,9 +17,31 @@ const productReducer = (state = initialState, action) => {
     case getProductPagination + PENDING:
       return { ...state, isLoading: true }
     case getProductPagination + FULLFILLED:
-      return { ...state, data: action.payload.value.data.data, isLoading: false, prevLink: action.payload.value.data.prevLink, nextLink: action.payload.value.data.nextLink }
+      return { ...state, products: action.payload.data.data, isLoading: false, prevLink: action.payload.data.prevLink, nextLink: action.payload.data.nextLink, currentPage: action.payload.data.currentPage, totalPage: action.payload.data.totalPage }
     case getProductPagination + REJECTED:
-      return { ...state, isLoading: false }
+      return { ...state, isLoading: false, err: action.payload }
+
+    case getProductFavorite + PENDING:
+      return { ...state, isLoading: true }
+    case getProductFavorite + FULLFILLED:
+      // console.log(action.payload.data)
+      return { ...state, favorite: action.payload.data.data, isLoading: false, prevLink: action.payload.data.prevLink, nextLink: action.payload.data.nextLink, currentPage: action.payload.data.currentPage }
+    case getProductFavorite + REJECTED:
+      return { ...state, isLoading: false, err: action.payload }
+
+    case sortByPrice + PENDING:
+      return { ...state, isLoading: true }
+    case sortByPrice + FULLFILLED:
+      return { ...state, price: action.payload.data.data, isLoading: false, prevLink: action.payload.data.prevLink, nextLink: action.payload.data.nextLink, currentPage: action.payload.data.currentPage, totalPage: action.payload.data.totalPage }
+    case sortByPrice + REJECTED:
+      return { ...state, isLoading: false, err: action.payload }
+
+    case nextLink + PENDING:
+      return { ...state, isLoading: true }
+    case nextLink + FULLFILLED:
+      return { ...state, products: action.payload.data.data, isLoading: false, prevLink: action.payload.data.prevLink, nextLink: action.payload.data.nextLink, currentPage: action.payload.data.currentPage, totalPage: action.payload.data.totalPage }
+    case nextLink + REJECTED:
+      return { ...state, isLoading: false, err: action.payload }
     default:
       return state
   }

@@ -18,11 +18,6 @@ import withSearchParams from "../../helpers/withSearchParams";
 import withLocation from "../../helpers/withLocation";
 import withParams from "../../helpers/withParams";
 
-// axios
-// import {
-//   sortProductsMinPrice,
-//   sortProductsMaxPrice,
-// } from "../../services/product";
 import withNavigate from "../../helpers/withNavigate";
 
 //redux
@@ -45,117 +40,92 @@ class Product extends Component {
       totalPage: 0,
       isActiveFav: false,
       currentPage: 0,
-      products: {
-        favorite: [],
-        minPrice: [],
-        maxPrice: [],
-        products: [],
-      },
     };
   }
-
-  getFavoriteProducts = () => {
-    const { dispatch } = this.props;
-    dispatch(getFavoriteRedux())
-      .then((res) => {
-        console.log(res);
-        this.setState({
-          products: { ...this.state.products, favorite: res.value.data.data },
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  getProductsPagination = (category, search, page) => {
-    const { dispatch } = this.props;
-    dispatch(getProductsRedux(category, search, page))
-      .then((res) => {
-        console.log(res);
-        this.setState({
-          products: { ...this.state.products, products: res.value.data.data },
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
 
   handleMinPrice = (event) => {
     event.preventDefault();
     const { setSearchParams, dispatch } = this.props;
-    dispatch(sortByPriceRedux("ASC"))
-      .then((res) => {
-        this.setState({
-          products: { ...this.state.products, minPrice: res.value.data.data },
-        });
-        setSearchParams({ sort: "price", order: "asc" });
-      })
-      .catch((err) => {
-        console.log("ERROR SEARCH PRODUCT", err);
-      });
+    dispatch(sortByPriceRedux("ASC"));
+    setSearchParams({ sort: "price", order: "asc" });
   };
 
   handleMaxPrice = (event) => {
     event.preventDefault();
     const { dispatch, setSearchParams } = this.props;
-    dispatch(sortByPriceRedux("DESC"))
-      .then((res) => {
-        // console.log(res.value);
-        this.setState({
-          currentPage: res.value.data.currentPage,
-          nextLink: res.value.data.nextLink,
-          prevLink: res.value.data.prevLink,
-          products: { ...this.state.products, maxPrice: res.value.data.data },
-        });
-        setSearchParams({ sort: "price", order: "desc" });
-      })
-      .catch((err) => {
-        console.log("ERROR SEARCH PRODUCT", err);
-      });
+    dispatch(sortByPriceRedux("DESC"));
+    setSearchParams({ sort: "price", order: "desc" });
   };
 
   handleNextLink = (event) => {
     event.preventDefault();
-    const { navigate, dispatch, searchParams } = this.props;
-    const { nextLink, currentPage } = this.state;
-    const nextLinkPage = nextLink.slice(35);
-    navigate(nextLinkPage);
-    dispatch(nextLinkRedux(searchParams.get("order"), currentPage + 1));
+    const { dispatch, searchParams, setSearchParams, currentPage, totalPage } =
+      this.props;
+    if (currentPage !== totalPage) {
+      dispatch(
+        nextLinkRedux(
+          searchParams.get("category") || "",
+          searchParams.get("name") || "",
+          searchParams.get("page") || "1"
+        )
+      );
+      setSearchParams({ page: currentPage + 1 });
+      window.scrollTo(0, 0);
+    }
+  };
+
+  handlePrevLink = (event) => {
+    event.preventDefault();
+    const { dispatch, searchParams, setSearchParams, currentPage } = this.props;
+    if (currentPage > 1) {
+      dispatch(
+        nextLinkRedux(
+          searchParams.get("category") || "",
+          searchParams.get("name") || "",
+          searchParams.get("page") || "1"
+        )
+      );
+      setSearchParams({ page: currentPage - 1 });
+      window.scrollTo(0, 0);
+    }
   };
 
   componentDidMount() {
-    const { searchParams } = this.props;
-    this.getProductsPagination(
-      searchParams.get("category") || "",
-      searchParams.get("name") || ""
-    );
-  }
-  componentDidUpdate(prevProps) {
-    const { searchParams, params } = this.props;
-    if (prevProps.searchParams !== searchParams) {
-      this.getProductsPagination(
+    const { searchParams, dispatch } = this.props;
+    dispatch(
+      getProductsRedux(
         searchParams.get("category") || "",
         searchParams.get("name") || ""
+      )
+    );
+    dispatch(getFavoriteRedux());
+  }
+  componentDidUpdate(prevProps) {
+    const { searchParams, dispatch } = this.props;
+    if (prevProps.searchParams !== searchParams) {
+      dispatch(
+        getProductsRedux(
+          searchParams.get("category") || "",
+          searchParams.get("name") || ""
+        )
       );
-    }
-    if (prevProps.params !== params) {
-      this.getFavoriteProducts();
     }
   }
 
   render() {
     const {
-      location: { search },
       params,
       searchParams,
+      products,
+      favorite,
+      price,
+      totalPage,
+      // currentPage,
     } = this.props;
-    const category = search.slice(10, 11) || "";
-    const page = search.slice(17, 18) || "1";
-    const name = search.slice(24) || "";
-    const { favorite, products, minPrice, maxPrice } = this.state.products;
-    console.log(this.state);
+    const category = searchParams.get("category") || "";
+    const page = searchParams.get("page") || "1";
+    const name = searchParams.get("name") || "";
+    console.log(totalPage);
     return (
       <>
         {this.state.token ? (
@@ -239,7 +209,7 @@ class Product extends Component {
               </div>
               <div className="col-md-8 p-5 column-products">
                 <Dropdown className="rounded-4">
-                  <Dropdown.Toggle variant="success" id="dropdown-basic">
+                  <Dropdown.Toggle variant="warning" id="dropdown-basic">
                     SORT
                   </Dropdown.Toggle>
 
@@ -311,7 +281,8 @@ class Product extends Component {
                     <Link
                       to="/products?"
                       className={`${
-                        searchParams.get("category") === null
+                        searchParams.get("category") === null &&
+                        params.favorite !== "favorite"
                           ? "menu-products-active"
                           : "menu-products"
                       }`}
@@ -336,7 +307,7 @@ class Product extends Component {
                         );
                       })
                     : searchParams.get("order") === "asc"
-                    ? minPrice.map((item) => {
+                    ? price.map((item) => {
                         return (
                           <CardProduct
                             id={item.id}
@@ -349,7 +320,7 @@ class Product extends Component {
                         );
                       })
                     : searchParams.get("order") === "desc"
-                    ? maxPrice.map((item) => {
+                    ? price.map((item) => {
                         return (
                           <CardProduct
                             id={item.id}
@@ -387,7 +358,7 @@ class Product extends Component {
                         );
                       })}
                 </div>
-                <div className="row pagination justify-content-around">
+                <div className="row pagination justify-content-between">
                   {this.state.role !== "1" ? (
                     <></>
                   ) : (
@@ -396,39 +367,33 @@ class Product extends Component {
                     </div>
                   )}
                   <div className="col-auto">
-                    <nav aria-label="Page navigation example">
-                      <ul className="pagination">
-                        <li className="page-item">
-                          <Link
-                            to={`${this.state.prevLink}`}
-                            className="page-link text-choco"
-                            aria-label="Previous"
-                          >
-                            <span aria-hidden="true">&laquo;</span>
-                          </Link>
-                        </li>
-                        <li className="page-item">
-                          <Link to="/" className="page-link text-choco">
-                            1
-                          </Link>
-                        </li>
-                        <li className="page-item">
-                          <Link to="/" className="page-link text-choco">
-                            2
-                          </Link>
-                        </li>
-                        <li className="page-item">
-                          <Link to="/" className="page-link text-choco">
-                            3
-                          </Link>
-                        </li>
-                        <li className="page-item">
-                          <button className="btn" onClick={this.handleNextLink}>
-                            <span aria-hidden="true">&raquo;</span>
-                          </button>
-                        </li>
-                      </ul>
-                    </nav>
+                    {totalPage > 1 ? (
+                      <nav aria-label="Page navigation example">
+                        <ul className="pagination">
+                          <li className="page-item">
+                            <Link
+                              to="#"
+                              onClick={this.handlePrevLink}
+                              className="page-link text-choco"
+                              aria-label="Previous"
+                            >
+                              &laquo; PREV
+                            </Link>
+                          </li>
+                          <li className="page-item">
+                            <Link
+                              to="#"
+                              className="page-link text-choco"
+                              onClick={this.handleNextLink}
+                            >
+                              NEXT &raquo;
+                            </Link>
+                          </li>
+                        </ul>
+                      </nav>
+                    ) : (
+                      <></>
+                    )}
                   </div>
                   {this.state.role !== "1" ? (
                     <></>
@@ -448,6 +413,19 @@ class Product extends Component {
   }
 }
 
-export default connect()(
+const mapStateToProps = (state) => {
+  const {
+    products: { products, favorite, price, totalPage, currentPage },
+  } = state;
+  return {
+    products,
+    favorite,
+    price,
+    totalPage,
+    currentPage,
+  };
+};
+
+export default connect(mapStateToProps)(
   withNavigate(withLocation(withSearchParams(withParams(Product))))
 );

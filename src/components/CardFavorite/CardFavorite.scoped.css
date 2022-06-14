@@ -10,3 +10,21 @@
   width: 50%;
   height: inherit;
 }
+
+.card-fav-600 {
+  height: 100%;
+}
+
+@media only screen and (max-width: 600px) {
+  .card-fav-600 {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+  }
+  .card-img-top {
+    width: 20%;
+  }
+  .card-body-600 {
+    font-size: 10px;
+  }
+}

@@ -7,7 +7,7 @@ import CardHistory from "../../components/CardHistory/CardHistory";
 // Assets
 import "../History/History.scoped.css";
 
-import { getAllhistories } from "../../services/history";
+import { getAllhistories, softDeleteHistories } from "../../services/history";
 
 export default class History extends Component {
   constructor(props) {
@@ -16,12 +16,28 @@ export default class History extends Component {
       token: localStorage.getItem("token") || null,
       history: [],
     };
+    this.handleDeleteProduct.bind(this);
   }
+
+  handleDeleteProduct = (id) => {
+    softDeleteHistories(this.state.token, id)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    const newHistory = this.state.history.filter((item) => {
+      return item.id !== id;
+    });
+    this.setState({
+      history: newHistory,
+    });
+  };
 
   getHistoryProducts = (token) => {
     getAllhistories(token)
       .then((res) => {
-        console.log(res.data.data);
         this.setState({
           history: res.data.data,
         });
@@ -33,13 +49,14 @@ export default class History extends Component {
 
   componentDidMount() {
     const { token } = this.state;
+    console.log(token);
     if (token !== null) {
       this.getHistoryProducts(token);
-      console.log(token);
+      // console.log(token);
     }
   }
   render() {
-    console.log(this.state.history);
+    // console.log(this.state.history);
     return (
       <>
         {this.state.token ? <Navbar /> : <NavbarHome />}
@@ -66,6 +83,8 @@ export default class History extends Component {
                       price={`IDR ${item.price}`}
                       status="Delivery"
                       key={item.id}
+                      onDeleteCard={this.handleDeleteProduct}
+                      id={item.id}
                     />
                   );
                 })

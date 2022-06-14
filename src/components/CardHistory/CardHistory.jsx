@@ -4,6 +4,7 @@ import React from "react";
 import "./CardHistory.scoped.css";
 
 export default function CardHistory(props) {
+  // console.log(props.id);
   return (
     <div className="col-md-3">
       <div className="card rounded-4 p-2">
@@ -28,6 +29,7 @@ export default function CardHistory(props) {
                   type="checkbox"
                   value=""
                   id="flexCheckDefault"
+                  onChange={() => props.onDeleteCard(props.id)}
                 />
               </div>
             </div>

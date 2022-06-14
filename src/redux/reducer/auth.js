@@ -11,7 +11,8 @@ const authReducer = (state = initialState, action) => {
     case authLogin + PENDING:
       return { ...state, isLoading: true }
     case authLogin + FULLFILLED:
-      return { ...state, data: action.payload.value.data.data, isLoading: false }
+      console.log(action.payload.data.data)
+      return { ...state, data: action.payload.data.data, isLoading: false }
     case authLogin + REJECTED:
       return { ...state, err: action.payload, isLoading: false }
     default:
