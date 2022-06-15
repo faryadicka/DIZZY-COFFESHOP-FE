@@ -10,7 +10,8 @@ import Google from "../../assets/img/google.png";
 import Facebook from "../../assets/img/facebook.png";
 import Instagram from "../../assets/img/instagram.png";
 import Twitter from "../../assets/img/twitter.png";
-import Eye from "../../assets/img/eye.png";
+import Show from "../../assets/img/show.png";
+import Hide from "../../assets/img/hide.png";
 
 //components
 import ModalWarning from "../../components/ModalWarning/ModalWarning";
@@ -134,7 +135,11 @@ class Login extends Component {
                       });
                     }}
                   >
-                    <img src={Eye} alt="eye" className="eye-pass" />
+                    <img
+                      src={this.state.showPass ? Hide : Show}
+                      alt="eye"
+                      className="eye-pass"
+                    />
                   </button>
                 </label>
                 <input
