@@ -38,7 +38,7 @@ class Profile extends Component {
     this.inputFile = React.createRef();
   }
   getProfilePage = () => {
-    const URL = "http://localhost:5000/api/users/profile";
+    const URL = `${process.env.REACT_APP_HOST}/api/users/profile`;
     const token = this.state.token;
     axios
       .get(URL, { headers: { "x-access-token": token } })
@@ -115,7 +115,7 @@ class Profile extends Component {
     event.preventDefault();
     const body = this.updateForm();
     console.log(body);
-    const URL = "http://localhost:5000/api/users/profile";
+    const URL = `${process.env.REACT_APP_HOST}/api/users/profile`;
     const token = this.state.token;
     axios
       .patch(URL, body, {
@@ -189,7 +189,7 @@ class Profile extends Component {
                       src={
                         imgPreview
                           ? imgPreview
-                          : `http://localhost:5000${image}`
+                          : `${process.env.REACT_APP_HOST}${image}`
                       }
                       className="card-img-top rounded-circle"
                       alt="profile"

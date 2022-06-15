@@ -130,7 +130,7 @@ class ProductDetail extends Component {
                 <div className="card-info-detail col-3 col-md-4 text-center">
                   <img
                     className="rounded-circle image-product-detail"
-                    src={`http://localhost:5000${detailProduct.image}`}
+                    src={`${process.env.REACT_APP_HOST}${detailProduct.image}`}
                     alt=""
                   />
                   <p className="title-product-detail">{detailProduct.name}</p>
@@ -287,7 +287,7 @@ class ProductDetail extends Component {
                         <img
                           className="rounded-circle w-100 image-cart"
                           src={
-                            `http://localhost:5000${detailProduct.image}` ||
+                            `${process.env.REACT_APP_HOST}${detailProduct.image}` ||
                             DefaultProducts
                           }
                           alt="imageDetail"

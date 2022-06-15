@@ -162,7 +162,7 @@ export default class Home extends Component {
             {this.state.favorite.map((item) => {
               return (
                 <CardFavorite
-                  image={`http://localhost:5000${item.image}`}
+                  image={`${process.env.REACT_APP_HOST}${item.image}`}
                   title={item.name}
                   price={`IDR ${item.price}`}
                   key={item.id}

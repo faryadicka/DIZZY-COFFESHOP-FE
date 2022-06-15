@@ -33,7 +33,7 @@ class Register extends Component {
 
   registerAuth = async (event) => {
     event.preventDefault();
-    const URL = "http://localhost:5000/api/auth/register";
+    const URL = `${process.env.REACT_APP_HOST}/api/auth/register`;
     await axios
       .post(URL, this.state)
       .then((res) => {

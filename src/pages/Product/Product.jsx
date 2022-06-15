@@ -324,7 +324,7 @@ class Product extends Component {
                         return (
                           <CardProduct
                             id={item.id}
-                            image={`http://localhost:5000${item.image}`}
+                            image={`${process.env.REACT_APP_HOST}${item.image}`}
                             discount="0%"
                             title={item.name}
                             price={`IDR ${item.price}`}
@@ -337,7 +337,7 @@ class Product extends Component {
                         return (
                           <CardProduct
                             id={item.id}
-                            image={`http://localhost:5000${item.image}`}
+                            image={`${process.env.REACT_APP_HOST}${item.image}`}
                             discount="0%"
                             title={item.name}
                             price={`IDR ${item.price}`}
@@ -350,7 +350,7 @@ class Product extends Component {
                         return (
                           <CardProduct
                             id={item.id}
-                            image={`http://localhost:5000${item.image}`}
+                            image={`${process.env.REACT_APP_HOST}${item.image}`}
                             discount="0%"
                             title={item.name}
                             price={`IDR ${item.price}`}
@@ -363,7 +363,7 @@ class Product extends Component {
                         return (
                           <CardProduct
                             id={item.id}
-                            image={`http://localhost:5000${item.image}`}
+                            image={`${process.env.REACT_APP_HOST}${item.image}`}
                             discount="0%"
                             title={item.name}
                             price={`IDR ${item.price}`}
@@ -375,7 +375,7 @@ class Product extends Component {
                         return (
                           <CardProduct
                             id={item.id}
-                            image={`http://localhost:5000${item.image}`}
+                            image={`${process.env.REACT_APP_HOST}${item.image}`}
                             discount="0%"
                             title={item.name}
                             price={`IDR ${item.price}`}

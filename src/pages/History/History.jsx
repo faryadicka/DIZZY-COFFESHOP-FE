@@ -78,7 +78,7 @@ export default class History extends Component {
                 this.state.history.map((item) => {
                   return (
                     <CardHistory
-                      image={`http://localhost:5000${item.image}`}
+                      image={`${process.env.REACT_APP_HOST}${item.image}`}
                       name={item.name}
                       price={`IDR ${item.price}`}
                       status="Delivery"

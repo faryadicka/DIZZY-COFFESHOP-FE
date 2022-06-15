@@ -69,7 +69,7 @@ export class Payment extends Component {
       address,
       paymentMethods,
     };
-    const URL = "http://localhost:5000/api/transactions";
+    const URL = "${process.env.REACT_APP_HOST}/api/transactions";
     axios
       .post(URL, body, { headers: { "x-access-token": token } })
       .then((res) => {
@@ -123,7 +123,9 @@ export class Payment extends Component {
                       Old Summary
                     </h4>
                     <CardCart
-                      image={`http://localhost:5000${image}` || `${Default}`}
+                      image={
+                        `${process.env.REACT_APP_HOST}${image}` || `${Default}`
+                      }
                       name={name}
                       qty={qty}
                       size={size}
