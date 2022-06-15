@@ -89,7 +89,7 @@ class Login extends Component {
   }
   render() {
     const { navigate } = this.props;
-    const { token } = this.state;
+    // const { token } = this.state;
     return (
       <>
         <div className="container-auth">
@@ -150,7 +150,7 @@ class Login extends Component {
                   }}
                 />
                 <Link
-                  to="/forgot-password"
+                  to="/forgot"
                   className="mt-2 forgot-password text-decoration-none"
                 >
                   Forgot password?

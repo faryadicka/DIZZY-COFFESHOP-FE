@@ -27,8 +27,9 @@ class Profile extends Component {
       firstName: "",
       lastName: "",
       email: "",
-      image: "",
-      imgPreview: Avatar,
+      image: null,
+      imgPreview: null,
+      imgDefault: Avatar,
       useSrc: true,
       successMsg: "",
       errorMsg: "",
@@ -104,6 +105,9 @@ class Profile extends Component {
     if (this.state.gender !== "") {
       body.append("gender", this.state.gender);
     }
+    if (this.state.phone !== "") {
+      body.append("phone", this.state.phone);
+    }
     return body;
   };
 
@@ -161,6 +165,7 @@ class Profile extends Component {
       birthdate,
       gender,
     } = this.state;
+    // const profile = image !== null ? image : imgPreview;
     return (
       <>
         <Navbar />
@@ -183,8 +188,8 @@ class Profile extends Component {
                     <img
                       src={
                         imgPreview
-                          ? `http://localhost:5000${image}`
-                          : imgPreview
+                          ? imgPreview
+                          : `http://localhost:5000${image}`
                       }
                       className="card-img-top rounded-circle"
                       alt="profile"

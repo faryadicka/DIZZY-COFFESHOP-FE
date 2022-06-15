@@ -62,10 +62,10 @@ export default function Navbar(props) {
                 id="exampleFormControlInput1"
                 placeholder="search"
                 onChange={(event) => {
-                  const { category, page } = props;
+                  const { category, page, sort, order } = props;
                   if (location.search.includes("category")) {
                     navigate(
-                      `/products?category=${category}&page=${page}&name=${event.target.value}`
+                      `/products?category=${category}&sort=${sort}&order=${order}&page=${page}&name=${event.target.value}`
                     );
                   }
                   if (!location.search.includes("category")) {
@@ -90,8 +90,8 @@ export default function Navbar(props) {
                   <img src={Ava} alt="avatar" />
                 </Dropdown.Toggle>
 
-                <Dropdown.Menu className="dropdown-navbar">
-                  <Dropdown.Item href="#/action-1">
+                <Dropdown.Menu className="dropdown-navbar position-fixed">
+                  <Dropdown.Item>
                     <button
                       onClick={() => {
                         navigate(`/profile`);

@@ -13,17 +13,25 @@ import History from "./pages/History/History";
 import Profile from "./pages/Profile/Profile";
 import Payment from "./pages/Payment/Payment";
 import PrivateElement from "./components/PrivateElement/PrivateElement";
+import PublicElement from "./components/PublicElement/PublicElement";
 import NewProduct from "./pages/NewProduct/NewProduct";
 
 export default function App() {
+  // const token = localStorage.getItem("token")
   return (
     <ReduxProvider store={store}>
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/create" element={<NewProduct />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={
+            <PublicElement redirectTo="/">
+              <Login />
+            </PublicElement>} />
+          <Route path="/register" element={
+            <PublicElement redirectTo="/">
+              <Register />
+            </PublicElement>} />
           <Route path="/forgot" element={<ForgotPassword />} />
           <Route path="/products" element={<Product />} />
           <Route path="/products/:favorite" element={<Product />} />

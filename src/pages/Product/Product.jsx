@@ -22,10 +22,11 @@ import withNavigate from "../../helpers/withNavigate";
 
 //redux
 import {
-  getProductsRedux,
+  // getProductsRedux,
   getFavoriteRedux,
   sortByPriceRedux,
   nextLinkRedux,
+  getFixProductsRedux,
 } from "../../redux/actionCreator/productList";
 
 class Product extends Component {
@@ -93,22 +94,38 @@ class Product extends Component {
   componentDidMount() {
     const { searchParams, dispatch } = this.props;
     dispatch(
-      getProductsRedux(
+      getFixProductsRedux(
         searchParams.get("category") || "",
-        searchParams.get("name") || ""
+        searchParams.get("name") || "",
+        searchParams.get("sort") || "name",
+        searchParams.get("order") || "asc"
       )
     );
+    // dispatch(
+    //   getProductsRedux(
+    //     searchParams.get("category") || "",
+    //     searchParams.get("name") || ""
+    //   )
+    // );
     dispatch(getFavoriteRedux());
   }
   componentDidUpdate(prevProps) {
     const { searchParams, dispatch } = this.props;
     if (prevProps.searchParams !== searchParams) {
       dispatch(
-        getProductsRedux(
+        getFixProductsRedux(
           searchParams.get("category") || "",
-          searchParams.get("name") || ""
+          searchParams.get("name") || "",
+          searchParams.get("sort") || "name",
+          searchParams.get("order") || "asc"
         )
       );
+      // dispatch(
+      //   getProductsRedux(
+      //     searchParams.get("category") || "",
+      //     searchParams.get("name") || ""
+      //   )
+      // );
     }
   }
 
@@ -121,15 +138,24 @@ class Product extends Component {
       price,
       totalPage,
       // currentPage,
+      navigate,
     } = this.props;
-    const category = searchParams.get("category") || "";
+    const category = searchParams.get("category") || "1";
     const page = searchParams.get("page") || "1";
     const name = searchParams.get("name") || "";
+    const sort = searchParams.get("sort") || "name";
+    const order = searchParams.get("order") || "asc";
     console.log(totalPage);
     return (
       <>
         {this.state.token ? (
-          <Navbar category={category} name={name} page={page} />
+          <Navbar
+            category={category}
+            name={name}
+            sort={sort}
+            order={order}
+            page={page}
+          />
         ) : (
           <NavbarHome />
         )}
@@ -243,7 +269,7 @@ class Product extends Component {
                   </li>
                   <li className="col-2 col-lg-2 link-category">
                     <Link
-                      to="/products?category=1&page=1"
+                      to="/products?category=1&sort=name&order=asc&page=1"
                       className={`${
                         searchParams.get("category") === "1"
                           ? "menu-products-active"
@@ -255,7 +281,7 @@ class Product extends Component {
                   </li>
                   <li className="col-2 col-lg-2 link-category">
                     <Link
-                      to="/products?category=2&page=1"
+                      to="/products?category=2&sort=name&order=asc&page=1"
                       className={`${
                         searchParams.get("category") === "2"
                           ? "menu-products-active"
@@ -267,7 +293,7 @@ class Product extends Component {
                   </li>
                   <li className="col-2 col-lg-2 link-category">
                     <Link
-                      to="/products?category=3&page=1"
+                      to="/products?category=3&sort=name&order=asc&page=1"
                       className={`${
                         searchParams.get("category") === "3"
                           ? "menu-products-active"
@@ -399,7 +425,15 @@ class Product extends Component {
                     <></>
                   ) : (
                     <div className="col-auto">
-                      <button className="btn btn-choco">CREATE PRODUCT</button>
+                      <button
+                        onClick={() => {
+                          navigate(`/create`);
+                          window.scrollTo(0, 0);
+                        }}
+                        className="btn btn-choco"
+                      >
+                        CREATE PRODUCT
+                      </button>
                     </div>
                   )}
                 </div>

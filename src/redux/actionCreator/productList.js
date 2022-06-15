@@ -1,10 +1,11 @@
-import { getProductPagination, getProductFavorite, sortByPrice, nextLink } from "../../redux/actionCreator/actionString"
-import { getProducts, getFavorite, sortProductsByPrice } from "../../services/product"
+import { getProductFavorite, getFixProductPagination, sortByPrice, nextLink } from "../../redux/actionCreator/actionString"
+import { getFavorite, sortProductsByPrice, getFixProducts } from "../../services/product"
 
-export const getProductsRedux = (category, search, page) => {
+
+export const getFixProductsRedux = (category, search, sort, order, page) => {
   return {
-    type: getProductPagination,
-    payload: getProducts(category, search, page)
+    type: getFixProductPagination,
+    payload: getFixProducts(category, search, sort, order, page)
   }
 }
 
@@ -22,9 +23,9 @@ export const sortByPriceRedux = (order) => {
   }
 }
 
-export const nextLinkRedux = (category = "", search = "", page) => {
+export const nextLinkRedux = (category, search, sort, order, page) => {
   return {
     type: nextLink,
-    payload: getProducts(category, search, page)
+    payload: getFixProducts(category, search, sort, order, page)
   }
 }

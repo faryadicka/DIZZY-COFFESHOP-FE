@@ -1,8 +1,9 @@
 // REQUEST AXIOS
 export const authLogin = "AUTH_LOGIN"
-export const getProductPagination = "GET_PRODUCTS"
+export const getFixProductPagination = "GET_PRODUCTS_FIX"
 export const getProductFavorite = "GET_FAVORITE"
 export const sortByPrice = "GET_PRICE"
+export const getUser = "GET_PROFILE"
 export const nextLink = "NEXT_LINK"
 
 // ADD CART
