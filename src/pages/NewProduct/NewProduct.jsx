@@ -194,9 +194,9 @@ export class NewProduct extends Component {
                     aria-labelledby="dropdownMenuButton1"
                   >
                     <li>
-                      <a className="dropdown-item" href="#">
+                      <NavLink className="dropdown-item" to="#">
                         Action
-                      </a>
+                      </NavLink>
                     </li>
                   </ul>
                 </div>
@@ -275,9 +275,9 @@ export class NewProduct extends Component {
                     aria-labelledby="dropdownMenuButton1"
                   >
                     <li>
-                      <a className="dropdown-item" href="#">
+                      <NavLink className="dropdown-item" to="#">
                         Action
-                      </a>
+                      </NavLink>
                     </li>
                   </ul>
                 </div>

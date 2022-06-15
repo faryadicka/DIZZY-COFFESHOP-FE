@@ -69,7 +69,7 @@ export class Payment extends Component {
       address,
       paymentMethods,
     };
-    const URL = "${process.env.REACT_APP_HOST}/api/transactions";
+    const URL = `${process.env.REACT_APP_HOST}/api/transactions`;
     axios
       .post(URL, body, { headers: { "x-access-token": token } })
       .then((res) => {
