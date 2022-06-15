@@ -136,7 +136,7 @@ class Login extends Component {
                     }}
                   >
                     <img
-                      src={this.state.showPass ? Hide : Show}
+                      src={this.state.showPass ? Show : Hide}
                       alt="eye"
                       className="eye-pass"
                     />
