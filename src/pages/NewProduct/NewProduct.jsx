@@ -127,11 +127,16 @@ export class NewProduct extends Component {
       createSuccess,
       errorMsg,
       successMsg,
+      start,
+      end,
     } = this.state;
     return (
       <>
         <Navbar />
-        <form className="container form-container-create">
+        <form
+          onSubmit={this.createProduct}
+          className="container form-container-create"
+        >
           <div className="row">
             <div className="col-auto">
               <Link to="/products">Products</Link>
@@ -323,7 +328,13 @@ export class NewProduct extends Component {
                     type="time"
                     name="time-start"
                     id="time-start"
+                    value={start}
                     className="w-50 rounded-3 p-md-2 start-hour"
+                    onChange={(event) => {
+                      this.setState({
+                        start: event.target.value,
+                      });
+                    }}
                   />
                 </div>
                 <div className="end-time mt-md-2">
@@ -332,6 +343,12 @@ export class NewProduct extends Component {
                     name="time-end"
                     id="time-end"
                     className="w-50 rounded-3 p-md-2 end-hour"
+                    value={end}
+                    onChange={(event) => {
+                      this.setState({
+                        end: event.target.value,
+                      });
+                    }}
                   />
                 </div>
               </div>
@@ -350,8 +367,8 @@ export class NewProduct extends Component {
                     type="radio"
                     name="options-outlined"
                     id="reguler"
-                    value="1"
-                    checked={categoryId === "1"}
+                    value={categoryId}
+                    checked={categoryId === 1}
                     onChange={(event) => {
                       this.setState({
                         categoryId: event.target.value,
@@ -369,8 +386,8 @@ export class NewProduct extends Component {
                     type="radio"
                     name="options-outlined"
                     id="large"
-                    value="2"
-                    checked={categoryId === "2"}
+                    value={categoryId}
+                    checked={categoryId === 2}
                     onChange={(event) => {
                       this.setState({
                         categoryId: event.target.value,
@@ -388,8 +405,8 @@ export class NewProduct extends Component {
                     type="radio"
                     name="options-outlined"
                     id="extra-large"
-                    value="3"
-                    checked={categoryId === "3"}
+                    value={categoryId}
+                    checked={categoryId === 3}
                     onChange={(event) => {
                       this.setState({
                         categoryId: event.target.value,
