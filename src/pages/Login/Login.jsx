@@ -274,6 +274,7 @@ class Login extends Component {
                     }
                     this.setState({
                       email: "",
+                      password: "",
                     });
                   }}
                 >
