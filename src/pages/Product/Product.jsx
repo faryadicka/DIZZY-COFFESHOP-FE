@@ -384,7 +384,7 @@ class Product extends Component {
                         );
                       })}
                 </div>
-                <div className="row pagination justify-content-between">
+                <div className="row pagination justify-content-center">
                   {this.state.role !== "1" ? (
                     <></>
                   ) : (

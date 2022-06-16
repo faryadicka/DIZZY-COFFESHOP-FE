@@ -350,6 +350,7 @@ class ProductDetail extends Component {
             this.setState({ modalShow: false }, () =>
               navigate("/login", { replace: true, state: null })
             );
+            window.scrollTo(0, 0);
           }}
         />
       </div>

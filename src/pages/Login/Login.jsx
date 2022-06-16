@@ -34,7 +34,6 @@ class Login extends Component {
       email: "",
       password: "",
       showPass: false,
-      isError: false,
       errMsg: "",
       succsessMsg: "",
       isLogin: false,
@@ -74,7 +73,6 @@ class Login extends Component {
       .catch((err) => {
         console.log(err);
         this.setState({
-          isError: true,
           errMsg: err.response.data.message,
         });
       });
@@ -90,7 +88,6 @@ class Login extends Component {
   }
   render() {
     const { navigate } = this.props;
-    // const { token } = this.state;
     return (
       <>
         <div className="container-auth">
@@ -119,6 +116,7 @@ class Login extends Component {
                   id="email"
                   placeholder="Enter your email address"
                   onChange={(event) => {
+                    event.preventDefault();
                     this.setState({
                       email: event.target.value,
                     });
@@ -245,7 +243,7 @@ class Login extends Component {
             <div className="modal-content">
               <div className="modal-header">
                 <h5 className="modal-title text-center" id="exampleModalLabel">
-                  {this.state.isError ? (
+                  {!this.state.isLogin ? (
                     <p className="text-warning">
                       {this.state.errMsg}
                       {"!"}
@@ -269,11 +267,9 @@ class Login extends Component {
                   onClick={() => {
                     if (this.state.isLogin) {
                       navigate("/");
-                    } else if (!this.state.isLogin) {
-                      this.setState({
-                        email: "",
-                      });
+                      return window.scrollTo(0, 0);
                     }
+                    return window.location.reload();
                   }}
                 >
                   Close

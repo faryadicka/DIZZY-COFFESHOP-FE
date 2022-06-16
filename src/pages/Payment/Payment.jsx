@@ -97,19 +97,20 @@ export class Payment extends Component {
     const {
       navigate,
       cart: { size, qty, image, price, name },
+      state,
     } = this.props;
     const subTotal = price * qty;
     const taxAndFees = subTotal * 0.1;
     const shipping = subTotal * 0.2;
     const total = subTotal + taxAndFees + shipping;
-    console.log(this.state);
+    console.log(state);
     return (
       <>
         <Navbar />
         <main className="main-payment mt-5">
           <div className="container">
             <div className="row justify-content-center justify-content-lg-between">
-              <div className="col-auto col-md-4">
+              <div className="col-auto col-md-5">
                 <p className="text-white header-payment">
                   Checkout your item now!
                 </p>
@@ -312,6 +313,7 @@ const mapStateToProps = (state) => {
   const { cart } = state;
   return {
     cart,
+    state,
   };
 };
 

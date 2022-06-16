@@ -36,9 +36,12 @@ export default function App() {
           <Route path="/products" element={<Product />} />
           <Route path="/products/:favorite" element={<Product />} />
           <Route path="/products/detail/:id" element={<ProductDetail />} />
-          <Route path="/history" element={<History />} />
+          <Route path="/history" element={
+            <PrivateElement redirectTo="/login" extraData={{ isAuthenticated: false }}>
+              <History />
+            </PrivateElement>} />
           <Route path="/payment" element={
-            <PrivateElement redirectTo="/products/detail/:id" extraData={{ isAuthenticated: false }}>
+            <PrivateElement redirectTo="/login" extraData={{ isAuthenticated: false }}>
               <Payment />
             </PrivateElement>} />
           <Route path="/profile" element={
