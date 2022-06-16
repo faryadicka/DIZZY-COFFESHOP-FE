@@ -116,6 +116,7 @@ class Login extends Component {
                   name="email"
                   id="email"
                   placeholder="Enter your email address"
+                  value={this.state.email}
                   onChange={(event) => {
                     event.preventDefault();
                     this.setState({
@@ -147,6 +148,7 @@ class Login extends Component {
                   name="password"
                   id="password"
                   placeholder="Enter your password"
+                  value={this.state.password}
                   onChange={(event) => {
                     this.setState({
                       password: event.target.value,
