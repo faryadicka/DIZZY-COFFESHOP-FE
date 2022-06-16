@@ -88,6 +88,7 @@ class Login extends Component {
   }
   render() {
     const { navigate } = this.props;
+    console.log(this.state);
     return (
       <>
         <div className="container-auth">
