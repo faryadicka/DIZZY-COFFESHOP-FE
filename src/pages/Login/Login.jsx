@@ -269,7 +269,9 @@ class Login extends Component {
                       navigate("/");
                       return window.scrollTo(0, 0);
                     }
-                    return window.location.reload();
+                    this.setState({
+                      email: "",
+                    });
                   }}
                 >
                   Close
