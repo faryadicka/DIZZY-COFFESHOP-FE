@@ -369,7 +369,7 @@ export class NewProduct extends Component {
                     name="options-outlined"
                     id="reguler"
                     value={categoryId}
-                    checked={categoryId === 1}
+                    checked={categoryId === "1"}
                     onChange={(event) => {
                       this.setState({
                         categoryId: event.target.value,
@@ -388,7 +388,7 @@ export class NewProduct extends Component {
                     name="options-outlined"
                     id="large"
                     value={categoryId}
-                    checked={categoryId === 2}
+                    checked={categoryId === "2"}
                     onChange={(event) => {
                       this.setState({
                         categoryId: event.target.value,
@@ -407,7 +407,7 @@ export class NewProduct extends Component {
                     name="options-outlined"
                     id="extra-large"
                     value={categoryId}
-                    checked={categoryId === 3}
+                    checked={categoryId === "3"}
                     onChange={(event) => {
                       this.setState({
                         categoryId: event.target.value,
