@@ -22,7 +22,6 @@ import withNavigate from "../../helpers/withNavigate";
 
 //redux
 import {
-  // getProductsRedux,
   getFavoriteRedux,
   sortByPriceRedux,
   nextLinkRedux,
@@ -67,6 +66,8 @@ class Product extends Component {
         nextLinkRedux(
           searchParams.get("category") || "",
           searchParams.get("name") || "",
+          searchParams.get("sort") || "name",
+          searchParams.get("order") || "asc",
           searchParams.get("page") || "1"
         )
       );
@@ -83,6 +84,8 @@ class Product extends Component {
         nextLinkRedux(
           searchParams.get("category") || "",
           searchParams.get("name") || "",
+          searchParams.get("sort") || "name",
+          searchParams.get("order") || "asc",
           searchParams.get("page") || "1"
         )
       );
@@ -101,12 +104,6 @@ class Product extends Component {
         searchParams.get("order") || "asc"
       )
     );
-    // dispatch(
-    //   getProductsRedux(
-    //     searchParams.get("category") || "",
-    //     searchParams.get("name") || ""
-    //   )
-    // );
     dispatch(getFavoriteRedux());
   }
   componentDidUpdate(prevProps) {
@@ -120,12 +117,6 @@ class Product extends Component {
           searchParams.get("order") || "asc"
         )
       );
-      // dispatch(
-      //   getProductsRedux(
-      //     searchParams.get("category") || "",
-      //     searchParams.get("name") || ""
-      //   )
-      // );
     }
   }
 
@@ -137,7 +128,6 @@ class Product extends Component {
       favorite,
       price,
       totalPage,
-      // currentPage,
       navigate,
     } = this.props;
     const category = searchParams.get("category") || "1";
