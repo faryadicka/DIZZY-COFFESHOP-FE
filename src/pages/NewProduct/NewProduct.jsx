@@ -130,6 +130,7 @@ export class NewProduct extends Component {
       start,
       end,
     } = this.state;
+    console.log(this.state);
     return (
       <>
         <Navbar />
@@ -457,7 +458,7 @@ export class NewProduct extends Component {
           message={createSuccess ? successMsg : errorMsg}
           hideModal={() => {
             this.setState({
-              updateSuccess: false,
+              createSuccess: false,
             });
           }}
         />
