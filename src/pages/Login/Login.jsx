@@ -270,7 +270,9 @@ class Login extends Component {
                     if (this.state.isLogin) {
                       navigate("/");
                     } else if (!this.state.isLogin) {
-                      window.location.reload();
+                      this.setState({
+                        email: "",
+                      });
                     }
                   }}
                 >
