@@ -27,7 +27,7 @@ class Profile extends Component {
       firstName: "",
       lastName: "",
       email: "",
-      image: null,
+      image: "",
       imgPreview: null,
       imgDefault: Avatar,
       useSrc: true,
