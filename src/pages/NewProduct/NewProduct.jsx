@@ -367,7 +367,7 @@ export class NewProduct extends Component {
                     className="btn-check"
                     type="radio"
                     name="options-outlined"
-                    id="reguler"
+                    id="coffe"
                     value={categoryId}
                     checked={categoryId === "1"}
                     onChange={(event) => {
@@ -377,7 +377,7 @@ export class NewProduct extends Component {
                     }}
                   />
                   <label
-                    htmlFor="reguler"
+                    htmlFor="coffe"
                     className="btn btn-outlined-order btn-warning"
                   >
                     Coffee
@@ -386,7 +386,7 @@ export class NewProduct extends Component {
                     className="btn-check"
                     type="radio"
                     name="options-outlined"
-                    id="large"
+                    id="non-coffe"
                     value={categoryId}
                     checked={categoryId === "2"}
                     onChange={(event) => {
@@ -396,7 +396,7 @@ export class NewProduct extends Component {
                     }}
                   />
                   <label
-                    htmlFor="large"
+                    htmlFor="non-coffe"
                     className="btn btn-outlined-order btn-warning"
                   >
                     Non Coffee
@@ -405,7 +405,7 @@ export class NewProduct extends Component {
                     className="btn-check"
                     type="radio"
                     name="options-outlined"
-                    id="extra-large"
+                    id="foods"
                     value={categoryId}
                     checked={categoryId === "3"}
                     onChange={(event) => {
@@ -415,7 +415,7 @@ export class NewProduct extends Component {
                     }}
                   />
                   <label
-                    htmlFor="extra-large"
+                    htmlFor="foods"
                     className="btn btn-outlined-order btn-warning"
                   >
                     Foods
