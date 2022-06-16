@@ -372,7 +372,7 @@ export class NewProduct extends Component {
                     checked={categoryId === "1"}
                     onChange={(event) => {
                       this.setState({
-                        categoryId: event.target.value,
+                        categoryId: "1",
                       });
                     }}
                   />
@@ -391,7 +391,7 @@ export class NewProduct extends Component {
                     checked={categoryId === "2"}
                     onChange={(event) => {
                       this.setState({
-                        categoryId: event.target.value,
+                        categoryId: "2",
                       });
                     }}
                   />
@@ -410,7 +410,7 @@ export class NewProduct extends Component {
                     checked={categoryId === "3"}
                     onChange={(event) => {
                       this.setState({
-                        categoryId: event.target.value,
+                        categoryId: "3",
                       });
                     }}
                   />
