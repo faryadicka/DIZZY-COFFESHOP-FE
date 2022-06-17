@@ -31,3 +31,13 @@ export const getFixProducts = (
   const URL = `${REACT_APP_HOST}/api/products?category=${category}&name=${search}&sort=${sort}&order=${order}&page=${page}&limit=12`;
   return axios.get(URL);
 };
+
+export const editProductAxios = (id, body, token) => {
+  const URL = `${REACT_APP_HOST}/api/products/${id}`;
+  return axios.patch(URL, body, {
+    headers: {
+      "x-access-token": token,
+      "content-type": "multipart/form-data",
+    },
+  });
+};

@@ -26,7 +26,7 @@ import {
   sortByPriceRedux,
   nextLinkRedux,
   getFixProductsRedux,
-} from "../../redux/actionCreator/productList";
+} from "../../redux/actionCreator/product";
 
 class Product extends Component {
   constructor(props) {

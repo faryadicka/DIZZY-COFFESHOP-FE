@@ -43,17 +43,17 @@ class Profile extends Component {
     axios
       .get(URL, { headers: { "x-access-token": token } })
       .then((res) => {
-        console.log(res.data.total);
+        console.log(res.data.data);
         this.setState({
-          email: res.data.total.email,
-          display: res.data.total.display_name,
-          address: res.data.total.address,
-          phone: res.data.total.phone,
-          birthdate: res.data.total.birthdate,
-          gender: res.data.total.gender,
-          firstName: res.data.total.first_name,
-          lastName: res.data.total.last_name,
-          image: res.data.total.image_profile,
+          email: res.data.data.email,
+          display: res.data.data.display_name,
+          address: res.data.data.address,
+          phone: res.data.data.phone,
+          birthdate: res.data.data.birthdate,
+          gender: res.data.data.gender,
+          firstName: res.data.data.first_name,
+          lastName: res.data.data.last_name,
+          image: res.data.data.image_profile,
         });
       })
       .catch((err) => {

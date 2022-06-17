@@ -1,9 +1,11 @@
-import { sortByPrice, getProductFavorite, getFixProductPagination, PENDING, FULLFILLED, REJECTED, nextLink } from "../actionCreator/actionString";
+import { sortByPrice, getProductFavorite, getFixProductPagination, PENDING, FULLFILLED, REJECTED, nextLink, getDetail, editProduct } from "../actionCreator/actionString";
 
 const initialState = {
   products: [],
   favorite: [],
   price: [],
+  detail: [],
+  edit: {},
   err: null,
   isLoading: false,
   prevLink: "",
@@ -43,6 +45,22 @@ const productReducer = (state = initialState, action) => {
       return { ...state, products: action.payload.data.data, isLoading: false, prevLink: action.payload.data.prevLink, nextLink: action.payload.data.nextLink, currentPage: action.payload.data.currentPage, totalPage: action.payload.data.totalPage }
     case nextLink + REJECTED:
       return { ...state, isLoading: false, err: action.payload }
+
+    case getDetail + PENDING:
+      return { ...state, isLoading: true }
+    case getDetail + FULLFILLED:
+      return { ...state, detail: action.payload.data.data, isLoading: false }
+    case getDetail + REJECTED:
+      return { ...state, isLoading: false, err: action.payload }
+
+    case editProduct + PENDING:
+      return { ...state, isLoading: true }
+    case editProduct + FULLFILLED:
+      console.log(action.payload.data)
+      return { ...state, edit: action.payload.data.data, isLoading: false }
+    case editProduct + REJECTED:
+      return { ...state, isLoading: false, err: action.payload }
+
     default:
       return state
   }

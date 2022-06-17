@@ -5,6 +5,8 @@ export const getProductFavorite = "GET_FAVORITE"
 export const sortByPrice = "GET_PRICE"
 export const getUser = "GET_PROFILE"
 export const nextLink = "NEXT_LINK"
+export const getDetail = "GET_DETAIL"
+export const editProduct = "EDIT_PRODUCTS"
 
 // ADD CART
 export const idProduct = "SET_ID_PRODUCT"

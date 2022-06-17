@@ -269,9 +269,9 @@ class ProductDetail extends Component {
                         </div>
                         <div className="col-md-8">
                           <input
-                            type="text"
+                            type="time"
                             id="inputPassword6"
-                            className="form-control border-top-0 w-100"
+                            className="form-control border-0 w-100"
                             value={this.state.time}
                             onChange={(event) => {
                               dispatch(setTime(event.target.value));

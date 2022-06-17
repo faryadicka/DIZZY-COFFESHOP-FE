@@ -296,92 +296,6 @@ export class NewProduct extends Component {
                     </label>
                   </div>
                 </div>
-                {/* <div className="row">
-                  <label htmlFor="size">Input product size :</label> <br />
-                  <small id="size-help" className="form-text text-muted">
-                    Click size you want to use for this product
-                  </small>
-                </div>
-                <div className="d-flex mt-3 gap-3">
-                  <input
-                    className="btn-check"
-                    type="radio"
-                    name="options-outlined"
-                    id="reguler"
-                    value="Reguler"
-                  />
-                  <label
-                    htmlFor="reguler"
-                    className="btn btn-outlined-order btn-warning rounded-circle"
-                  >
-                    R
-                  </label>
-                  <input
-                    className="btn-check"
-                    type="radio"
-                    name="options-outlined"
-                    id="large"
-                    value="large"
-                  />
-                  <label
-                    htmlFor="large"
-                    className="btn btn-outlined-order  btn-warning rounded-circle"
-                  >
-                    L
-                  </label>
-                  <input
-                    className="btn-check"
-                    type="radio"
-                    name="options-outlined"
-                    id="extra-large"
-                    value="extra-large"
-                  />
-                  <label
-                    htmlFor="extra-large"
-                    className="btn btn-outlined-order btn-warning rounded-circle"
-                  >
-                    XL
-                  </label>
-                  <input
-                    className="btn-check"
-                    type="radio"
-                    name="options-outlined"
-                    id="250-gr"
-                    value="250-gr"
-                  />
-                  <label
-                    htmlFor="250-gr"
-                    className="btn btn-outlined-order btn-secondary rounded-circle"
-                  >
-                    250 gr
-                  </label>
-                  <input
-                    className="btn-check"
-                    type="radio"
-                    name="options-outlined"
-                    id="300-gr"
-                    value="300-gr"
-                  />
-                  <label
-                    htmlFor="300-gr"
-                    className="btn btn-outlined-order btn-secondary rounded-circle"
-                  >
-                    300 gr
-                  </label>
-                  <input
-                    className="btn-check"
-                    type="radio"
-                    name="options-outlined"
-                    id="500-gr"
-                    value="500-gr"
-                  />
-                  <label
-                    htmlFor="500-gr"
-                    className="btn btn-outlined-order btn-secondary rounded-circle"
-                  >
-                    500 gr
-                  </label>
-                </div> */}
               </div>
             </div>
           </div>
@@ -421,7 +335,7 @@ export class NewProduct extends Component {
                 </div>
               </div>
             </div>
-            <div className="col-md-6 p-0">
+            <div className="col-md-5 p-0">
               <div className="row">
                 <button type="submit" className="btn btn-choco rounded-4 py-3">
                   Save Product
@@ -430,103 +344,8 @@ export class NewProduct extends Component {
               <div className="row mt-3">
                 <button className="btn btn-light rounded-4 py-3">Cancel</button>
               </div>
-              {/* <div className="form-group">
-                <div className="row">
-                  <label htmlFor="size">Input Category :</label> <br />
-                  <small id="size-help" className="form-text text-muted">
-                    Click category you want to use for this product
-                  </small>
-                </div>
-                <div className="d-flex gap-3 mt-3">
-                  <input
-                    className="btn-check"
-                    type="radio"
-                    name="options-outlined"
-                    id="coffe"
-                    value={categoryId}
-                    checked={categoryId === "1"}
-                    onChange={(event) => {
-                      this.setState({
-                        categoryId: "1",
-                      });
-                    }}
-                  />
-                  <label
-                    htmlFor="coffe"
-                    className="btn btn-outlined-order btn-warning"
-                  >
-                    Coffee
-                  </label>
-                  <input
-                    className="btn-check"
-                    type="radio"
-                    name="options-outlined"
-                    id="non-coffe"
-                    value={categoryId}
-                    checked={categoryId === "2"}
-                    onChange={(event) => {
-                      this.setState({
-                        categoryId: "2",
-                      });
-                    }}
-                  />
-                  <label
-                    htmlFor="non-coffe"
-                    className="btn btn-outlined-order btn-warning"
-                  >
-                    Non Coffee
-                  </label>
-                  <input
-                    className="btn-check"
-                    type="radio"
-                    name="options-outlined"
-                    id="foods"
-                    value={categoryId}
-                    checked={categoryId === "3"}
-                    onChange={(event) => {
-                      this.setState({
-                        categoryId: "3",
-                      });
-                    }}
-                  />
-                  <label
-                    htmlFor="foods"
-                    className="btn btn-outlined-order btn-warning"
-                  >
-                    Foods
-                  </label>
-                </div>
-              </div> */}
             </div>
           </div>
-          {/* <div className="row justify-content-around mt-4">
-            <div className="col-md-4">
-              <div className="row">
-                <label className="fw-bold">Input Stock :</label>
-              </div>
-              <div className="row input-stock">
-                <div className="stock-input mt-md-2">
-                  <input
-                    type="number"
-                    name="stock-input"
-                    id="stock-input"
-                    className="w-50 rounded-3 p-md-2 stock-input"
-                    placeholder="Stock :"
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="col-md-6 mt-3">
-              <div className="row">
-                <button type="submit" className="btn btn-choco rounded-4 py-3">
-                  Save Product
-                </button>
-              </div>
-              <div className="row mt-3">
-                <button className="btn btn-light rounded-4 py-3">Cancel</button>
-              </div>
-            </div>
-          </div> */}
         </form>
         <ModalWarning
           showModal={createSuccess}

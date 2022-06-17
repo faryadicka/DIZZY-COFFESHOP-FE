@@ -14,6 +14,9 @@
 .cursor-image-products {
   cursor: pointer;
   background-color: #bababa59;
+  width: 150px;
+  position: relative;
+  left: 60px;
 }
 
 input[type="time"],
@@ -22,20 +25,6 @@ input[type="text"] {
   background: #fff;
   border: 1.5px solid #464646;
 }
-
-/* .start-hour[type="time"]:before {
-  content: "Select start hour : ";
-  color: #9d9d9d;
-  position: absolute;
-  background: #fff;
-}
-
-.end-hour[type="time"]:before {
-  content: "Select end hour : ";
-  color: #9d9d9d;
-  position: absolute;
-  background: #fff;
-} */
 
 input[type="time"]:hover:before {
   content: "";
