@@ -229,7 +229,74 @@ export class NewProduct extends Component {
                 />
               </div>
               <div className="form-group mt-4">
-                <div className="row">
+                <div className="form-group">
+                  <div className="row">
+                    <label htmlFor="size">Input Category :</label> <br />
+                    <small id="size-help" className="form-text text-muted">
+                      Click category you want to use for this product
+                    </small>
+                  </div>
+                  <div className="d-flex gap-3 mt-3">
+                    <input
+                      className="btn-check"
+                      type="radio"
+                      name="options-outlined"
+                      id="coffe"
+                      value={categoryId}
+                      checked={categoryId === "1"}
+                      onChange={(event) => {
+                        this.setState({
+                          categoryId: "1",
+                        });
+                      }}
+                    />
+                    <label
+                      htmlFor="coffe"
+                      className="btn btn-outlined-order btn-warning"
+                    >
+                      Coffee
+                    </label>
+                    <input
+                      className="btn-check"
+                      type="radio"
+                      name="options-outlined"
+                      id="non-coffe"
+                      value={categoryId}
+                      checked={categoryId === "2"}
+                      onChange={(event) => {
+                        this.setState({
+                          categoryId: "2",
+                        });
+                      }}
+                    />
+                    <label
+                      htmlFor="non-coffe"
+                      className="btn btn-outlined-order btn-warning"
+                    >
+                      Non Coffee
+                    </label>
+                    <input
+                      className="btn-check"
+                      type="radio"
+                      name="options-outlined"
+                      id="foods"
+                      value={categoryId}
+                      checked={categoryId === "3"}
+                      onChange={(event) => {
+                        this.setState({
+                          categoryId: "3",
+                        });
+                      }}
+                    />
+                    <label
+                      htmlFor="foods"
+                      className="btn btn-outlined-order btn-warning"
+                    >
+                      Foods
+                    </label>
+                  </div>
+                </div>
+                {/* <div className="row">
                   <label htmlFor="size">Input product size :</label> <br />
                   <small id="size-help" className="form-text text-muted">
                     Click size you want to use for this product
@@ -314,7 +381,7 @@ export class NewProduct extends Component {
                   >
                     500 gr
                   </label>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
@@ -355,7 +422,7 @@ export class NewProduct extends Component {
               </div>
             </div>
             <div className="col-md-6 p-0">
-              <div className="form-group">
+              {/* <div className="form-group">
                 <div className="row">
                   <label htmlFor="size">Input Category :</label> <br />
                   <small id="size-help" className="form-text text-muted">
@@ -421,7 +488,7 @@ export class NewProduct extends Component {
                     Foods
                   </label>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
           <div className="row justify-content-around mt-4">
