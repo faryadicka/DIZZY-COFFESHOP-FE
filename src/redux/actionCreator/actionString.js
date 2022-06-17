@@ -16,6 +16,7 @@ export const countDec = "COUNT_DECREMENT"
 export const imgProduct = "SET_IMAGE"
 export const nameProduct = "SET_NAME"
 export const priceProduct = "SET_PRICE"
+export const checkOut = "SET_CHECKOUT"
 
 
 

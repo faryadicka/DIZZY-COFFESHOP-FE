@@ -7,10 +7,11 @@ import axios from "axios";
 import "../Payment/Payment.scoped.css";
 
 //assets
-import Default from "../../assets/img/default.png";
+// import Default from "../../assets/img/default.png";
 
 //component
-import CardCart from "../../components/CardCart/CardCart";
+// import CardCart from "../../components/CardCart/CardCart";
+import CardUnOrdered from "../../components/CardUnOrdered/CardUnOrdered";
 
 //services
 
@@ -96,13 +97,13 @@ export class Payment extends Component {
   render() {
     const {
       navigate,
-      cart: { size, qty, image, price, name },
+      // cart: { size, qty, image, price, name },
       state,
     } = this.props;
-    const subTotal = price * qty;
-    const taxAndFees = subTotal * 0.1;
-    const shipping = subTotal * 0.2;
-    const total = subTotal + taxAndFees + shipping;
+    // const subTotal = price * qty;
+    // const taxAndFees = subTotal * 0.1;
+    // const shipping = subTotal * 0.2;
+    // const total = subTotal + taxAndFees + shipping;
     console.log(state);
     return (
       <>
@@ -117,7 +118,8 @@ export class Payment extends Component {
               </div>
             </div>
             <div className="row justify-content-around mt-md-5 gap-5">
-              <div className="col-8 col-md-6">
+              <CardUnOrdered />
+              {/* <div className="col-8 col-md-6">
                 <div className="card rounded-4 px-3 h-100">
                   <div className="card-body">
                     <h4 className="header-payment-card card-title text-center">
@@ -257,7 +259,7 @@ export class Payment extends Component {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </main>

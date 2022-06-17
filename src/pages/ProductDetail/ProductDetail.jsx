@@ -23,6 +23,7 @@ import {
   setSize,
   setTime,
   setPrice,
+  setCheckOut,
 } from "../../redux/actionCreator/cart";
 
 // Services
@@ -76,10 +77,12 @@ class ProductDetail extends Component {
 
   checkOutHandle = () => {
     const { token } = this.state;
+    const { dispatch } = this.props;
     if (token) {
       this.setState({
         isCheckOut: true,
       });
+      dispatch(setCheckOut(true));
     }
     this.setState({
       showModal: true,
