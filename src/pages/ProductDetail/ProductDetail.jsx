@@ -104,8 +104,9 @@ class ProductDetail extends Component {
 
   render() {
     const { detailProduct } = this.state.products;
-    const { params, navigate, dispatch, qty, size, delivery } = this.props;
-    console.log(qty);
+    const { params, navigate, dispatch, qty, size, delivery, checkOut } =
+      this.props;
+    console.log("checkout :"checkOut);
     if (this.state.isCheckOut) return <Navigate to="/payment" />;
     return (
       <div>

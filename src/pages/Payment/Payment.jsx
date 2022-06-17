@@ -104,7 +104,7 @@ export class Payment extends Component {
     const taxAndFees = subTotal * 0.1;
     const shipping = subTotal * 0.2;
     const total = subTotal + taxAndFees + shipping;
-    console.log(state);
+    console.log(checkOut);
     return (
       <>
         <Navbar />
