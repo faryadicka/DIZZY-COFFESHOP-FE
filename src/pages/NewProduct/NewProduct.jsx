@@ -422,6 +422,14 @@ export class NewProduct extends Component {
               </div>
             </div>
             <div className="col-md-6 p-0">
+              <div className="row">
+                <button type="submit" className="btn btn-choco rounded-4 py-3">
+                  Save Product
+                </button>
+              </div>
+              <div className="row mt-3">
+                <button className="btn btn-light rounded-4 py-3">Cancel</button>
+              </div>
               {/* <div className="form-group">
                 <div className="row">
                   <label htmlFor="size">Input Category :</label> <br />
@@ -491,7 +499,7 @@ export class NewProduct extends Component {
               </div> */}
             </div>
           </div>
-          <div className="row justify-content-around mt-4">
+          {/* <div className="row justify-content-around mt-4">
             <div className="col-md-4">
               <div className="row">
                 <label className="fw-bold">Input Stock :</label>
@@ -518,7 +526,7 @@ export class NewProduct extends Component {
                 <button className="btn btn-light rounded-4 py-3">Cancel</button>
               </div>
             </div>
-          </div>
+          </div> */}
         </form>
         <ModalWarning
           showModal={createSuccess}
