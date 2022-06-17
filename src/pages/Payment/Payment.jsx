@@ -98,7 +98,7 @@ export class Payment extends Component {
     const {
       navigate,
       cart: { size, qty, image, price, name, checkOut },
-      state,
+      // state,
     } = this.props;
     const subTotal = price * qty;
     const taxAndFees = subTotal * 0.1;

@@ -1,4 +1,4 @@
-import { sizeProduct, idProduct, timeProduct, deliveryProduct, countDec, countInc, imgProduct, nameProduct, priceProduct, checkOut } from "./actionString"
+import { sizeProduct, idProduct, timeProduct, deliveryProduct, countDec, countInc, imgProduct, nameProduct, priceProduct, checkOutProduct } from "./actionString"
 
 export const increment = () => {
   return {
@@ -75,11 +75,11 @@ export const setPrice = (price) => {
   }
 }
 
-export const setCheckOut = (value) => {
+export const setCheckOut = (checkOut) => {
   return {
-    type: checkOut,
+    type: checkOutProduct,
     payload: {
-      value
+      checkOut
     }
   }
 }

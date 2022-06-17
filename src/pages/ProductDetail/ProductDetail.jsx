@@ -364,9 +364,9 @@ class ProductDetail extends Component {
 
 const mapStateToProps = (state) => {
   const {
-    cart: { qty, size, delivery },
+    cart: { qty, size, delivery, checkOut },
   } = state;
-  return { qty, size, delivery };
+  return { qty, size, delivery, checkOut };
 };
 
 export default connect(mapStateToProps)(

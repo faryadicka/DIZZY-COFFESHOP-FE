@@ -1,4 +1,4 @@
-import { sizeProduct, idProduct, timeProduct, deliveryProduct, countDec, countInc, imgProduct, nameProduct, priceProduct, checkOut } from "../actionCreator/actionString"
+import { sizeProduct, idProduct, timeProduct, deliveryProduct, countDec, countInc, imgProduct, nameProduct, priceProduct, checkOutProduct } from "../actionCreator/actionString"
 const initialState = {
   id: "",
   price: 0,
@@ -38,9 +38,9 @@ const cartReducer = (state = initialState, action) => {
     case priceProduct:
       const { price } = action.payload
       return { ...state, price }
-    case checkOut:
-      const { value } = action.payload
-      return { ...state, value }
+    case checkOutProduct:
+      const { checkOut } = action.payload
+      return { ...state, checkOut }
     default:
       return state
   }
