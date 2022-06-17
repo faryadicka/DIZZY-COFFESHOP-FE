@@ -19,12 +19,12 @@
   left: 60px;
 }
 
-input[type="time"],
+/* input[type="time"],
 input[type="number"],
 input[type="text"] {
   background: #fff;
   border: 1.5px solid #464646;
-}
+} */
 
 input[type="time"]:hover:before {
   content: "";

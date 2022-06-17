@@ -16,6 +16,7 @@ import PrivateElement from "./components/PrivateElement/PrivateElement";
 import PublicElement from "./components/PublicElement/PublicElement";
 import NewProduct from "./pages/NewProduct/NewProduct";
 import EditProduct from "./pages/EditProduct/EditProduct";
+import NewPromo from "./pages/NewPromo/NewPromo";
 
 export default function App() {
   // const token = localStorage.getItem("token")
@@ -25,6 +26,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/products/create" element={<NewProduct />} />
+          <Route path="/promos/create" element={<NewPromo />} />
           <Route path="/products/edit/:id" element={<EditProduct />} />
           <Route path="/login" element={
             <PublicElement redirectTo="/">
