@@ -163,7 +163,7 @@ class ProductDetail extends Component {
                           <p className="card-title">
                             Delivery only on{" "}
                             <span className="fw-bold">
-                              {detailProduct.delivery_info}
+                              Available delivery at
                             </span>
                           </p>
                           <p className="card-text mt-5">

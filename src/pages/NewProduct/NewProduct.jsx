@@ -12,8 +12,8 @@ import Default from "../../assets/img/default.png";
 import "./NewProduct.scoped.css";
 
 export class NewProduct extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       token: localStorage.getItem("token"),
       name: "",
