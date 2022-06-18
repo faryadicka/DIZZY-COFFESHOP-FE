@@ -417,7 +417,7 @@ class Product extends Component {
                     <div className="col-auto">
                       <button
                         onClick={() => {
-                          navigate(`/create`);
+                          navigate(`/products/create`);
                           window.scrollTo(0, 0);
                         }}
                         className="btn btn-choco"

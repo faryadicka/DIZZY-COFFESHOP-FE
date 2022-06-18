@@ -41,6 +41,7 @@ class ProductDetail extends Component {
       successMsg: "",
       errorMsg: "",
       token: localStorage.getItem("token"),
+      role: localStorage.getItem("role"),
       products: {
         detailProduct: [],
       },
@@ -103,9 +104,18 @@ class ProductDetail extends Component {
   }
 
   render() {
+    const { role, token } = this.state;
     const { detailProduct } = this.state.products;
-    const { params, navigate, dispatch, qty, size, delivery, checkOut } =
-      this.props;
+    const {
+      params,
+      params: { id },
+      navigate,
+      dispatch,
+      qty,
+      size,
+      delivery,
+      checkOut,
+    } = this.props;
     console.log("checkout :", checkOut);
     if (this.state.isCheckOut) return <Navigate to="/payment" />;
     return (
@@ -142,17 +152,32 @@ class ProductDetail extends Component {
                     detailProduct.price || ""
                   }`}</p>
                   <div className="row justify-content-center mt-5">
-                    <button
-                      type="submit"
-                      className="btn btn-choco w-75 py-3 rounded-4"
-                    >
-                      Add to Cart
-                    </button>
+                    {role !== "1" ? (
+                      <button
+                        type="submit"
+                        className="btn btn-choco w-75 py-3 rounded-4"
+                      >
+                        Add to Cart
+                      </button>
+                    ) : (
+                      <></>
+                    )}
                   </div>
                   <div className="row justify-content-center mt-3">
-                    <button className="btn btn-warning w-75 py-3 rounded-4">
-                      Ask a Staff
-                    </button>
+                    {role !== "1" ? (
+                      <button className="btn btn-warning w-75 py-3 rounded-4">
+                        Ask a Staff
+                      </button>
+                    ) : (
+                      <button
+                        onClick={() => {
+                          navigate(`/products/edit/${id}`);
+                        }}
+                        className="btn btn-warning w-75 py-3 rounded-4"
+                      >
+                        Edit Product
+                      </button>
+                    )}
                   </div>
                 </div>
                 <div className="col-7 col-md-7">

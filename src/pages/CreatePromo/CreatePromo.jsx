@@ -1,29 +1,27 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
 
-//assets
-import "./CreateProduct.scooped.css";
+//assetss
 import Default from "../../assets/img/default.png";
 
 //component
 import Footer from "../../components/Footer/Footer";
-import Navbar from "../../components/Navbar/Navbar";
-import Product from "../Product/Product";
 import ModalWarning from "../../components/ModalWarning/ModalWarning";
+import Navbar from "../../components/Navbar/Navbar";
 
-export class CreateProduct extends Component {
+export class CreatePromo extends Component {
   constructor(props) {
     super(props);
     this.state = {
       token: localStorage.getItem("token"),
       name: "",
-      price: "",
+      normalPrice: "",
       description: "",
-      start: "",
-      end: "",
+      availableStart: "",
+      availableEnd: "",
       image: "",
-      categoryId: "",
+      coupon: "",
+      discount: "",
       errorMsg: "",
       successMsg: "",
       imgPreview: null,
@@ -58,22 +56,31 @@ export class CreateProduct extends Component {
 
   createForm = () => {
     let body = new FormData();
-    const { name, price, description, start, end, image, categoryId } =
-      this.state;
+    const {
+      name,
+      normalPrice,
+      description,
+      availableStart,
+      availableEnd,
+      image,
+      categoryId,
+      discount,
+      coupon,
+    } = this.state;
     if (name !== "") {
       body.append("name", name);
     }
-    if (price !== "") {
-      body.append("price", Number(price));
+    if (normalPrice !== "") {
+      body.append("normalPrice", Number(normalPrice));
     }
     if (description !== "") {
       body.append("description", description);
     }
-    if (start !== "") {
-      body.append("start", start);
+    if (availableStart !== "") {
+      body.append("start", availableStart);
     }
-    if (end !== "") {
-      body.append("end", end);
+    if (availableEnd !== "") {
+      body.append("end", availableEnd);
     }
     if (image !== "") {
       body.append("image", image);
@@ -81,10 +88,16 @@ export class CreateProduct extends Component {
     if (categoryId !== "") {
       body.append("categoryId", Number(categoryId));
     }
+    if (coupon !== "") {
+      body.append("coupon", coupon);
+    }
+    if (discount !== "") {
+      body.append("discount", Number(discount));
+    }
     return body;
   };
 
-  createProduct = (event) => {
+  createPromo = (event) => {
     event.preventDefault();
     const body = this.createForm();
     const URL = `${process.env.REACT_APP_HOST}/api/products`;
@@ -114,29 +127,28 @@ export class CreateProduct extends Component {
 
   render() {
     const {
-      categoryId,
-      imgDefault,
       imgPreview,
       createSuccess,
       errorMsg,
       successMsg,
-      start,
-      end,
+      availableStart,
+      availableEnd,
       showModal,
+      coupon,
     } = this.state;
     return (
       <>
         <Navbar />
         <div className="container create-container mb-5 mb-md-5">
-          <form onSubmit={this.createProduct}>
+          <form onSubmit={this.createPromo}>
             <div className="row link-products">
-              <Link to={<Product />}>Products</Link>
+              {/* <Link to={<Product />}>Products</Link> */}
             </div>
             <div className="row justify-content-around mt-md-5">
               <div className="col-md-4">
                 <div className="row justify-content-center">
                   <img
-                    src={imgPreview ? imgPreview : imgDefault}
+                    src={imgPreview ? imgPreview : Default}
                     alt="imageproduct"
                     className="rounded-circle border border-secondary cursor-image-products w-75"
                     onClick={(event) => {
@@ -169,68 +181,75 @@ export class CreateProduct extends Component {
                     Choose from gallery
                   </button>
                 </div>
-                <label className="fw-bold label">Delivery Hour :</label>
+                <label className="fw-bold label mt-md-3">
+                  Input discount :
+                </label>
                 <div className="start-time mt-md-3">
                   <input
-                    type="time"
+                    type="text"
+                    name="discount"
+                    id="discount"
+                    placeholder="input stock"
+                    // value={start}
+                    className="w-50 rounded-3 p-md-2 discount border-dark border border-1"
+                    onChange={(event) => {
+                      this.setState({
+                        discount: event.target.value,
+                      });
+                    }}
+                  />
+                </div>
+                <label className="fw-bold mt-md-3 label">Expired date :</label>
+                <div className="start-time mt-md-3">
+                  <input
+                    type="date"
                     name="time-start"
                     id="time-start"
-                    // value={start}
+                    value={availableStart}
                     className="w-50 rounded-3 p-md-2 start-hour border-dark border border-1"
                     onChange={(event) => {
                       this.setState({
-                        start: event.target.value,
+                        availableStart: event.target.value,
                       });
                     }}
                   />
                 </div>
                 <div className="end-time mt-2 mt-md-2">
                   <input
-                    type="time"
+                    type="date"
                     name="time-end"
                     id="time-end"
                     className="w-50 rounded-3 p-md-2 end-hour border-dark border border-1"
-                    value={end}
+                    value={availableEnd}
                     onChange={(event) => {
                       this.setState({
-                        end: event.target.value,
+                        availableEnd: event.target.value,
                       });
                     }}
                   />
                 </div>
-                <label className="fw-bold label mt-md-3">Input stock :</label>
+                <label className="fw-bold label mt-md-3">
+                  Input coupon code :
+                </label>
                 <div className="start-time mt-md-3">
                   <input
-                    type="number"
-                    name="stock-input"
-                    id="stock-input"
+                    type="text"
+                    name="coupon-code"
+                    id="coupon-code"
                     placeholder="input stock"
-                    value={start}
-                    className="w-50 rounded-3 p-md-2 stock-input border-dark border border-1"
-                    // onChange={(event) => {
-                    //   this.setState({
-                    //     stock: event.target.value,
-                    //   });
-                    // }}
+                    className="w-50 rounded-3 p-md-2 coupon-code border-dark border border-1"
+                    value={coupon}
+                    onChange={(event) => {
+                      this.setState({
+                        coupon: event.target.value,
+                      });
+                    }}
                   />
-                </div>
-                <div className="row mt-5 mt-md-5">
-                  <button
-                    type="submit"
-                    className="btn btn-choco rounded-4 py-3"
-                  >
-                    Save Product
-                  </button>
-                </div>
-                <div className="row mt-3">
-                  <button className="btn btn-light rounded-4 py-3">
-                    Cancel
-                  </button>
                 </div>
               </div>
               <div className="col-md-6">
                 <div className="form-group">
-                  <label className="mb-3 label" htmlFor="name">
+                  <label className="mb-3 mt-2 label fw-bold" htmlFor="name">
                     Name :
                   </label>
                   <input
@@ -246,8 +265,8 @@ export class CreateProduct extends Component {
                   />
                 </div>
                 <div className="form-group mt-4">
-                  <label className="mb-3" htmlFor="name">
-                    Price :
+                  <label className="mb-3 mt-2 label fw-bold" htmlFor="name">
+                    Normal Price :
                   </label>
                   <input
                     type="text"
@@ -256,13 +275,13 @@ export class CreateProduct extends Component {
                     placeholder="Type the price"
                     onChange={(event) => {
                       this.setState({
-                        price: event.target.value,
+                        normalPrice: event.target.value,
                       });
                     }}
                   />
                 </div>
                 <div className="form-group mt-4">
-                  <label className="mb-3" htmlFor="name">
+                  <label className="mb-3 mt-2 label fw-bold" htmlFor="name">
                     Description :
                   </label>
                   <input
@@ -276,73 +295,6 @@ export class CreateProduct extends Component {
                       });
                     }}
                   />
-                </div>
-                <div className="form-group mt-md-3">
-                  <div className="row">
-                    <label htmlFor="size">Input Category :</label> <br />
-                    <small id="size-help" className="form-text text-muted">
-                      Click category you want to use for this product
-                    </small>
-                  </div>
-                  <div className="d-flex gap-3 mt-3">
-                    <input
-                      className="btn-check"
-                      type="radio"
-                      name="options-outlined"
-                      id="coffe"
-                      value={categoryId}
-                      checked={categoryId === "1"}
-                      onChange={(event) => {
-                        this.setState({
-                          categoryId: "1",
-                        });
-                      }}
-                    />
-                    <label
-                      htmlFor="coffe"
-                      className="btn btn-outlined-order btn-warning"
-                    >
-                      Coffee
-                    </label>
-                    <input
-                      className="btn-check"
-                      type="radio"
-                      name="options-outlined"
-                      id="non-coffe"
-                      value={categoryId}
-                      checked={categoryId === "2"}
-                      onChange={(event) => {
-                        this.setState({
-                          categoryId: "2",
-                        });
-                      }}
-                    />
-                    <label
-                      htmlFor="non-coffe"
-                      className="btn btn-outlined-order btn-warning"
-                    >
-                      Non Coffee
-                    </label>
-                    <input
-                      className="btn-check"
-                      type="radio"
-                      name="options-outlined"
-                      id="foods"
-                      value={categoryId}
-                      checked={categoryId === "3"}
-                      onChange={(event) => {
-                        this.setState({
-                          categoryId: "3",
-                        });
-                      }}
-                    />
-                    <label
-                      htmlFor="foods"
-                      className="btn btn-outlined-order btn-warning"
-                    >
-                      Foods
-                    </label>
-                  </div>
                 </div>
                 <div className="form-group mt-3 mt-md-3">
                   <div className="row">
@@ -520,6 +472,19 @@ export class CreateProduct extends Component {
                       </label>
                     </div>
                   </div>
+                  <div className="row mt-5 mt-md-5">
+                    <button
+                      type="submit"
+                      className="btn btn-choco rounded-4 py-3"
+                    >
+                      Save Product
+                    </button>
+                  </div>
+                  <div className="row mt-3">
+                    <button className="btn btn-light rounded-4 py-3">
+                      Cancel
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -540,4 +505,4 @@ export class CreateProduct extends Component {
   }
 }
 
-export default CreateProduct;
+export default CreatePromo;
