@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Dropdown } from "react-bootstrap";
+import { connect } from "react-redux";
 
 // assets
 import "../Navbar/Navbar.scoped.css";
@@ -8,11 +9,14 @@ import Logo from "../../assets/img/logo.png";
 import Search from "../../assets/img/search.png";
 import Chat from "../../assets/img/chat.png";
 import Ava from "../../assets/img/ava.png";
-// import DropdownItem from "react-bootstrap/esm/DropdownItem";
 
-export default function Navbar(props) {
+//actionRedux
+import { logOutAuthRedux } from "../../redux/actionCreator/auth";
+
+function Navbar(props) {
   let navigate = useNavigate();
   let location = useLocation();
+  const { dispatch } = props;
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light navbar-products navbar-costum">
@@ -104,10 +108,8 @@ export default function Navbar(props) {
                   <Dropdown.Item>
                     <button
                       onClick={() => {
-                        localStorage.removeItem("token");
-                        localStorage.removeItem("role");
+                        dispatch(logOutAuthRedux(null, null));
                         navigate(`/`);
-                        window.location.reload(false);
                       }}
                       className="text-decoration-none text-dark btn border-0"
                     >
@@ -123,3 +125,15 @@ export default function Navbar(props) {
     </nav>
   );
 }
+
+const mapStateToProps = (state) => {
+  const {
+    auth: { userData, authData },
+  } = state;
+  return {
+    userData,
+    authData,
+  };
+};
+
+export default connect(mapStateToProps)(Navbar);

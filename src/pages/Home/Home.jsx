@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
 // Components
 import NavbarHome from "../../components/NavbarHome/Navbar";
@@ -23,14 +24,17 @@ import Left from "../../assets/img/left.png";
 import Right from "../../assets/img/right.png";
 import Map from "../../assets/img/map.png";
 
+//axios
 import { getFavoriteHome } from "../../services/product";
+
+//actionRedux
+import { getProfileRedux } from "../../redux/actionCreator/auth";
 // import Navbar from "../../components/Navbar/Navbar";
-export default class Home extends Component {
+class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
       favorite: [],
-      token: localStorage.getItem("token") || "",
     };
   }
   getFavoriteHomeCard = () => {
@@ -46,13 +50,21 @@ export default class Home extends Component {
   };
 
   componentDidMount() {
+    const {
+      dispatch,
+      auth: { token },
+    } = this.props;
     this.getFavoriteHomeCard();
+    dispatch(getProfileRedux(token));
   }
   render() {
-    console.log(process.env);
+    const {
+      authData: { token, role },
+    } = this.props.auth;
+    console.log(token, role);
     return (
       <>
-        {this.state.token ? <Navbar /> : <NavbarHome />}
+        {token ? <Navbar /> : <NavbarHome />}
         <header className="header-home">
           <div className="header-content mb-5 border">
             <div className="container">
@@ -162,7 +174,7 @@ export default class Home extends Component {
             {this.state.favorite.map((item) => {
               return (
                 <CardFavorite
-                  image={`${process.env.REACT_APP_HOST}${item.image}`}
+                  image={`${item.image}`}
                   title={item.name}
                   price={`IDR ${item.price}`}
                   key={item.id}
@@ -260,3 +272,12 @@ export default class Home extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  const { auth } = state;
+  return {
+    auth,
+  };
+};
+
+export default connect(mapStateToProps)(Home);

@@ -32,8 +32,6 @@ class Product extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      token: localStorage.getItem("token") || "",
-      role: localStorage.getItem("role") || null,
       modalShow: false,
       nextLink: null,
       prevLink: null,
@@ -130,6 +128,7 @@ class Product extends Component {
       price,
       totalPage,
       navigate,
+      authData: { role, token },
     } = this.props;
     const { showButton } = this.state;
     const category = searchParams.get("category") || "1";
@@ -137,10 +136,9 @@ class Product extends Component {
     const name = searchParams.get("name") || "";
     const sort = searchParams.get("sort") || "name";
     const order = searchParams.get("order") || "asc";
-    console.log(totalPage);
     return (
       <>
-        {this.state.token ? (
+        {token ? (
           <Navbar
             category={category}
             name={name}
@@ -216,7 +214,7 @@ class Product extends Component {
                     <br />
                   </p>
                 </div>
-                {this.state.role !== "1" ? (
+                {role !== 1 ? (
                   <></>
                 ) : (
                   <div className="coupon-button d-flex justify-content-around mt-5">
@@ -390,7 +388,7 @@ class Product extends Component {
                       })}
                 </div>
                 <div className="row pagination justify-content-center">
-                  {this.state.role !== "1" ? (
+                  {role !== 1 ? (
                     <></>
                   ) : (
                     <div className="col-auto">
@@ -440,7 +438,7 @@ class Product extends Component {
                       <></>
                     )}
                   </div>
-                  {this.state.role !== "1" ? (
+                  {role !== 1 ? (
                     <></>
                   ) : (
                     <div className="col-auto">
@@ -469,6 +467,7 @@ class Product extends Component {
 const mapStateToProps = (state) => {
   const {
     products: { products, favorite, price, totalPage, currentPage },
+    auth: { authData },
   } = state;
   return {
     products,
@@ -476,6 +475,7 @@ const mapStateToProps = (state) => {
     price,
     totalPage,
     currentPage,
+    authData,
   };
 };
 

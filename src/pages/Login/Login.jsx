@@ -20,7 +20,7 @@ import ModalWarning from "../../components/ModalWarning/ModalWarning";
 import { loginAuthService } from "../../services/login";
 
 //Redux
-// import { authActionRedux } from "../../redux/actionCreator/auth";
+import { authActionRedux } from "../../redux/actionCreator/auth";
 
 //  Helpers
 import withNavigate from "../../helpers/withNavigate";
@@ -44,31 +44,14 @@ class Login extends Component {
 
   loginAuthPage = (event) => {
     event.preventDefault();
-    // const { dispatch } = this.props;
-    // dispatch(authActionRedux(this.state))
-    //   .then((res) => {
-    //     console.log(res.value);
-    //     this.setState({
-    //       succsessMsg: res.value.data.message,
-    //       isLogin: true,
-    //       token: res.value.data.data.token,
-    //     });
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //     this.setState({
-    //       isError: true,
-    //       errMsg: err.response.data.message,
-    //     });
-    //   });
-    loginAuthService(this.state)
+    const { dispatch } = this.props;
+    dispatch(authActionRedux(this.state))
       .then((res) => {
+        console.log(res);
         this.setState({
-          succsessMsg: res.data.message,
+          succsessMsg: res.value.data.message,
           isLogin: true,
         });
-        localStorage.setItem("token", res.data.data.token);
-        localStorage.setItem("role", res.data.data.role);
       })
       .catch((err) => {
         console.log(err);

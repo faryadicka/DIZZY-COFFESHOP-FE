@@ -1,7 +1,8 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Provider as ReduxProvider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
 
-import store from "./redux/store"
+import { store, persistor } from "./redux/store"
 
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
@@ -20,43 +21,44 @@ import CreatePromo from "./pages/CreatePromo/CreatePromo";
 import EditPromo from "./pages/EditPromo/EditPromo";
 
 export default function App() {
-  // const token = localStorage.getItem("token")
   return (
     <ReduxProvider store={store}>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/products/create" element={<CreateProduct />} />
-          <Route path="/promos/create" element={<CreatePromo />} />
-          <Route path="/products/edit/:id" element={<EditProduct />} />
-          <Route path="/promos/edit/:id" element={<EditPromo />} />
-          <Route path="/login" element={
-            <PublicElement redirectTo="/">
-              <Login />
-            </PublicElement>} />
-          <Route path="/register" element={
-            <PublicElement redirectTo="/">
-              <Register />
-            </PublicElement>} />
-          <Route path="/forgot" element={<ForgotPassword />} />
-          <Route path="/products" element={<Product />} />
-          <Route path="/products/:favorite" element={<Product />} />
-          <Route path="/products/detail/:id" element={<ProductDetail />} />
-          <Route path="/history" element={
-            <PrivateElement redirectTo="/login" extraData={{ isAuthenticated: false }}>
-              <History />
-            </PrivateElement>} />
-          <Route path="/payment" element={
-            <PrivateElement redirectTo="/login" extraData={{ isAuthenticated: false }}>
-              <Payment />
-            </PrivateElement>} />
-          <Route path="/profile" element={
-            <PrivateElement redirectTo="/login" extraData={{ isAuthenticated: false }}>
-              <Profile />
-            </PrivateElement>} />
-          <Route path="*" element={<><h1>PAGE 404</h1></>} />
-        </Routes>
-      </Router>
+      <PersistGate loading={null} persistor={persistor}>
+        <Router>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/products/create" element={<CreateProduct />} />
+            <Route path="/promos/create" element={<CreatePromo />} />
+            <Route path="/products/edit/:id" element={<EditProduct />} />
+            <Route path="/promos/edit/:id" element={<EditPromo />} />
+            <Route path="/login" element={
+              <PublicElement redirectTo="/">
+                <Login />
+              </PublicElement>} />
+            <Route path="/register" element={
+              <PublicElement redirectTo="/">
+                <Register />
+              </PublicElement>} />
+            <Route path="/forgot" element={<ForgotPassword />} />
+            <Route path="/products" element={<Product />} />
+            <Route path="/products/:favorite" element={<Product />} />
+            <Route path="/products/detail/:id" element={<ProductDetail />} />
+            <Route path="/history" element={
+              <PrivateElement redirectTo="/login" extraData={{ isAuthenticated: false }}>
+                <History />
+              </PrivateElement>} />
+            <Route path="/payment" element={
+              <PrivateElement redirectTo="/login" extraData={{ isAuthenticated: false }}>
+                <Payment />
+              </PrivateElement>} />
+            <Route path="/profile" element={
+              <PrivateElement redirectTo="/login" extraData={{ isAuthenticated: false }}>
+                <Profile />
+              </PrivateElement>} />
+            <Route path="*" element={<><h1>PAGE 404</h1></>} />
+          </Routes>
+        </Router>
+      </PersistGate>
     </ReduxProvider>
   );
 }

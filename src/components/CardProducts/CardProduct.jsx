@@ -10,7 +10,7 @@ import "../CardProducts/CardProduct.scoped.css";
 export default function CardProduct(props) {
   const navigate = useNavigate();
   const { id, show } = props;
-  console.log(show);
+  // console.log(show);
   const handleClick = () => {
     navigate(`/products/detail/${id}`);
     window.scrollTo(0, 0);

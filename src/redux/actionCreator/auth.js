@@ -1,6 +1,6 @@
 import { loginAuthService } from "../../services/login"
 import { getProfile } from "../../services/profile"
-import { authLogin, getUser } from "./actionString"
+import { authLogin, getUser, authLogout } from "./actionString"
 
 export const authActionRedux = (body) => {
   return {
@@ -15,3 +15,14 @@ export const getProfileRedux = (token) => {
     payload: getProfile(token)
   }
 }
+
+export const logOutAuthRedux = (token, role) => {
+  return {
+    type: authLogout,
+    payload: {
+      token,
+      role
+    }
+  }
+}
+
