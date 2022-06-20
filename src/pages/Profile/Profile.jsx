@@ -43,7 +43,7 @@ class Profile extends Component {
     axios
       .get(URL, { headers: { "x-access-token": token } })
       .then((res) => {
-        console.log(res.data.data);
+        console.log(res);
         this.setState({
           email: res.data.data.email,
           display: res.data.data.display_name,

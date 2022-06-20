@@ -40,6 +40,7 @@ class Product extends Component {
       totalPage: 0,
       isActiveFav: false,
       currentPage: 0,
+      showButton: false,
     };
   }
 
@@ -130,6 +131,7 @@ class Product extends Component {
       totalPage,
       navigate,
     } = this.props;
+    const { showButton } = this.state;
     const category = searchParams.get("category") || "1";
     const page = searchParams.get("page") || "1";
     const name = searchParams.get("name") || "";
@@ -218,8 +220,16 @@ class Product extends Component {
                   <></>
                 ) : (
                   <div className="coupon-button d-flex justify-content-around mt-5">
-                    <button className="btn btn-choco">Edit Promo</button>
-                    <button className="btn btn-choco">Create Promo</button>
+                    <button className="btn btn-dark">Edit Promo</button>
+                    <button
+                      onClick={() => {
+                        navigate(`/promos/create`);
+                        window.scrollTo(0, 0);
+                      }}
+                      className="btn btn-dark"
+                    >
+                      Create Promo
+                    </button>
                   </div>
                 )}
               </div>
@@ -314,11 +324,12 @@ class Product extends Component {
                         return (
                           <CardProduct
                             id={item.id}
-                            image={`${process.env.REACT_APP_HOST}${item.image}`}
+                            image={`${item.image}`}
                             discount="0%"
                             title={item.name}
                             price={`IDR ${item.price}`}
                             key={item.id}
+                            show={showButton}
                           />
                         );
                       })
@@ -327,11 +338,12 @@ class Product extends Component {
                         return (
                           <CardProduct
                             id={item.id}
-                            image={`${process.env.REACT_APP_HOST}${item.image}`}
+                            image={`${item.image}`}
                             discount="0%"
                             title={item.name}
                             price={`IDR ${item.price}`}
                             key={item.id}
+                            show={showButton}
                           />
                         );
                       })
@@ -340,11 +352,12 @@ class Product extends Component {
                         return (
                           <CardProduct
                             id={item.id}
-                            image={`${process.env.REACT_APP_HOST}${item.image}`}
+                            image={`${item.image}`}
                             discount="0%"
                             title={item.name}
                             price={`IDR ${item.price}`}
                             key={item.id}
+                            show={showButton}
                           />
                         );
                       })
@@ -353,11 +366,12 @@ class Product extends Component {
                         return (
                           <CardProduct
                             id={item.id}
-                            image={`${process.env.REACT_APP_HOST}${item.image}`}
+                            image={`${item.image}`}
                             discount="0%"
                             title={item.name}
                             price={`IDR ${item.price}`}
                             key={item.id}
+                            show={showButton}
                           />
                         );
                       })
@@ -365,11 +379,12 @@ class Product extends Component {
                         return (
                           <CardProduct
                             id={item.id}
-                            image={`${process.env.REACT_APP_HOST}${item.image}`}
+                            image={`${item.image}`}
                             discount="0%"
                             title={item.name}
                             price={`IDR ${item.price}`}
                             key={item.id}
+                            show={showButton}
                           />
                         );
                       })}
@@ -379,7 +394,21 @@ class Product extends Component {
                     <></>
                   ) : (
                     <div className="col-auto">
-                      <button className="btn btn-choco">EDIT PRODUCT</button>
+                      <button
+                        onClick={() => {
+                          if (!showButton) {
+                            return this.setState({
+                              showButton: true,
+                            });
+                          }
+                          return this.setState({
+                            showButton: false,
+                          });
+                        }}
+                        className="btn btn-dark"
+                      >
+                        EDIT PRODUCT
+                      </button>
                     </div>
                   )}
                   <div className="col-auto">
@@ -420,7 +449,7 @@ class Product extends Component {
                           navigate(`/products/create`);
                           window.scrollTo(0, 0);
                         }}
-                        className="btn btn-choco"
+                        className="btn btn-dark"
                       >
                         CREATE PRODUCT
                       </button>

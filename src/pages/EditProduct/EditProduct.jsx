@@ -6,6 +6,9 @@ import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import Modal from "../../components/ModalWarning/ModalWarning";
 
+//assets
+import "./EditProduct.scooped.css";
+
 //HOC
 import { connect } from "react-redux";
 import withParams from "../../helpers/withParams";
@@ -32,6 +35,7 @@ class EditProduct extends Component {
       imgPreview: null,
       updateSuccess: false,
       token: localStorage.getItem("token"),
+      showModal: false,
     };
     this.inputFile = React.createRef();
   }
@@ -101,6 +105,7 @@ class EditProduct extends Component {
       .then((res) => {
         console.log(res.data);
         this.setState({
+          showModal: true,
           updateSuccess: true,
           successMsg: res.data.message,
         });
@@ -108,6 +113,7 @@ class EditProduct extends Component {
       .catch((err) => {
         console.log(err);
         this.setState({
+          showModal: true,
           errorMsg: err.response.data.message,
         });
       });
@@ -128,6 +134,8 @@ class EditProduct extends Component {
       updateSuccess,
       errorMsg,
       successMsg,
+      categoryId,
+      showModal,
     } = this.state;
     console.log(this.state);
     return (
@@ -137,7 +145,7 @@ class EditProduct extends Component {
           <div className="container">
             <form
               onSubmit={this.editProduct}
-              className="container form-container-create"
+              className="container form-container-edit mb-md-5 mb-3"
             >
               <div className="row">
                 <div className="col-auto">
@@ -149,7 +157,7 @@ class EditProduct extends Component {
                   <img
                     src={`${process.env.REACT_APP_HOST}${image}`}
                     alt="imageproduct"
-                    className="rounded-circle border border-secondary cursor-image-products"
+                    className="rounded-circle border border-secondary edit-img"
                     onClick={(event) => {
                       this.inputFile.current.click();
                       event.preventDefault();
@@ -178,6 +186,58 @@ class EditProduct extends Component {
                     >
                       Choose from gallery
                     </button>
+                  </div>
+                  <div className="row">
+                    <label className="fw-bold label mt-md-5 mt-5">
+                      Delivery Hour :
+                    </label>
+                  </div>
+                  <div className="row mt-4">
+                    <div className="start-time">
+                      <input
+                        type="time"
+                        name="time-start"
+                        id="time-start"
+                        value=""
+                        className="w-50 rounded-3 p-md-2 start-hour w-100"
+                        onChange={(event) => {
+                          this.setState({
+                            start: event.target.value,
+                          });
+                        }}
+                      />
+                    </div>
+                    <div className="end-time mt-md-2">
+                      <input
+                        type="time"
+                        name="time-end"
+                        id="time-end"
+                        className="w-50 rounded-3 p-md-2 end-hour w-100"
+                        value=""
+                        onChange={(event) => {
+                          this.setState({
+                            end: event.target.value,
+                          });
+                        }}
+                      />
+                    </div>
+                  </div>
+                  <div className="row">
+                    <label className="fw-bold label mt-md-5 mt-5">
+                      Input stock :
+                    </label>
+                  </div>
+                  <div className="row mt-4">
+                    <div className="stock">
+                      <input
+                        type="number"
+                        name="stock"
+                        id="stock"
+                        value=""
+                        placeholder="Input stock product"
+                        className="w-50 rounded-3 p-md-2 start-hour w-100"
+                      />
+                    </div>
                   </div>
                 </div>
                 <div className="col-md-6">
@@ -246,8 +306,8 @@ class EditProduct extends Component {
                           type="radio"
                           name="options-outlined"
                           id="coffe"
-                          value=""
-                          checked=""
+                          value={categoryId}
+                          checked={categoryId === "1"}
                           onChange={(event) => {
                             this.setState({
                               categoryId: "1",
@@ -265,8 +325,8 @@ class EditProduct extends Component {
                           type="radio"
                           name="options-outlined"
                           id="non-coffe"
-                          value=""
-                          checked=""
+                          value={categoryId}
+                          checked={categoryId === "2"}
                           onChange={(event) => {
                             this.setState({
                               categoryId: "2",
@@ -284,8 +344,8 @@ class EditProduct extends Component {
                           type="radio"
                           name="options-outlined"
                           id="foods"
-                          value=""
-                          checked=""
+                          value={categoryId}
+                          checked={categoryId === "3"}
                           onChange={(event) => {
                             this.setState({
                               categoryId: "3",
@@ -301,46 +361,144 @@ class EditProduct extends Component {
                       </div>
                     </div>
                   </div>
-                </div>
-              </div>
-              <div className="row delivery justify-content-evenly mt-4">
-                <div className="col-md-4">
-                  <div className="row">
-                    <label className="fw-bold">Delivery Hour :</label>
-                  </div>
-                  <div className="row mt-4">
-                    <div className="start-time">
-                      <input
-                        type="time"
-                        name="time-start"
-                        id="time-start"
-                        value=""
-                        className="w-50 rounded-3 p-md-2 start-hour"
-                        onChange={(event) => {
-                          this.setState({
-                            start: event.target.value,
-                          });
-                        }}
-                      />
+                  <div className="form-group">
+                    <div className="row">
+                      <label htmlFor="mt-md-3 mt-3">Input size :</label> <br />
+                      <small id="size-help" className="form-text text-muted">
+                        Click size you want to use for this product
+                      </small>
                     </div>
-                    <div className="end-time mt-md-2">
+                    <div className="d-flex gap-3 mt-3">
                       <input
-                        type="time"
-                        name="time-end"
-                        id="time-end"
-                        className="w-50 rounded-3 p-md-2 end-hour"
-                        value=""
-                        onChange={(event) => {
-                          this.setState({
-                            end: event.target.value,
-                          });
-                        }}
+                        className="btn-check"
+                        type="checkbox"
+                        name="options-outlined"
+                        id="regular"
                       />
+                      <label
+                        htmlFor="regular"
+                        className="btn btn-outlined-order btn-warning"
+                      >
+                        R
+                      </label>
+                      <input
+                        className="btn-check"
+                        type="checkbox"
+                        name="options-outlined"
+                        id="large"
+                      />
+                      <label
+                        htmlFor="large"
+                        className="btn btn-outlined-order btn-warning"
+                      >
+                        L
+                      </label>
+                      <input
+                        className="btn-check"
+                        type="checkbox"
+                        name="options-outlined"
+                        id="xlarge"
+                      />
+                      <label
+                        htmlFor="xlarge"
+                        className="btn btn-outlined-order btn-warning"
+                      >
+                        XL
+                      </label>
+                      <input
+                        className="btn-check"
+                        type="checkbox"
+                        name="options-outlined"
+                        id="250gr"
+                      />
+                      <label
+                        htmlFor="250gr"
+                        className="btn btn-outlined-order btn-light"
+                      >
+                        250gr
+                      </label>
+                      <input
+                        className="btn-check"
+                        type="checkbox"
+                        name="options-outlined"
+                        id="300gr"
+                      />
+                      <label
+                        htmlFor="300gr"
+                        className="btn btn-outlined-order btn-light"
+                      >
+                        300gr
+                      </label>
+                      <input
+                        className="btn-check"
+                        type="checkbox"
+                        name="options-outlined"
+                        id="500gr"
+                      />
+                      <label
+                        htmlFor="500gr"
+                        className="btn btn-outlined-order btn-light"
+                      >
+                        500gr
+                      </label>
                     </div>
                   </div>
-                </div>
-                <div className="col-md-5 p-0 mt-3 mt-md-0">
-                  <div className="row p-3 p-md-0">
+                  <div className="form-group mt-4">
+                    <div className="form-group">
+                      <div className="row">
+                        <label htmlFor="size">Input delivery methods :</label>{" "}
+                        <br />
+                        <small id="size-help" className="form-text text-muted">
+                          Click methods you want to use for this product
+                        </small>
+                      </div>
+                      <div className="d-flex gap-3 mt-3">
+                        <input
+                          className="btn-check"
+                          type="radio"
+                          name="options-outlined"
+                          id="Home delivery"
+                          value=""
+                          checked=""
+                        />
+                        <label
+                          htmlFor="Home delivery"
+                          className="btn btn-outlined-order btn-warning"
+                        >
+                          Home delivery
+                        </label>
+                        <input
+                          className="btn-check"
+                          type="radio"
+                          name="options-outlined"
+                          id="Dine in"
+                          value=""
+                          checked=""
+                        />
+                        <label
+                          htmlFor="Dine in"
+                          className="btn btn-outlined-order btn-warning"
+                        >
+                          Dine in
+                        </label>
+                        <input
+                          className="btn-check"
+                          type="radio"
+                          name="options-outlined"
+                          id="TakeAway"
+                          value=""
+                          checked=""
+                        />
+                        <label
+                          htmlFor="TakeAway"
+                          className="btn btn-outlined-order btn-warning"
+                        >
+                          Take Away
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="row p-3 p-md-0 mt-md-4 mt-4">
                     <button
                       type="submit"
                       className="btn btn-choco rounded-4 py-3"
@@ -348,7 +506,7 @@ class EditProduct extends Component {
                       Save Product
                     </button>
                   </div>
-                  <div className="row p-3 p-md-0">
+                  <div className="row p-3 p-md-0 mt-md-4 mt-4">
                     <button className="btn btn-light rounded-4 py-3">
                       Cancel
                     </button>
@@ -360,11 +518,11 @@ class EditProduct extends Component {
         </main>
         <Footer />
         <Modal
-          showModal={updateSuccess}
+          showModal={showModal}
           message={updateSuccess ? successMsg : errorMsg}
           hideModal={() => {
             this.setState({
-              updateSuccess: false,
+              showModal: false,
             });
           }}
         />

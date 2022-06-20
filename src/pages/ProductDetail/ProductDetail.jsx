@@ -3,11 +3,11 @@ import { Link, Navigate } from "react-router-dom";
 import { connect } from "react-redux";
 // component
 import Navbar from "../../components/Navbar/Navbar";
+import NavbarDefault from "../../components/NavbarHome/Navbar";
 import Footer from "../../components/Footer/Footer";
 // assets
 import "../ProductDetail/ProductDetail.scoped.css";
 import DefaultProducts from "../../assets/img/default.png";
-// import ImageProduct from "../../assets/img/cold-brew.png";
 
 // Helpers
 import withParams from "../../helpers/withParams";
@@ -120,7 +120,7 @@ class ProductDetail extends Component {
     if (this.state.isCheckOut) return <Navigate to="/payment" />;
     return (
       <div>
-        <Navbar />
+        {token ? <Navbar /> : <NavbarDefault />}
         <main className="main-product-detail mt-5">
           {params.id ? (
             <div className="container mt-0 mt-md-5">
@@ -296,7 +296,7 @@ class ProductDetail extends Component {
                           <input
                             type="time"
                             id="inputPassword6"
-                            className="form-control border-0 w-100"
+                            className="form-control border-0 w-100 bg-light"
                             value={this.state.time}
                             onChange={(event) => {
                               dispatch(setTime(event.target.value));
@@ -308,66 +308,70 @@ class ProductDetail extends Component {
                   </div>
                 </div>
               </form>
-              <div className="row justify-content-center card-payment">
-                <div className="col-6 col-md-6">
-                  <div className="card p-3 card-payment-cart rounded-4">
-                    <div className="row align-items-center justify-content-center">
-                      <div className="col-md-2 card-col-cart ps-md-0">
-                        <img
-                          className="rounded-circle w-100 image-cart"
-                          src={
-                            `${process.env.REACT_APP_HOST}${detailProduct.image}` ||
-                            DefaultProducts
-                          }
-                          alt="imageDetail"
-                        />
-                      </div>
-                      <div className="ms-2 col-md-5 text-md-left">
-                        <p className="title fw-bold">{detailProduct.name}</p>
-                        <div className="d-flex">
-                          {qty !== 0 ? (
-                            <p className="qty">{`${qty}x `}</p>
-                          ) : null}
-                          <p className="size ms-md-2 ms-0">{size}</p>
+              {role !== "1" ? (
+                <div className="row justify-content-center card-payment">
+                  <div className="col-6 col-md-6">
+                    <div className="card p-3 card-payment-cart rounded-4">
+                      <div className="row align-items-center justify-content-center">
+                        <div className="col-md-2 card-col-cart ps-md-0">
+                          <img
+                            className="rounded-circle w-100 image-cart"
+                            src={
+                              `${process.env.REACT_APP_HOST}${detailProduct.image}` ||
+                              DefaultProducts
+                            }
+                            alt="imageDetail"
+                          />
                         </div>
-                      </div>
-                      <div className="col-md-4">
-                        <div className="d-flex justify-content-center">
-                          <button
-                            onClick={() => {
-                              if (qty > 0) {
-                                dispatch(decrement());
-                              }
-                            }}
-                            className="btn btn-choco rounded-circle"
-                          >
-                            -
-                          </button>
-                          <div className="col-md-4 mx-3 mx-md-0 text-center mt-1 fw-bold">
-                            {qty}
+                        <div className="ms-2 col-md-5 text-md-left">
+                          <p className="title fw-bold">{detailProduct.name}</p>
+                          <div className="d-flex">
+                            {qty !== 0 ? (
+                              <p className="qty">{`${qty}x `}</p>
+                            ) : null}
+                            <p className="size ms-md-2 ms-0">{size}</p>
                           </div>
-                          <button
-                            onClick={() => {
-                              dispatch(increment());
-                            }}
-                            className="btn btn-choco rounded-circle"
-                          >
-                            +
-                          </button>
+                        </div>
+                        <div className="col-md-4">
+                          <div className="d-flex justify-content-center">
+                            <button
+                              onClick={() => {
+                                if (qty > 0) {
+                                  dispatch(decrement());
+                                }
+                              }}
+                              className="btn btn-choco rounded-circle"
+                            >
+                              -
+                            </button>
+                            <div className="col-md-4 mx-3 mx-md-0 text-center mt-1 fw-bold">
+                              {qty}
+                            </div>
+                            <button
+                              onClick={() => {
+                                dispatch(increment());
+                              }}
+                              className="btn btn-choco rounded-circle"
+                            >
+                              +
+                            </button>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
+                  <div className="col-4 col-md-3">
+                    <button
+                      onClick={this.checkOutHandle}
+                      className="btn btn-warning w-100 h-100 rounded-4"
+                    >
+                      CHECKOUT
+                    </button>
+                  </div>
                 </div>
-                <div className="col-4 col-md-3">
-                  <button
-                    onClick={this.checkOutHandle}
-                    className="btn btn-warning w-100 h-100 rounded-4"
-                  >
-                    CHECKOUT
-                  </button>
-                </div>
-              </div>
+              ) : (
+                <></>
+              )}
             </div>
           ) : null}
         </main>

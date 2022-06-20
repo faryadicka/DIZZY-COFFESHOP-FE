@@ -21,6 +21,29 @@
 .card-img-top {
   width: 50%;
   height: inherit;
+  cursor: pointer;
+}
+
+.btn-choco:visited {
+  font-weight: bold;
+  background-color: #6a4029;
+  color: white;
+}
+
+.btn-edit {
+  position: relative;
+  left: 60px;
+  top: 10px;
+  z-index: 1;
+  background-color: #6a4029;
+  color: white;
+  font-size: 10px;
+}
+
+.btn-edit:hover {
+  font-weight: bold;
+  background-color: #6a4029;
+  color: white;
 }
 
 .card-price {
@@ -36,6 +59,7 @@
   line-height: 22px;
   letter-spacing: 0em;
   text-align: center;
+  cursor: pointer;
 }
 
 .badge-position {

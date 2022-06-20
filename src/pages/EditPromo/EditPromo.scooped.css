@@ -1,0 +1,46 @@
+.card-promo-edit {
+  border: none;
+  cursor: pointer;
+  background-color: #ffcb65;
+  padding-top: 20px;
+  box-shadow: 5px 15px 10px 5px rgba(0, 0, 0, 0.226);
+  border-radius: 20px;
+}
+
+.upload-wrap {
+  position: relative;
+}
+
+.card-img-center {
+  position: relative;
+  left: 15px;
+}
+
+.button-edit-promo {
+  font-size: 13px;
+  width: 40px;
+  height: 40px;
+  background-color: #523805;
+  position: absolute;
+  left: 230px;
+  bottom: 10px;
+  border: none;
+  font-size: 7px;
+  color: white;
+}
+
+.button-edit-promo:hover {
+  background-color: #3a2804;
+  color: white;
+  font-weight: bold;
+}
+
+.button-edit-promo:focus {
+  background-color: #3a2804;
+  color: white;
+  font-weight: bold;
+}
+
+.line-promo {
+  width: 300px;
+}

@@ -14,14 +14,14 @@ export class CreatePromo extends Component {
     super(props);
     this.state = {
       token: localStorage.getItem("token"),
-      name: "",
-      normalPrice: "",
+      productName: "",
+      normalPrice: 0,
       description: "",
       availableStart: "",
       availableEnd: "",
       image: "",
       coupon: "",
-      discount: "",
+      discount: 0,
       errorMsg: "",
       successMsg: "",
       imgPreview: null,
@@ -57,41 +57,37 @@ export class CreatePromo extends Component {
   createForm = () => {
     let body = new FormData();
     const {
-      name,
+      productName,
       normalPrice,
       description,
       availableStart,
       availableEnd,
       image,
-      categoryId,
       discount,
       coupon,
     } = this.state;
-    if (name !== "") {
-      body.append("name", name);
+    if (productName !== "") {
+      body.append("productName", productName);
     }
-    if (normalPrice !== "") {
+    if (normalPrice !== 0) {
       body.append("normalPrice", Number(normalPrice));
     }
     if (description !== "") {
       body.append("description", description);
     }
     if (availableStart !== "") {
-      body.append("start", availableStart);
+      body.append("availableStart", availableStart);
     }
     if (availableEnd !== "") {
-      body.append("end", availableEnd);
+      body.append("availableEnd", availableEnd);
     }
     if (image !== "") {
       body.append("image", image);
     }
-    if (categoryId !== "") {
-      body.append("categoryId", Number(categoryId));
-    }
     if (coupon !== "") {
       body.append("coupon", coupon);
     }
-    if (discount !== "") {
+    if (discount !== 0) {
       body.append("discount", Number(discount));
     }
     return body;
@@ -100,7 +96,7 @@ export class CreatePromo extends Component {
   createPromo = (event) => {
     event.preventDefault();
     const body = this.createForm();
-    const URL = `${process.env.REACT_APP_HOST}/api/products`;
+    const URL = `${process.env.REACT_APP_HOST}/api/promos`;
     const token = this.state.token;
     axios
       .post(URL, body, {
@@ -259,7 +255,7 @@ export class CreatePromo extends Component {
                     placeholder="Type product name min. 50 characters"
                     onChange={(event) => {
                       this.setState({
-                        name: event.target.value,
+                        productName: event.target.value,
                       });
                     }}
                   />
