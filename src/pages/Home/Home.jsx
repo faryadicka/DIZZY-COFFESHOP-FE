@@ -65,7 +65,7 @@ class Home extends Component {
     console.log(token, role);
     return (
       <>
-        {token ? <Navbar profile={image_profile} /> : <NavbarHome />}
+        {token ? <Navbar /> : <NavbarHome />}
         <header className="header-home">
           <div className="header-content mb-5 border">
             <div className="container">
