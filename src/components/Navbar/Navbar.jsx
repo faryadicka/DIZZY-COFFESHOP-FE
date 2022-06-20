@@ -16,7 +16,7 @@ import { logOutAuthRedux } from "../../redux/actionCreator/auth";
 function Navbar(props) {
   let navigate = useNavigate();
   let location = useLocation();
-  const { dispatch } = props;
+  const { dispatch, profile } = props;
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light navbar-products navbar-costum">
@@ -91,7 +91,7 @@ function Navbar(props) {
             <div className="col-2 col-md-2">
               <Dropdown>
                 <Dropdown.Toggle variant="none" id="dropdown-basic">
-                  <img src={Ava} alt="avatar" />
+                  <img src={profile} alt="avatar" />
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu className="dropdown-navbar position-fixed">

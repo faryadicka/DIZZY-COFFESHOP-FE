@@ -60,11 +60,12 @@ class Home extends Component {
   render() {
     const {
       authData: { token, role },
+      userData: { image_profile },
     } = this.props.auth;
     console.log(token, role);
     return (
       <>
-        {token ? <Navbar /> : <NavbarHome />}
+        {token ? <Navbar profile={image_profile} /> : <NavbarHome />}
         <header className="header-home">
           <div className="header-content mb-5 border">
             <div className="container">
