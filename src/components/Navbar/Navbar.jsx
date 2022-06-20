@@ -8,7 +8,6 @@ import "../Navbar/Navbar.scoped.css";
 import Logo from "../../assets/img/logo.png";
 import Search from "../../assets/img/search.png";
 import Chat from "../../assets/img/chat.png";
-import Ava from "../../assets/img/ava.png";
 
 //actionRedux
 import { logOutAuthRedux } from "../../redux/actionCreator/auth";
