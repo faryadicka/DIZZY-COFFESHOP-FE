@@ -103,4 +103,4 @@ You may also see any lint errors in the console.
 
 # Related Projects
 
-[Dizzy Coffee Shop - Backend](https://github.com/faryadicka/DIZZY-COFFEE-BACKEND)
+[Dizzy Coffee Shop - Backend](https://github.com/faryadicka/DIZZY-COFFEESHOP-BE)
