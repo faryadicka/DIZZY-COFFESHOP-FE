@@ -86,17 +86,15 @@ You may also see any lint errors in the console.
 
 ## Screenshots
 
-<div align="center">
+<div style="display:flex;flex:wrap" align="center">
+<div>
 <img width="500" src="src/assets/screenshots/home.png" alt="Home page">
-</div>
-<div align="center">
 <img width="500" src="src/assets/screenshots/detail.png" alt="detail">
 </div>
-<div align="center">
+<div>
 <img width="500" src="src/assets/screenshots/products.png" alt="products">
-</div>
-<div align="center">
 <img width="500" src="src/assets/screenshots/screenshot.png" alt="Login">
+</div>
 </div>
 
 <br/>
