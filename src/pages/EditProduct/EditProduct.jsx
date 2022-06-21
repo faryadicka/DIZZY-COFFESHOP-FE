@@ -26,9 +26,12 @@ class EditProduct extends Component {
     super(props);
     this.state = {
       name: "",
-      price: 0,
+      price: "",
       image: "",
       description: "",
+      start: "",
+      end: "",
+      categoryId: "",
       successMsg: "",
       errorMsg: "",
       useSrc: true,
@@ -77,18 +80,28 @@ class EditProduct extends Component {
 
   editForm = () => {
     let body = new FormData();
-    const { name, price, image, description } = this.state;
+    const { name, price, image, description, start, end, categoryId } =
+      this.state;
     if (name !== "") {
       body.append("name", name);
     }
     if (price !== 0) {
-      body.append("price", price);
+      body.append("price", Number(price));
     }
     if (image !== "") {
       body.append("image", image);
     }
     if (description !== "") {
       body.append("description", description);
+    }
+    if (start !== "") {
+      body.append("start", start);
+    }
+    if (end !== "") {
+      body.append("end", end);
+    }
+    if (categoryId !== "") {
+      body.append("categoryId", Number(categoryId));
     }
     return body;
   };
@@ -136,6 +149,8 @@ class EditProduct extends Component {
       categoryId,
       showModal,
       imgPreview,
+      start,
+      end,
     } = this.state;
     console.log(this.state);
     return (
@@ -198,7 +213,7 @@ class EditProduct extends Component {
                         type="time"
                         name="time-start"
                         id="time-start"
-                        value=""
+                        value={start}
                         className="w-50 rounded-3 p-md-2 start-hour w-100"
                         onChange={(event) => {
                           this.setState({
@@ -213,7 +228,7 @@ class EditProduct extends Component {
                         name="time-end"
                         id="time-end"
                         className="w-50 rounded-3 p-md-2 end-hour w-100"
-                        value=""
+                        value={end}
                         onChange={(event) => {
                           this.setState({
                             end: event.target.value,
