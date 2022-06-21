@@ -27,7 +27,7 @@ class Profile extends Component {
       firstName: "",
       lastName: "",
       email: "",
-      image: "",
+      image: this.props.userData.image_profile,
       imgPreview: null,
       imgDefault: Avatar,
       useSrc: true,
@@ -505,10 +505,11 @@ class Profile extends Component {
 
 const mapStateToProps = (state) => {
   const {
-    auth: { authData },
+    auth: { authData, userData },
   } = state;
   return {
     authData,
+    userData,
   };
 };
 
