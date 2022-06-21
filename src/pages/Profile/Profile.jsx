@@ -187,11 +187,7 @@ class Profile extends Component {
                 <div className="col-10 col-lg-4">
                   <div className="card pt-3 text-center align-items-center edit-column-first">
                     <img
-                      src={
-                        imgPreview
-                          ? imgPreview
-                          : `${process.env.REACT_APP_HOST}${image}`
-                      }
+                      src={imgPreview ? imgPreview : `${image}`}
                       className="card-img-top rounded-circle"
                       alt="profile"
                     />
