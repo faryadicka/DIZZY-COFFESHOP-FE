@@ -88,13 +88,19 @@ You may also see any lint errors in the console.
 
 <div align="center">
 <img width="500" src="src/assets/screenshots/home.png" alt="Home page">
+</div>
 <div align="center">
 <img width="500" src="src/assets/screenshots/detail.png" alt="detail">
+</div>
 <div align="center">
 <img width="500" src="src/assets/screenshots/products.png" alt="products">
+</div>
 <div align="center">
 <img width="500" src="src/assets/screenshots/screenshot.png" alt="Login">
+</div>
 
-## Related Projects
+<br/>
+
+# Related Projects
 
 [Dizzy Coffee Shop - Backend](https://github.com/faryadicka/DIZZY-COFFEE-BACKEND)
