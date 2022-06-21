@@ -13,7 +13,7 @@ import ProductDetail from "./pages/ProductDetail/ProductDetail";
 import History from "./pages/History/History";
 import Profile from "./pages/Profile/Profile";
 import Payment from "./pages/Payment/Payment";
-import PrivateElement from "./components/PrivateElement/PrivateElement";
+import PrivateElementLogin from "./components/PrivateElement/PrivateElementLogin.jsx";
 import PublicElement from "./components/PublicElement/PublicElement";
 import CreateProduct from "./pages/CreateProduct/CreateProduct";
 import EditProduct from "./pages/EditProduct/EditProduct";
@@ -29,19 +29,19 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/products/create" element={
-              <PrivateElement redirectTo="/login" extraData={{ isAuthenticated: false }}>
+              <PrivateElementLogin redirectTo="/login" extraData={{ isAuthenticated: false }}>
                 <CreateProduct />
-              </PrivateElement>} />
+              </PrivateElementLogin>} />
             <Route path="/promos/create" element={
-              <PrivateElement redirectTo="/login" extraData={{ isAuthenticated: false }}>
+              <PrivateElementLogin redirectTo="/login" extraData={{ isAuthenticated: false }}>
                 <CreatePromo />
-              </PrivateElement>} />
-            <Route path="/products/edit/:id" element={<PrivateElement redirectTo="/login" extraData={{ isAuthenticated: false }}>
+              </PrivateElementLogin>} />
+            <Route path="/products/edit/:id" element={<PrivateElementLogin redirectTo="/login" extraData={{ isAuthenticated: false }}>
               <EditProduct />
-            </PrivateElement>} />
-            <Route path="/promos/edit/:id" element={<PrivateElement redirectTo="/login" extraData={{ isAuthenticated: false }}>
+            </PrivateElementLogin>} />
+            <Route path="/promos/edit/:id" element={<PrivateElementLogin redirectTo="/login" extraData={{ isAuthenticated: false }}>
               <EditPromo />
-            </PrivateElement>} />
+            </PrivateElementLogin>} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={
               <PublicElement redirectTo="/">
@@ -52,17 +52,17 @@ export default function App() {
             <Route path="/products/:favorite" element={<Product />} />
             <Route path="/products/detail/:id" element={<ProductDetail />} />
             <Route path="/history" element={
-              <PrivateElement redirectTo="/login" extraData={{ isAuthenticated: false }}>
+              <PrivateElementLogin redirectTo="/login" extraData={{ isAuthenticated: false }}>
                 <History />
-              </PrivateElement>} />
+              </PrivateElementLogin>} />
             <Route path="/payment" element={
-              <PrivateElement redirectTo="/login" extraData={{ isAuthenticated: false }}>
+              <PrivateElementLogin redirectTo="/login" extraData={{ isAuthenticated: false }}>
                 <Payment />
-              </PrivateElement>} />
-            <Route path="/profile" element={<Profile />
-              // <PrivateElement redirectTo="/login" extraData={{ isAuthenticated: false }}>
-              //   <Profile />
-              // </PrivateElement>
+              </PrivateElementLogin>} />
+            <Route path="/profile" element={
+              <PrivateElementLogin redirectTo="/login" extraData={{ isAuthenticated: false }}>
+                <Profile />
+              </PrivateElementLogin>
             } />
             <Route path="*" element={<NotFound />} />
           </Routes>

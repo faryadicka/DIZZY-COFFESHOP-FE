@@ -19,7 +19,6 @@ class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      token: localStorage.getItem("token"),
       display: "",
       address: "",
       phone: "",
@@ -40,7 +39,9 @@ class Profile extends Component {
   }
   getProfilePage = () => {
     const URL = `${process.env.REACT_APP_HOST}/api/users/profile`;
-    const token = this.state.token;
+    const {
+      authData: { token },
+    } = this.props;
     axios
       .get(URL, { headers: { "x-access-token": token } })
       .then((res) => {
@@ -114,10 +115,12 @@ class Profile extends Component {
 
   udpdateProfile = (event) => {
     event.preventDefault();
+    const {
+      authData: { token },
+    } = this.props;
     const body = this.updateForm();
     console.log(body);
     const URL = `${process.env.REACT_APP_HOST}/api/users/profile`;
-    const token = this.state.token;
     axios
       .patch(URL, body, {
         headers: {
@@ -145,7 +148,10 @@ class Profile extends Component {
   }
 
   render() {
-    if (!this.state.token)
+    const {
+      authData: { token },
+    } = this.props;
+    if (!token)
       return this.setState({
         isLogin: false,
       });

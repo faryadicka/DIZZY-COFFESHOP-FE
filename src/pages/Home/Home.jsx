@@ -63,7 +63,6 @@ class Home extends Component {
   render() {
     const {
       authData: { token },
-      // userData: { image_profile },
     } = this.props;
     return (
       <>

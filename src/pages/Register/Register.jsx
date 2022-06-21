@@ -39,7 +39,7 @@ class Register extends Component {
       .then((res) => {
         console.log(res.data);
         this.setState({
-          succsessMsg: "success",
+          succsessMsg: "Register success👍",
           isSuccess: true,
         });
       })

@@ -9,14 +9,8 @@ function PrivateElement({
   extraData = null,
   authData,
 }) {
-  const token = authData.token || null;
-  const role = authData.role || null;
+  const token = authData.token || "";
   if (!token) {
-    return (
-      <Navigate to={redirectTo} replace={isRouteReplace} state={extraData} />
-    );
-  }
-  if (role === null) {
     return (
       <Navigate to={redirectTo} replace={isRouteReplace} state={extraData} />
     );

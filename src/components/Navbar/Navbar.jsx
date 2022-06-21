@@ -13,6 +13,7 @@ import "../Navbar/Navbar.scoped.css";
 import Logo from "../../assets/img/logo.png";
 import Search from "../../assets/img/search.png";
 import Chat from "../../assets/img/chat.png";
+import Default from "../../assets/img/avatar.png";
 
 //actionRedux
 import { logOutAuthRedux } from "../../redux/actionCreator/auth";
@@ -21,7 +22,10 @@ import { logOutAuthRedux } from "../../redux/actionCreator/auth";
 function Navbar(props) {
   let navigate = useNavigate();
   let location = useLocation();
-  const { dispatch, profile } = props;
+  const {
+    dispatch,
+    userData: { image_profile },
+  } = props;
 
   // const handleSearchProduct = (event) => {
   //   event.preventDefault();
@@ -112,7 +116,7 @@ function Navbar(props) {
               <Dropdown>
                 <Dropdown.Toggle variant="none" id="dropdown-basic">
                   <img
-                    src={profile}
+                    src={image_profile ? image_profile : Default}
                     alt="avatar"
                     className="img-avatar-navbar"
                   />
