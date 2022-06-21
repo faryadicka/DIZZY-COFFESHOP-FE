@@ -8,12 +8,12 @@ import CardHistory from "../../components/CardHistory/CardHistory";
 import "../History/History.scoped.css";
 
 import { getAllhistories, softDeleteHistories } from "../../services/history";
+import { connect } from "react-redux";
 
-export default class History extends Component {
+class History extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      token: localStorage.getItem("token") || null,
       history: [],
     };
     this.handleDeleteProduct.bind(this);
@@ -48,7 +48,7 @@ export default class History extends Component {
   };
 
   componentDidMount() {
-    const { token } = this.state;
+    const { token } = this.props;
     console.log(token);
     if (token !== null) {
       this.getHistoryProducts(token);
@@ -56,10 +56,10 @@ export default class History extends Component {
     }
   }
   render() {
-    // console.log(this.state.history);
+    const { token } = this.props;
     return (
       <>
-        {this.state.token ? <Navbar /> : <NavbarHome />}
+        {token ? <Navbar /> : <NavbarHome />}
         <main className="main-history mt-5">
           <div className="container">
             <div className="row">
@@ -78,7 +78,7 @@ export default class History extends Component {
                 this.state.history.map((item) => {
                   return (
                     <CardHistory
-                      image={`${process.env.REACT_APP_HOST}${item.image}`}
+                      image={`${item.image}`}
                       name={item.name}
                       price={`IDR ${item.price}`}
                       status="Delivery"
@@ -97,3 +97,16 @@ export default class History extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  const {
+    auth: {
+      authData: { token },
+    },
+  } = state;
+  return {
+    token,
+  };
+};
+
+export default connect(mapStateToProps)(History);
