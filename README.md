@@ -86,7 +86,7 @@ You may also see any lint errors in the console.
 
 ## Screenshots
 
-<div style="display:flex;flex:wrap" align="center">
+<div style="display:flex" align="center">
 <div>
 <img width="200" src="src/assets/screenshots/home.png" alt="Home page">
 <img width="200" src="src/assets/screenshots/detail.png" alt="detail">
