@@ -21,7 +21,10 @@ import { logOutAuthRedux } from "../../redux/actionCreator/auth";
 function Navbar(props) {
   let navigate = useNavigate();
   let location = useLocation();
-  const { dispatch, profile } = props;
+  const {
+    dispatch,
+    userData: { image_profile },
+  } = props;
 
   // const handleSearchProduct = (event) => {
   //   event.preventDefault();
@@ -112,7 +115,7 @@ function Navbar(props) {
               <Dropdown>
                 <Dropdown.Toggle variant="none" id="dropdown-basic">
                   <img
-                    src={profile}
+                    src={image_profile}
                     alt="avatar"
                     className="img-avatar-navbar"
                   />
