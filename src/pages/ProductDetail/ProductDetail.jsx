@@ -141,7 +141,7 @@ class ProductDetail extends Component {
                 <div className="card-info-detail col-3 col-md-4 text-center">
                   <img
                     className="rounded-circle image-product-detail"
-                    src={`${process.env.REACT_APP_HOST}${detailProduct.image}`}
+                    src={`${detailProduct.image}`}
                     alt=""
                   />
                   <p className="title-product-detail">{detailProduct.name}</p>
