@@ -185,7 +185,7 @@ class CreatePromo extends Component {
                     type="text"
                     name="discount"
                     id="discount"
-                    placeholder="input stock"
+                    placeholder="input discount"
                     // value={start}
                     className="w-50 rounded-3 p-md-2 discount border-dark border border-1"
                     onChange={(event) => {
@@ -232,7 +232,7 @@ class CreatePromo extends Component {
                     type="text"
                     name="coupon-code"
                     id="coupon-code"
-                    placeholder="input stock"
+                    placeholder="input coupon"
                     className="w-50 rounded-3 p-md-2 coupon-code border-dark border border-1"
                     value={coupon}
                     onChange={(event) => {
