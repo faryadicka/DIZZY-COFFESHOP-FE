@@ -136,6 +136,7 @@ class EditProduct extends Component {
       successMsg,
       categoryId,
       showModal,
+      imgPreview,
     } = this.state;
     console.log(this.state);
     return (
@@ -155,7 +156,7 @@ class EditProduct extends Component {
               <div className="row justify-content-around">
                 <div className="col-md-3 mt-4">
                   <img
-                    src={`${image}`}
+                    src={imgPreview ? imgPreview : `${image}`}
                     alt="imageproduct"
                     className="rounded-circle border border-secondary edit-img"
                     onClick={(event) => {

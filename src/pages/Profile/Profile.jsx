@@ -500,4 +500,13 @@ class Profile extends Component {
   }
 }
 
-export default connect()(Profile);
+const mapStateToProps = (state) => {
+  const {
+    auth: { authData },
+  } = state;
+  return {
+    authData,
+  };
+};
+
+export default connect(mapStateToProps)(Profile);

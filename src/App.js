@@ -59,10 +59,11 @@ export default function App() {
               <PrivateElement redirectTo="/login" extraData={{ isAuthenticated: false }}>
                 <Payment />
               </PrivateElement>} />
-            <Route path="/profile" element={
-              <PrivateElement redirectTo="/login" extraData={{ isAuthenticated: false }}>
-                <Profile />
-              </PrivateElement>} />
+            <Route path="/profile" element={<Profile />
+              // <PrivateElement redirectTo="/login" extraData={{ isAuthenticated: false }}>
+              //   <Profile />
+              // </PrivateElement>
+            } />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Router>
