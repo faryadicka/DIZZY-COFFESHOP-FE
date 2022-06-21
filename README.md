@@ -38,7 +38,7 @@ Dizzy coffee shop website is a service for order food and beverages. Customer ca
 Clone this repository by running the following command :
 
 ```
-$ git clone <this-repo-url>
+$ git clone https://github.com/faryadicka/DIZZY-COFFEESHOP-FE
 ```
 
 ### 2. Install dependency packages
