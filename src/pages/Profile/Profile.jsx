@@ -169,7 +169,7 @@ class Profile extends Component {
     console.log(image);
     return (
       <>
-        <Navbar />
+        <Navbar profile={image} />
         <main className="main-user mt-5">
           <div className="main-content">
             <form
