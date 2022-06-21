@@ -171,6 +171,7 @@ class Profile extends Component {
       lastName,
       birthdate,
       gender,
+      useSrc,
     } = this.state;
     console.log(image);
     return (
@@ -193,7 +194,7 @@ class Profile extends Component {
                 <div className="col-10 col-lg-4">
                   <div className="card pt-3 text-center align-items-center edit-column-first">
                     <img
-                      src={imgPreview ? imgPreview : `${image}`}
+                      src={useSrc ? imgPreview : `${image}`}
                       className="card-img-top rounded-circle"
                       alt="profile"
                     />
