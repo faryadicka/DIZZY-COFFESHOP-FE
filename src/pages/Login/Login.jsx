@@ -37,7 +37,6 @@ class Login extends Component {
       errMsg: "",
       succsessMsg: "",
       isLogin: false,
-      token: localStorage.getItem("token"),
       modalShow: false,
     };
   }

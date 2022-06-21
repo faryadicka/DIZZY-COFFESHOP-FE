@@ -28,7 +28,7 @@ import Map from "../../assets/img/map.png";
 import { getFavoriteHome } from "../../services/product";
 
 //actionRedux
-// import { getProfileRedux } from "../../redux/actionCreator/auth";
+import { getProfileRedux } from "../../redux/actionCreator/auth";
 // import Navbar from "../../components/Navbar/Navbar";
 class Home extends Component {
   constructor(props) {
@@ -50,12 +50,15 @@ class Home extends Component {
   };
 
   componentDidMount() {
-    // const {
-    //   dispatch,
-    //   auth: { token },
-    // } = this.props;
+    const {
+      dispatch,
+      authData: { token },
+      isLoggedIn,
+    } = this.props;
     this.getFavoriteHomeCard();
-    // dispatch(getProfileRedux(token));
+    if (isLoggedIn) {
+      dispatch(getProfileRedux(token));
+    }
   }
   render() {
     const {
@@ -274,9 +277,12 @@ class Home extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const { auth } = state;
+  const {
+    auth: { authData, isLoggedIn },
+  } = state;
   return {
-    auth,
+    authData,
+    isLoggedIn,
   };
 };
 

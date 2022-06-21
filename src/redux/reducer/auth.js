@@ -4,7 +4,8 @@ const initialState = {
   authData: {},
   userData: {},
   isLoading: false,
-  err: null
+  err: null,
+  isLoggedIn: false
 }
 
 const authReducer = (state = initialState, action) => {
@@ -12,7 +13,7 @@ const authReducer = (state = initialState, action) => {
     case authLogin + PENDING:
       return { ...state, isLoading: true }
     case authLogin + FULLFILLED:
-      return { ...state, authData: action.payload.data.data, isLoading: false }
+      return { ...state, authData: action.payload.data.data, isLoading: false, isLoggedIn: true }
     case authLogin + REJECTED:
       return { ...state, err: action.payload, isLoading: false }
 

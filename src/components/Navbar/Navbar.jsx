@@ -19,10 +19,9 @@ import { logOutAuthRedux } from "../../redux/actionCreator/auth";
 // import { getFixProductsRedux } from "../../redux/actionCreator/product";
 
 function Navbar(props) {
-  // const [searchParams, setSearchparams] = useSearchParams();
   let navigate = useNavigate();
   let location = useLocation();
-  const { dispatch, profile /*category, page, sort, order*/ } = props;
+  const { dispatch, profile } = props;
 
   // const handleSearchProduct = (event) => {
   //   event.preventDefault();
