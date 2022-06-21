@@ -489,6 +489,7 @@ class Profile extends Component {
         </main>
         <Footer />
         <ModalWarning
+          success={updateSuccess}
           showModal={updateSuccess}
           message={updateSuccess ? successMsg : errorMsg}
           hideModal={() => {
