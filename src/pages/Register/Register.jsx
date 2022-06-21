@@ -233,6 +233,7 @@ class Register extends Component {
                   data-bs-dismiss="modal"
                   onClick={() => {
                     navigate("/login");
+                    window.scrollTo(0, 0);
                   }}
                 >
                   Close
