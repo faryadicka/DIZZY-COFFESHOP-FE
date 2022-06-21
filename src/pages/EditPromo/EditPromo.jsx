@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import { connect } from "react-redux";
 //assetss
 import "./EditPromo.scooped.css";
 import Default from "../../assets/img/default.png";
@@ -17,7 +17,6 @@ class EditPromo extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      token: localStorage.getItem("token"),
       productName: "",
       normalPrice: 0,
       description: "",
@@ -120,7 +119,7 @@ class EditPromo extends Component {
   updatePromo = (event) => {
     event.preventDefault();
     const body = this.updateForm();
-    const token = this.state.token;
+    const { token } = this.props;
     const { id } = this.props.params;
     editPromoAxios(id, token, body)
       .then((res) => {
@@ -141,7 +140,7 @@ class EditPromo extends Component {
 
   componentDidMount = () => {
     const { id } = this.props.params;
-    const { token } = this.state;
+    const { token } = this.props;
     console.log(id);
     this.getPromoById(id, token);
   };
@@ -544,4 +543,15 @@ class EditPromo extends Component {
   }
 }
 
-export default withParams(EditPromo);
+const mapStateToProps = (state) => {
+  const {
+    auth: {
+      authData: { token },
+    },
+  } = state;
+  return {
+    token,
+  };
+};
+
+export default connect(mapStateToProps)(withParams(EditPromo));

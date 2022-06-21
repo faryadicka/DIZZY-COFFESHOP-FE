@@ -34,7 +34,6 @@ class EditProduct extends Component {
       useSrc: true,
       imgPreview: null,
       updateSuccess: false,
-      token: localStorage.getItem("token"),
       showModal: false,
     };
     this.inputFile = React.createRef();
@@ -100,7 +99,7 @@ class EditProduct extends Component {
     const {
       params: { id },
     } = this.props;
-    const { token } = this.state;
+    const { token } = this.props;
     editProductAxios(id, body, token)
       .then((res) => {
         console.log(res.data);
@@ -535,9 +534,13 @@ class EditProduct extends Component {
 const mapStateToProps = (state) => {
   const {
     products: { detail },
+    auth: {
+      authData: { token },
+    },
   } = state;
   return {
     detail,
+    token,
   };
 };
 

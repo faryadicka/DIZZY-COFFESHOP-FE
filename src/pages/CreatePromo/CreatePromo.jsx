@@ -1,19 +1,19 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { connect } from "react-redux";
 
 //assetss
-import Default from "../../assets/img/default.png";
+import Default from "../../assets/img/default-product.jpg";
 
 //component
 import Footer from "../../components/Footer/Footer";
 import ModalWarning from "../../components/ModalWarning/ModalWarning";
 import Navbar from "../../components/Navbar/Navbar";
 
-export class CreatePromo extends Component {
+class CreatePromo extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      token: localStorage.getItem("token"),
       productName: "",
       normalPrice: 0,
       description: "",
@@ -97,7 +97,7 @@ export class CreatePromo extends Component {
     event.preventDefault();
     const body = this.createForm();
     const URL = `${process.env.REACT_APP_HOST}/api/promos`;
-    const token = this.state.token;
+    const { token } = this.props;
     axios
       .post(URL, body, {
         headers: {
@@ -501,4 +501,15 @@ export class CreatePromo extends Component {
   }
 }
 
-export default CreatePromo;
+const mapStateToProps = (state) => {
+  const {
+    auth: {
+      authData: { token },
+    },
+  } = state;
+  return {
+    token,
+  };
+};
+
+export default connect(mapStateToProps)(CreatePromo);

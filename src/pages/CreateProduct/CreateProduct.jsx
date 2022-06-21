@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { connect } from "react-redux";
 
 //assets
 import "./CreateProduct.scooped.css";
-import Default from "../../assets/img/default.png";
+import Default from "../../assets/img/default-product.jpg";
 
 //component
 import Footer from "../../components/Footer/Footer";
@@ -12,11 +13,10 @@ import Navbar from "../../components/Navbar/Navbar";
 import Product from "../Product/Product";
 import ModalWarning from "../../components/ModalWarning/ModalWarning";
 
-export class CreateProduct extends Component {
+class CreateProduct extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      token: localStorage.getItem("token"),
       name: "",
       price: "",
       description: "",
@@ -88,7 +88,7 @@ export class CreateProduct extends Component {
     event.preventDefault();
     const body = this.createForm();
     const URL = `${process.env.REACT_APP_HOST}/api/products`;
-    const token = this.state.token;
+    const { token } = this.props;
     axios
       .post(URL, body, {
         headers: {
@@ -138,7 +138,7 @@ export class CreateProduct extends Component {
                   <img
                     src={imgPreview ? imgPreview : imgDefault}
                     alt="imageproduct"
-                    className="rounded-circle border border-secondary cursor-image-products w-75"
+                    className="rounded-circle cursor-image-products w-75"
                     onClick={(event) => {
                       this.inputFile.current.click();
                       event.preventDefault();
@@ -540,4 +540,15 @@ export class CreateProduct extends Component {
   }
 }
 
-export default CreateProduct;
+const mapStateToProps = (state) => {
+  const {
+    auth: {
+      authData: { token },
+    },
+  } = state;
+  return {
+    token,
+  };
+};
+
+export default connect(mapStateToProps)(CreateProduct);
