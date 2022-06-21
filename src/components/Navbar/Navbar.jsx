@@ -25,6 +25,7 @@ function Navbar(props) {
   const {
     dispatch,
     userData: { image_profile },
+    profile,
   } = props;
 
   // const handleSearchProduct = (event) => {
@@ -116,7 +117,7 @@ function Navbar(props) {
               <Dropdown>
                 <Dropdown.Toggle variant="none" id="dropdown-basic">
                   <img
-                    src={image_profile ? image_profile : Default}
+                    src={profile ? profile : Default}
                     alt="avatar"
                     className="img-avatar-navbar"
                   />
