@@ -23,7 +23,10 @@
 
 .img-search {
   width: 20%;
-  left: 15px;
+  left: 10px;
+  cursor: pointer;
+  position: relative;
+  bottom: 35px;
 }
 
 .nav-link {

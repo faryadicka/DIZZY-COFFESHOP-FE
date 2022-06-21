@@ -17,7 +17,7 @@ import Hide from "../../assets/img/hide.png";
 import ModalWarning from "../../components/ModalWarning/ModalWarning";
 
 //  Services
-import { loginAuthService } from "../../services/login";
+// import { loginAuthService } from "../../services/login";
 
 //Redux
 import { authActionRedux } from "../../redux/actionCreator/auth";
@@ -47,7 +47,6 @@ class Login extends Component {
     const { dispatch } = this.props;
     dispatch(authActionRedux(this.state))
       .then((res) => {
-        console.log(res);
         this.setState({
           succsessMsg: res.value.data.message,
           isLogin: true,
@@ -230,10 +229,7 @@ class Login extends Component {
               <div className="modal-header">
                 <h5 className="modal-title text-center" id="exampleModalLabel">
                   {!this.state.isLogin ? (
-                    <p className="text-warning">
-                      {this.state.errMsg}
-                      {"!"}
-                    </p>
+                    <p className="text-warning">{this.state.errMsg}</p>
                   ) : (
                     <p className="text-danger">{this.state.succsessMsg}</p>
                   )}

@@ -1,5 +1,10 @@
 import React from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import {
+  Link,
+  useNavigate,
+  useLocation,
+  // useSearchParams,
+} from "react-router-dom";
 import { Dropdown } from "react-bootstrap";
 import { connect } from "react-redux";
 
@@ -11,11 +16,30 @@ import Chat from "../../assets/img/chat.png";
 
 //actionRedux
 import { logOutAuthRedux } from "../../redux/actionCreator/auth";
+// import { getFixProductsRedux } from "../../redux/actionCreator/product";
 
 function Navbar(props) {
+  // const [searchParams, setSearchparams] = useSearchParams();
   let navigate = useNavigate();
   let location = useLocation();
-  const { dispatch, profile } = props;
+  const { dispatch, profile /*category, page, sort, order*/ } = props;
+
+  // const handleSearchProduct = (event) => {
+  //   event.preventDefault();
+  //   if (location.search.includes("category")) {
+  //     setSearchparams({
+  //       category,
+  //       page,
+  //       sort,
+  //       order,
+  //       name: event.target.value,
+  //     });
+  //   }
+  //   if (!location.search.includes("category")) {
+  //     setSearchparams({ name: event.target.value });
+  //   }
+  //   dispatch(getFixProductsRedux(category, ))
+  // };
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light navbar-products navbar-costum">
@@ -59,28 +83,26 @@ function Navbar(props) {
           </ul>
           <div className="row justify-content-md-none justify-content-center pt-3">
             <div className="col-4 col-md-5">
-              <input
-                type="text"
-                className="form-control ps-5 rounded-5 bg-light border-0"
-                id="exampleFormControlInput1"
-                placeholder="search"
-                onChange={(event) => {
-                  const { category, page, sort, order } = props;
-                  if (location.search.includes("category")) {
-                    navigate(
-                      `/products?category=${category}&sort=${sort}&order=${order}&page=${page}&name=${event.target.value}`
-                    );
-                  }
-                  if (!location.search.includes("category")) {
-                    navigate(`/products?name=${event.target.value}`);
-                  }
-                }}
-              />
-              <img
-                className="position-relative bottom-50 img-search"
-                src={Search}
-                alt="search"
-              />
+              <form className="">
+                <input
+                  type="text"
+                  className="form-control ps-5 rounded-5 bg-light border-0"
+                  id="exampleFormControlInput1"
+                  placeholder="search"
+                  onChange={(event) => {
+                    const { category, page, sort, order } = props;
+                    if (location.search.includes("category")) {
+                      navigate(
+                        `/products?category=${category}&sort=${sort}&order=${order}&page=${page}&name=${event.target.value}`
+                      );
+                    }
+                    if (!location.search.includes("category")) {
+                      navigate(`/products?name=${event.target.value}`);
+                    }
+                  }}
+                />
+                <img className="img-search" src={Search} alt="search" />
+              </form>
             </div>
             <div className="col-2 col-md-2 ps-4">
               <Link to="#">

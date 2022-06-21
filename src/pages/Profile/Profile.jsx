@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 // Component
@@ -499,4 +500,4 @@ class Profile extends Component {
   }
 }
 
-export default Profile;
+export default connect()(Profile);

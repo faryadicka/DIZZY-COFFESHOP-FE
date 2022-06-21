@@ -28,7 +28,7 @@ import Map from "../../assets/img/map.png";
 import { getFavoriteHome } from "../../services/product";
 
 //actionRedux
-import { getProfileRedux } from "../../redux/actionCreator/auth";
+// import { getProfileRedux } from "../../redux/actionCreator/auth";
 // import Navbar from "../../components/Navbar/Navbar";
 class Home extends Component {
   constructor(props) {
@@ -50,19 +50,18 @@ class Home extends Component {
   };
 
   componentDidMount() {
-    const {
-      dispatch,
-      auth: { token },
-    } = this.props;
+    // const {
+    //   dispatch,
+    //   auth: { token },
+    // } = this.props;
     this.getFavoriteHomeCard();
-    dispatch(getProfileRedux(token));
+    // dispatch(getProfileRedux(token));
   }
   render() {
     const {
-      authData: { token, role },
+      authData: { token },
       userData: { image_profile },
     } = this.props.auth;
-    console.log(token, role);
     return (
       <>
         {token ? <Navbar profile={image_profile} /> : <NavbarHome />}

@@ -19,6 +19,7 @@ import CreateProduct from "./pages/CreateProduct/CreateProduct";
 import EditProduct from "./pages/EditProduct/EditProduct";
 import CreatePromo from "./pages/CreatePromo/CreatePromo";
 import EditPromo from "./pages/EditPromo/EditPromo";
+import NotFound from "./pages/404/NoFound";
 
 export default function App() {
   return (
@@ -27,14 +28,21 @@ export default function App() {
         <Router>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/products/create" element={<CreateProduct />} />
-            <Route path="/promos/create" element={<CreatePromo />} />
-            <Route path="/products/edit/:id" element={<EditProduct />} />
-            <Route path="/promos/edit/:id" element={<EditPromo />} />
-            <Route path="/login" element={
-              <PublicElement redirectTo="/">
-                <Login />
-              </PublicElement>} />
+            <Route path="/products/create" element={
+              <PrivateElement redirectTo="/login" extraData={{ isAuthenticated: false }}>
+                <CreateProduct />
+              </PrivateElement>} />
+            <Route path="/promos/create" element={
+              <PrivateElement redirectTo="/login" extraData={{ isAuthenticated: false }}>
+                <CreatePromo />
+              </PrivateElement>} />
+            <Route path="/products/edit/:id" element={<PrivateElement redirectTo="/login" extraData={{ isAuthenticated: false }}>
+              <EditProduct />
+            </PrivateElement>} />
+            <Route path="/promos/edit/:id" element={<PrivateElement redirectTo="/login" extraData={{ isAuthenticated: false }}>
+              <EditPromo />
+            </PrivateElement>} />
+            <Route path="/login" element={<Login />} />
             <Route path="/register" element={
               <PublicElement redirectTo="/">
                 <Register />
@@ -55,7 +63,7 @@ export default function App() {
               <PrivateElement redirectTo="/login" extraData={{ isAuthenticated: false }}>
                 <Profile />
               </PrivateElement>} />
-            <Route path="*" element={<><h1>PAGE 404</h1></>} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </Router>
       </PersistGate>

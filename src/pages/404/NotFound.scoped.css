@@ -1,0 +1,64 @@
+.page_404 {
+  width: 100%;
+  padding: 40px 0;
+  /* background: #fff; */
+  font-family: "Poppins", serif;
+}
+
+.banner {
+  margin: 0 auto 0 auto;
+}
+
+.page_404 img {
+  width: 100%;
+}
+
+.four_zero_four_bg {
+  /* background-image: url(https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif);
+   */
+  background-image: url(https://cdn.dribbble.com/users/3167939/screenshots/10422336/media/b618a0e73996c3b24b58b2db1c881ee3.png);
+  height: 400px;
+  background-size: cover;
+  background-position: center;
+}
+
+.four_zero_four_bg h1 {
+  font-size: 80px;
+}
+
+.four_zero_four_bg h3 {
+  font-size: 80px;
+}
+
+.link_404 button {
+  width: 10vw;
+  height: 7vh;
+}
+
+.link_404 {
+  width: max-content;
+  height: max-content;
+  color: #fff !important;
+  padding: 10px 20px;
+  margin: 20px 0;
+  display: inline-block;
+}
+.contant_box_404 {
+  margin-top: 40px;
+}
+
+.btn-404 {
+  background-color: rgba(106, 64, 41, 1);
+  color: white;
+  font-family: "Poppins";
+  border: none;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.btn-404:hover {
+  background-color: rgba(106, 64, 41, 1);
+  color: white;
+  font-family: "Poppins";
+  border: none;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}

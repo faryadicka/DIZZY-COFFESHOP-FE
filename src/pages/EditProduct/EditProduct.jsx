@@ -155,7 +155,7 @@ class EditProduct extends Component {
               <div className="row justify-content-around">
                 <div className="col-md-3 mt-4">
                   <img
-                    src={`${process.env.REACT_APP_HOST}${image}`}
+                    src={`${image}`}
                     alt="imageproduct"
                     className="rounded-circle border border-secondary edit-img"
                     onClick={(event) => {
