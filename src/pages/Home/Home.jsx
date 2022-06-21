@@ -64,7 +64,9 @@ class Home extends Component {
     const {
       authData: { token },
       userData: { image_profile },
+      isLoggedIn,
     } = this.props;
+    console.log(isLoggedIn);
     return (
       <>
         {token ? <Navbar profile={image_profile} /> : <NavbarHome />}
