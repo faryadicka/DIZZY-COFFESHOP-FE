@@ -29,7 +29,6 @@ export class Payment extends Component {
       successMsg: "",
       isError: false,
       isSuccess: false,
-      token: localStorage.getItem("token"),
     };
   }
 
@@ -51,7 +50,8 @@ export class Payment extends Component {
     const {
       cart: { delivery, size, time, qty, id, price },
     } = this.props;
-    const { token, address, phone, paymentMethods } = this.state;
+    const { address, phone, paymentMethods } = this.state;
+    const { token } = this.props;
     const subtotal = price * qty;
     const taxAndFees = subtotal * 0.1;
     const shipping = subtotal * 0.2;
@@ -90,7 +90,7 @@ export class Payment extends Component {
   };
 
   componentDidMount() {
-    const { token } = this.state;
+    const { token } = this.props;
     this.getInfoUser(token);
   }
 
@@ -324,10 +324,16 @@ export class Payment extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const { cart } = state;
+  const {
+    cart,
+    auth: {
+      authData: { token },
+    },
+  } = state;
   return {
     cart,
     state,
+    token,
   };
 };
 

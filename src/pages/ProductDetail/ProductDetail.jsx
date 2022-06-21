@@ -77,8 +77,7 @@ class ProductDetail extends Component {
   };
 
   checkOutHandle = () => {
-    const { token } = this.state;
-    const { dispatch } = this.props;
+    const { dispatch, token } = this.props;
     if (token) {
       this.setState({
         isCheckOut: true,
@@ -104,7 +103,7 @@ class ProductDetail extends Component {
   }
 
   render() {
-    const { role, token } = this.state;
+    const { role, token } = this.props;
     const { detailProduct } = this.state.products;
     const {
       params,
@@ -114,9 +113,7 @@ class ProductDetail extends Component {
       qty,
       size,
       delivery,
-      checkOut,
     } = this.props;
-    console.log("checkout :", checkOut);
     if (this.state.isCheckOut) return <Navigate to="/payment" />;
     return (
       <div>
@@ -394,8 +391,11 @@ class ProductDetail extends Component {
 const mapStateToProps = (state) => {
   const {
     cart: { qty, size, delivery, checkOut },
+    auth: {
+      authData: { token, role },
+    },
   } = state;
-  return { qty, size, delivery, checkOut };
+  return { qty, size, delivery, checkOut, token, role };
 };
 
 export default connect(mapStateToProps)(
