@@ -166,7 +166,7 @@ class Profile extends Component {
       birthdate,
       gender,
     } = this.state;
-    // const profile = image !== null ? image : imgPreview;
+    console.log(image);
     return (
       <>
         <Navbar />
