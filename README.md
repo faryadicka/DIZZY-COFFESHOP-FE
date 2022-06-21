@@ -46,13 +46,13 @@ $ git clone <this-repo-url>
 Install dependency packages by run the following code inside project folder:
 
 ```
-$ npm install <package-name>
+$ npm install
 ```
 
 OR
 
 ```
-$ npm i <package-name>
+$ npm i
 ```
 
 ### 3. Set up Project
@@ -64,7 +64,7 @@ Configure .env file by create file named .env inside project folder and add this
 <br/>
 
 ```
-REACT_APP_HOST = "https://dizzy-coffeeshop.herokuapp.com/"
+REACT_APP_HOST = "YOUR HOST"
 ```
 
 - Run Project
