@@ -313,10 +313,7 @@ class ProductDetail extends Component {
                         <div className="col-md-2 card-col-cart ps-md-0">
                           <img
                             className="rounded-circle w-100 image-cart"
-                            src={
-                              `${process.env.REACT_APP_HOST}${detailProduct.image}` ||
-                              DefaultProducts
-                            }
+                            src={`${detailProduct.image}` || DefaultProducts}
                             alt="imageDetail"
                           />
                         </div>
