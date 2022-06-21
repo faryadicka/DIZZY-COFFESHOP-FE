@@ -29,6 +29,10 @@
   bottom: 35px;
 }
 
+.img-avatar-navbar {
+  width: 10%;
+}
+
 .nav-link {
   font-weight: 500;
   color: #4f5665;

@@ -111,7 +111,11 @@ function Navbar(props) {
             <div className="col-2 col-md-2">
               <Dropdown>
                 <Dropdown.Toggle variant="none" id="dropdown-basic">
-                  <img src={profile} alt="avatar" />
+                  <img
+                    src={profile}
+                    alt="avatar"
+                    className="img-avatar-navbar"
+                  />
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu className="dropdown-navbar position-fixed">
