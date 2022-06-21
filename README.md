@@ -88,12 +88,12 @@ You may also see any lint errors in the console.
 
 <div style="display:flex;flex:wrap" align="center">
 <div>
-<img width="500" src="src/assets/screenshots/home.png" alt="Home page">
-<img width="500" src="src/assets/screenshots/detail.png" alt="detail">
+<img width="200" src="src/assets/screenshots/home.png" alt="Home page">
+<img width="200" src="src/assets/screenshots/detail.png" alt="detail">
 </div>
 <div>
-<img width="500" src="src/assets/screenshots/products.png" alt="products">
-<img width="500" src="src/assets/screenshots/screenshot.png" alt="Login">
+<img width="200" src="src/assets/screenshots/products.png" alt="products">
+<img width="200" src="src/assets/screenshots/screenshot.png" alt="Login">
 </div>
 </div>
 
