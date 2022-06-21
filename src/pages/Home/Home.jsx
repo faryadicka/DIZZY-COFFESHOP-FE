@@ -278,11 +278,12 @@ class Home extends Component {
 
 const mapStateToProps = (state) => {
   const {
-    auth: { authData, isLoggedIn },
+    auth: { authData, userData, isLoggedIn },
   } = state;
   return {
     authData,
     isLoggedIn,
+    userData,
   };
 };
 
