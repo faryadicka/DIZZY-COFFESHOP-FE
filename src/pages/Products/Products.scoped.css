@@ -5,6 +5,24 @@
   box-sizing: border-box;
 }
 
+.page-link {
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  min-width: 100px;
+  border-radius: 0;
+  padding: 0;
+}
+
+.dropdown-item {
+  padding: 5px 10px;
+}
+
+.dropdown-item:hover {
+  background-color: rgb(67, 177, 250);
+}
+
 .link-category {
   list-style: none;
 }
@@ -43,6 +61,7 @@
   border: none;
   background-color: white;
   font-size: 17px;
+  cursor: pointer;
 }
 
 .menu-products-active {
@@ -51,6 +70,7 @@
   font-weight: bold;
   font-size: 17px;
   border: none;
+  cursor: pointer;
 }
 
 .menu-products-active:hover {

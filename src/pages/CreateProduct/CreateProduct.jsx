@@ -10,7 +10,7 @@ import Default from "../../assets/img/default-product.jpg";
 //component
 import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
-import Product from "../Product/Product";
+import Products from "../Products/Products";
 import ModalWarning from "../../components/ModalWarning/ModalWarning";
 
 class CreateProduct extends Component {
@@ -130,7 +130,7 @@ class CreateProduct extends Component {
         <div className="container create-container mb-5 mb-md-5">
           <form onSubmit={this.createProduct}>
             <div className="row link-products">
-              <Link to={<Product />}>Products</Link>
+              <Link to={<Products />}>Products</Link>
             </div>
             <div className="row justify-content-around mt-md-5">
               <div className="col-md-4">

@@ -8,7 +8,7 @@ import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import ForgotPassword from "./pages/Forgot/Forgot";
 import Home from "./pages/Home/Home";
-import Product from "./pages/Product/Product";
+import Products from "./pages/Products/Products";
 import ProductDetail from "./pages/ProductDetail/ProductDetail";
 import History from "./pages/History/History";
 import Profile from "./pages/Profile/Profile";
@@ -48,8 +48,8 @@ export default function App() {
                 <Register />
               </PublicElement>} />
             <Route path="/forgot" element={<ForgotPassword />} />
-            <Route path="/products" element={<Product />} />
-            <Route path="/products/:favorite" element={<Product />} />
+            <Route path="/products" element={<Products />} />
+            <Route path="/products/:favorite" element={<Products />} />
             <Route path="/products/detail/:id" element={<ProductDetail />} />
             <Route path="/history" element={
               <PrivateElementLogin redirectTo="/login" extraData={{ isAuthenticated: false }}>

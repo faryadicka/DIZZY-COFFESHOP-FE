@@ -3,6 +3,7 @@ import axios from "axios";
 import { connect } from "react-redux";
 
 //assetss
+import './styles.css'
 import Default from "../../assets/img/default-product.jpg";
 
 //component
@@ -146,7 +147,7 @@ class CreatePromo extends Component {
                   <img
                     src={imgPreview ? imgPreview : Default}
                     alt="imageproduct"
-                    className="rounded-circle border border-secondary cursor-image-products w-75"
+                    className="rounded-circle border border-secondary cursor-image-products"
                     onClick={(event) => {
                       this.inputFile.current.click();
                       event.preventDefault();

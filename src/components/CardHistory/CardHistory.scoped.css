@@ -1,3 +1,11 @@
 .image-history {
-  width: 250%;
+  width: 70px;
+  height: 70px;
+}
+
+.card-title, .card-price-history {
+  font-size: 12px;
+}
+.clickAble {
+  cursor: pointer;
 }

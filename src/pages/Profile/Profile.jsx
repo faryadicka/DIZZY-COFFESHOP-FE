@@ -15,6 +15,7 @@ import "../Profile/Profile.scoped.css";
 import Pencil from "../../assets/img/pancil-2.png";
 import Avatar from "../../assets/img/avatar.png";
 
+
 class Profile extends Component {
   constructor(props) {
     super(props);
@@ -171,9 +172,7 @@ class Profile extends Component {
       lastName,
       birthdate,
       gender,
-      useSrc,
     } = this.state;
-    console.log(image);
     return (
       <>
         <Navbar profile={image} />
@@ -194,7 +193,7 @@ class Profile extends Component {
                 <div className="col-10 col-lg-4">
                   <div className="card pt-3 text-center align-items-center edit-column-first">
                     <img
-                      src={useSrc ? imgPreview : `${image}`}
+                      src={this.props.userData?.image_profile ? this.props.userData?.image_profile  : imgPreview}
                       className="card-img-top rounded-circle"
                       alt="profile"
                     />
@@ -271,7 +270,7 @@ class Profile extends Component {
                               Delivery address :
                             </label>
                             <br />
-                            <input
+                            <textarea
                               name="address"
                               type="text"
                               className="form-control-profile"

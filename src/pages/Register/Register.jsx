@@ -12,6 +12,8 @@ import Instagram from "../../assets/img/instagram.png";
 import Twitter from "../../assets/img/twitter.png";
 import Show from "../../assets/img/show.png";
 import Hide from "../../assets/img/hide.png";
+//axios
+import {registerAxios} from "../../services/auth"
 //Helper
 import withNavigate from "../../helpers/withNavigate";
 
@@ -33,9 +35,16 @@ class Register extends Component {
 
   registerAuth = async (event) => {
     event.preventDefault();
-    const URL = `${process.env.REACT_APP_HOST}/api/auth/register`;
-    await axios
-      .post(URL, this.state)
+    // const URL = `${process.env.REACT_APP_HOST}/api/auth/register`;
+    // await axios
+    //   .post(URL, this.state)
+    const {email, password, phone} = this.state
+    const body = {
+      email,
+      password,
+      phone
+    }
+    registerAxios(body)
       .then((res) => {
         console.log(res.data);
         this.setState({
@@ -53,7 +62,6 @@ class Register extends Component {
   };
 
   render() {
-    // if (this.state.isSuccess) return <Navigate to="/login" />;
     const { navigate } = this.props;
     console.log(this.state);
     return (

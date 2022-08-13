@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import currentPeriod from '../../helpers/formatCurrency'
 import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
 import axios from "axios";
@@ -37,8 +38,8 @@ export class Payment extends Component {
       .then((res) => {
         console.log(res);
         this.setState({
-          address: res.data.total.address,
-          phone: res.data.total.phone,
+          address: res.data.data.address,
+          phone: res.data.data.phone,
         });
       })
       .catch((err) => {
@@ -104,7 +105,6 @@ export class Payment extends Component {
     const taxAndFees = subTotal * 0.1;
     const shipping = subTotal * 0.2;
     const total = subTotal + taxAndFees + shipping;
-    console.log(checkOut);
     return (
       <>
         <Navbar />
@@ -130,10 +130,7 @@ export class Payment extends Component {
                         Old Summary
                       </h4>
                       <CardCart
-                        image={
-                          `${process.env.REACT_APP_HOST}${image}` ||
-                          `${Default}`
-                        }
+                        image={`${image}`}
                         name={name}
                         qty={qty}
                         size={size}
@@ -141,19 +138,19 @@ export class Payment extends Component {
                       />
                       <div className="d-flex justify-content-between border-top border-dark pt-4">
                         <p className="subtotal">SUBTOTAL</p>
-                        <p className="price">{`IDR ${subTotal}`}</p>
+                        <p className="price">{`IDR ${currentPeriod(subTotal)}`}</p>
                       </div>
                       <div className="d-flex justify-content-between">
                         <p className="tax-fees">TAX & FEES</p>
-                        <p className="price">{`IDR ${taxAndFees}`}</p>
+                        <p className="price">{`IDR ${currentPeriod(taxAndFees)}`}</p>
                       </div>
                       <div className="d-flex justify-content-between">
                         <p className="shipping">SHIPPING</p>
-                        <p className="price">{`IDR ${shipping}`}</p>
+                        <p className="price">{`IDR ${currentPeriod(shipping)}`}</p>
                       </div>
                       <div className="d-flex justify-content-between mt-5">
                         <h5 className="total fw-bold">TOTAL</h5>
-                        <h5 className="price fw-bold">{`IDR ${total}`}</h5>
+                        <h5 className="price fw-bold">{`IDR ${currentPeriod(total)}`}</h5>
                       </div>
                     </div>
                   </div>
@@ -328,12 +325,14 @@ const mapStateToProps = (state) => {
     cart,
     auth: {
       authData: { token },
+      userData,
     },
   } = state;
   return {
     cart,
     state,
     token,
+    userData,
   };
 };
 

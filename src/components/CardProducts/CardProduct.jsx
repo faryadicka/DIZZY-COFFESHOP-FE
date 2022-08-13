@@ -1,5 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+//helpers
+import currencyPeriod from "../../helpers/formatCurrency";
+
 
 // assets
 import "../CardProducts/CardProduct.scoped.css";
@@ -17,7 +20,7 @@ export default function CardProduct(props) {
   };
 
   return (
-    <div className="btn-products-card col-4 col-md-4 col-lg-3 ms-md-0">
+    <div onClick={handleClick} className="btn-products-card col-4 col-md-4 col-lg-3 ms-md-0">
       <div className="card card-products border-0 align-items-center text-center mb-md-5 mb-5">
         {show ? (
           <button
@@ -42,10 +45,10 @@ export default function CardProduct(props) {
           {props.discount}
         </span>
         <div className="card-body">
-          <p onClick={handleClick} className="card-product-title">
+          <p className="card-product-title">
             {props.title}
           </p>
-          <p className="card-price">{props.price}</p>
+          <p className="card-price">{currencyPeriod(props.price)}</p>
         </div>
       </div>
     </div>

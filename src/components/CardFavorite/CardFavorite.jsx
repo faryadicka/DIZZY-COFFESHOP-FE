@@ -1,6 +1,6 @@
 import React from "react";
 
-//Component
+import currencyPeriod from "../../helpers/formatCurrency";
 
 //Assets
 import "../CardFavorite/CardFavorite.scoped.css";
@@ -31,7 +31,7 @@ export default function CardFavorite(props) {
           </ul>
         </div>
         <div className="price mt-4 text-center">
-          <h3 className="price-detail">{props.price}</h3>
+          <h3 className="price-detail">{currencyPeriod(props.price)}</h3>
           <button type="button" className="btn btn-outline-warning btn-select">
             SELECT
           </button>

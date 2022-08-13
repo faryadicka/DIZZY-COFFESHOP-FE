@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { connect } from "react-redux";
+import currencyPeriod from "../../helpers/formatCurrency";
 // component
 import Navbar from "../../components/Navbar/Navbar";
 import NavbarDefault from "../../components/NavbarHome/Navbar";
@@ -146,7 +147,7 @@ class ProductDetail extends Component {
                   />
                   <p className="title-product-detail">{detailProduct.name}</p>
                   <p className="price-product-detail">{`IDR ${
-                    detailProduct.price || ""
+                    currencyPeriod(Number(detailProduct.price)) || 0
                   }`}</p>
                   <div className="row justify-content-center mt-5">
                     {role !== "1" ? (
@@ -199,7 +200,7 @@ class ProductDetail extends Component {
                               onClick={() => {
                                 dispatch(setSize("Regular"));
                               }}
-                              className="btn btn-warning rounded-circle"
+                              className="btn btn-warning-pd rounded-circle"
                             >
                               R
                             </button>
@@ -207,7 +208,7 @@ class ProductDetail extends Component {
                               onClick={() => {
                                 dispatch(setSize("Large"));
                               }}
-                              className="btn btn-warning rounded-circle"
+                              className="btn btn-warning-pd rounded-circle"
                             >
                               L
                             </button>
@@ -215,7 +216,7 @@ class ProductDetail extends Component {
                               onClick={() => {
                                 dispatch(setSize("Extra Large"));
                               }}
-                              className="btn btn-warning rounded-circle"
+                              className="btn btn-warning-pd rounded-circle"
                             >
                               XL
                             </button>
@@ -312,7 +313,7 @@ class ProductDetail extends Component {
                       <div className="row align-items-center justify-content-center">
                         <div className="col-md-2 card-col-cart ps-md-0">
                           <img
-                            className="rounded-circle w-100 image-cart"
+                            className="rounded-circle image-cart"
                             src={`${detailProduct.image}` || DefaultProducts}
                             alt="imageDetail"
                           />
