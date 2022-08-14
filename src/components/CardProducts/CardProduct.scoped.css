@@ -33,11 +33,14 @@
 .btn-edit {
   position: relative;
   left: 60px;
-  top: 10px;
+  top: -10px;
   z-index: 1;
   background-color: #6a4029;
   color: white;
-  font-size: 10px;
+  font-size: 15px;
+  height: 40px;
+  width: 40px;
+  /* padding: 10px; */
 }
 
 .btn-edit:hover {
@@ -69,6 +72,7 @@
   border: none;
   background-color: #6a402900;
   cursor: pointer;
+  /* height: 400px; */
 }
 .btn-products-card:link {
   border: none;

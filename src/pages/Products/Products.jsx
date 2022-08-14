@@ -27,6 +27,9 @@ function Products() {
   const [meta, setMeta] = useState({});
   const [favorites, setFavorites] = useState([]);
   const [isShowBtn, setIsShowBtn] = useState(false);
+  const [sort, setSort] = useState(false);
+  const [order, setOrder] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const paramsCategory = searchParams.get("category") || "";
   const paramsName = searchParams.get("name") || "";
@@ -35,9 +38,11 @@ function Products() {
   const paramsPage = searchParams.get("page") || "1";
 
   const getAllproducts = (category, search, sort, order, page) => {
+    setLoading(true);
     getFixProducts(category, search, sort, order, page)
       .then((res) => {
         setProducts(res.data.data);
+        setLoading(false);
         setMeta(res.data);
         // console.log(res.data);
       })
@@ -46,9 +51,11 @@ function Products() {
       });
   };
   const getFavoriteProducts = () => {
+    setLoading(false);
     getFavorite()
       .then((res) => {
         setFavorites(res.data.data);
+        setLoading(false);
       })
       .catch((err) => {
         console.log(err);
@@ -176,12 +183,19 @@ function Products() {
                   <div className="sort-option">
                     <Dropdown>
                       <Dropdown.Toggle variant="dark" id="dropdown-basic">
-                        Sort by
+                        {!sort
+                          ? "Sort by"
+                          : paramsSort === "price"
+                          ? "Price"
+                          : paramsSort === "name"
+                          ? "Name"
+                          : null}
                       </Dropdown.Toggle>
 
                       <Dropdown.Menu>
                         <Dropdown.Item
                           onClick={() => {
+                            setSort(true);
                             !searchParams.get("category")
                               ? navigate(
                                   `/products?sort=name&order=${paramsOrder}&page=1`
@@ -199,6 +213,7 @@ function Products() {
                         </Dropdown.Item>
                         <Dropdown.Item
                           onClick={() => {
+                            setSort(true);
                             !searchParams.get("category")
                               ? navigate(
                                   `/products?sort=price&order=${paramsOrder}&page=1`
@@ -220,12 +235,19 @@ function Products() {
                   <div className="sort-option">
                     <Dropdown>
                       <Dropdown.Toggle variant="dark" id="dropdown-basic">
-                        Order
+                        {!order
+                          ? "Order"
+                          : paramsOrder === "asc"
+                          ? "Asc"
+                          : paramsOrder === "desc"
+                          ? "Desc"
+                          : null}
                       </Dropdown.Toggle>
 
                       <Dropdown.Menu>
                         <Dropdown.Item
                           onClick={() => {
+                            setOrder(true);
                             !searchParams.get("category")
                               ? navigate(
                                   `/products?sort=${paramsSort}&order=asc&page=1`
@@ -243,6 +265,7 @@ function Products() {
                         </Dropdown.Item>
                         <Dropdown.Item
                           onClick={() => {
+                            setOrder(true);
                             !searchParams.get("category")
                               ? navigate(
                                   `/products?sort=${paramsSort}&order=desc&page=1`
@@ -267,6 +290,8 @@ function Products() {
                 <li className="col-3 col-lg-3 link-category">
                   <div
                     onClick={() => {
+                      setSort(false);
+                      setOrder(false);
                       navigate("/products/favorite");
                     }}
                     className={`${
@@ -281,6 +306,8 @@ function Products() {
                 <li className="col-2 col-lg-2 link-category">
                   <div
                     onClick={() => {
+                      setSort(false);
+                      setOrder(false);
                       navigate(
                         `/products?category=1&sort=name&order=asc&page=1`
                       );
@@ -297,6 +324,8 @@ function Products() {
                 <li className="col-2 col-lg-2 link-category">
                   <div
                     onClick={() => {
+                      setSort(false);
+                      setOrder(false);
                       navigate(
                         `/products?category=2&sort=name&order=asc&page=1`
                       );
@@ -313,6 +342,8 @@ function Products() {
                 <li className="col-2 col-lg-2 link-category">
                   <div
                     onClick={() => {
+                      setSort(false);
+                      setOrder(false);
                       navigate(
                         `/products?category=3&sort=name&order=asc&page=1`
                       );
@@ -329,6 +360,8 @@ function Products() {
                 <li className="col-2 col-lg-2 link-category">
                   <div
                     onClick={() => {
+                      setSort(false);
+                      setOrder(false);
                       navigate("/products");
                     }}
                     className={`${
@@ -342,7 +375,7 @@ function Products() {
                   </div>
                 </li>
               </ul>
-              <div className="row mt-5 justify-content-center">
+              <div className="row mt-5 justify-content-center row-products">
                 {products.length > 0 && favorites.length > 0 ? (
                   <>
                     {params.favorite === "favorite"
@@ -369,9 +402,13 @@ function Products() {
                           />
                         ))}
                   </>
-                ) : (
+                ) : loading ? (
                   <div className="d-flex justify-content-center m-5">
                     <Loading />
+                  </div>
+                ) : (
+                  <div className="d-flex justify-content-center">
+                    <h1 className="text-warning">PRODUCT NOT FOUND</h1>
                   </div>
                 )}
               </div>
@@ -395,22 +432,26 @@ function Products() {
                     <nav aria-label="Page navigation example">
                       <ul className="pagination">
                         <li className="page-item">
-                          <div
-                            onClick={() => {
-                              if (meta.prevLink) {
+                          {meta.prevLink ? (
+                            <div
+                              onClick={() => {
                                 navigate(
                                   `/products?sort=${paramsSort}&order=${paramsOrder}&page=${
                                     meta.currentPage - 1
                                   }`
                                 );
-                              }
-                              window.scrollTo(0, 0);
-                            }}
-                            className="page-link text-choco"
-                            aria-label="Previous"
-                          >
-                            &laquo; PREV
-                          </div>
+                                window.scrollTo({
+                                  top: 100,
+                                  left: 100,
+                                  behavior: "smooth",
+                                });
+                              }}
+                              className="page-link text-choco"
+                              aria-label="Previous"
+                            >
+                              &laquo; PREV
+                            </div>
+                          ) : null}
                         </li>
                         <li>
                           <div className="page-link text-choco">
@@ -418,21 +459,25 @@ function Products() {
                           </div>
                         </li>
                         <li className="page-item">
-                          <div
-                            className="page-link text-choco"
-                            onClick={() => {
-                              if (meta.nextLink) {
+                          {meta.nextLink ? (
+                            <div
+                              className="page-link text-choco"
+                              onClick={() => {
                                 navigate(
                                   `/products?sort=${paramsSort}&order=${paramsOrder}&page=${
                                     meta.currentPage + 1
                                   }`
                                 );
-                              }
-                              window.scrollTo(0, 0);
-                            }}
-                          >
-                            NEXT &raquo;
-                          </div>
+                                window.scrollTo({
+                                  top: 100,
+                                  left: 100,
+                                  behavior: "smooth",
+                                });
+                              }}
+                            >
+                              NEXT &raquo;
+                            </div>
+                          ) : null}
                         </li>
                       </ul>
                     </nav>

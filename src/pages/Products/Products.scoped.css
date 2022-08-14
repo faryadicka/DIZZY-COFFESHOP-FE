@@ -5,6 +5,10 @@
   box-sizing: border-box;
 }
 
+.row-products {
+  /* height: 900px; */
+}
+
 .page-link {
   cursor: pointer;
 }
