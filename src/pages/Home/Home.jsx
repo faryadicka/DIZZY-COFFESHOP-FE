@@ -52,7 +52,7 @@ function Home() {
 
   useEffect(() => {
     getFavoriteHomeCard();
-  });
+  }, []);
 
   useEffect(() => {
     if (auth.isLoggedin) {
