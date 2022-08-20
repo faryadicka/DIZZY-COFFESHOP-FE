@@ -5,7 +5,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import { store, persistor } from "./redux/store"
 
 import Login from "./pages/Login/Login";
-import Register from "./pages/Register/Register";
+import Register from "./pages/Register/SignUp";
 import ForgotPassword from "./pages/Forgot/Forgot";
 import Home from "./pages/Home/Home";
 import Products from "./pages/Products/Products";
@@ -15,11 +15,11 @@ import Profile from "./pages/Profile/Profile";
 import Payment from "./pages/Payment/Payment";
 import PrivateElementLogin from "./components/PrivateElement/PrivateElementLogin.jsx";
 import PublicElement from "./components/PublicElement/PublicElement";
-import CreateProduct from "./pages/CreateProduct/CreateProduct";
+import CreateProduct from "./pages/CreateProduct/NewProduct";
 import EditProduct from "./pages/EditProduct/EditProduct";
 import CreatePromo from "./pages/CreatePromo/CreatePromo";
 import EditPromo from "./pages/EditPromo/EditPromo";
-import NotFound from "./pages/404/NoFound";
+import NotFound from "./pages/404/NotFound";
 
 export default function App() {
   return (

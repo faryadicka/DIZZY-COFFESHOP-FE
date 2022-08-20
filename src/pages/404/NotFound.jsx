@@ -1,10 +1,9 @@
-import React, { Component } from "react";
+import React from 'react'
 import "./NotFound.scoped.css";
 
-export default class NotFound extends Component {
-  render() {
-    return (
-      <>
+function NotFound() {
+  return (
+    <>
         <section className="page_404">
           <div className="container">
             <div className="row">
@@ -27,6 +26,7 @@ export default class NotFound extends Component {
           </div>
         </section>
       </>
-    );
-  }
+  )
 }
+
+export default NotFound

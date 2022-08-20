@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import {
   Link,
   useNavigate,
@@ -23,30 +23,13 @@ function Navbar(props) {
   let navigate = useNavigate();
   let location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
-  const [name, setName] = useState('')
+  const [name, setName] = useState("");
   const { dispatch, userData } = props;
   const paramsCategory = searchParams.get("category") || "";
   const paramsName = searchParams.get("name") || "";
   const paramsSort = searchParams.get("sort") || "name";
   const paramsOrder = searchParams.get("order") || "asc";
   const paramsPage = searchParams.get("page") || "1";
-
-  // const handleSearchProduct = (event) => {
-  //   event.preventDefault();
-  //   if (location.search.includes("category")) {
-  //     setSearchparams({
-  //       category,
-  //       page,
-  //       sort,
-  //       order,
-  //       name: event.target.value,
-  //     });
-  //   }
-  //   if (!location.search.includes("category")) {
-  //     setSearchparams({ name: event.target.value });
-  //   }
-  //   dispatch(getFixProductsRedux(category, ))
-  // };
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light navbar-products navbar-costum">
@@ -90,24 +73,26 @@ function Navbar(props) {
           </ul>
           <div className="row justify-content-md-none justify-content-center pt-3">
             <div className="col-4 col-md-5">
-              <form onSubmit={(e) => {
-                e.preventDefault()
-                if (location.search.includes("category")) {
-                  navigate(
-                    `/products?category=${paramsCategory}&sort=${paramsSort}&order=${paramsOrder}&page=${paramsPage}&name=${name}`
-                  );
-                }
-                if (!location.search.includes("category")) {
-                  navigate(`/products?name=${name}`);
-                }
-              }}>
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  if (location.search.includes("category")) {
+                    navigate(
+                      `/products?category=${paramsCategory}&sort=${paramsSort}&order=${paramsOrder}&page=${paramsPage}&name=${name}`
+                    );
+                  }
+                  if (!location.search.includes("category")) {
+                    navigate(`/products?name=${name}`);
+                  }
+                }}
+              >
                 <input
                   type="text"
                   className="form-control ps-5 rounded-5 bg-light border-0"
                   id="exampleFormControlInput1"
                   placeholder="search"
                   onChange={(event) => {
-                    setName(event.target.value)
+                    setName(event.target.value);
                   }}
                 />
                 <img className="img-search" src={Search} alt="search" />
@@ -146,7 +131,7 @@ function Navbar(props) {
                   <Dropdown.Item>
                     <button
                       onClick={() => {
-                        dispatch(logOutAuthRedux(null, null));
+                        dispatch(logOutAuthRedux());
                         navigate(`/`);
                       }}
                       className="text-decoration-none text-dark btn border-0"

@@ -41,3 +41,10 @@ export const editProductAxios = (id, body, token) => {
     },
   });
 };
+
+export const createProductAxios = (body, token) => {
+  const URL = `${process.env.REACT_APP_HOST}/api/products`;
+  return axios.post(URL, body, {
+    headers: { "Content-Type": "multipart/form-data", "x-access-token": token },
+  });
+};

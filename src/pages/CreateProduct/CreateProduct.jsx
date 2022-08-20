@@ -138,7 +138,7 @@ class CreateProduct extends Component {
                   <img
                     src={imgPreview ? imgPreview : imgDefault}
                     alt="imageproduct"
-                    className="rounded-circle cursor-image-products w-75"
+                    className="rounded-circle cursor-image-products"
                     onClick={(event) => {
                       this.inputFile.current.click();
                       event.preventDefault();

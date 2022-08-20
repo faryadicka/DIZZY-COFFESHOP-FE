@@ -32,4 +32,11 @@
 
 .cursor-image-products {
   cursor: pointer;
+  width: 100%;
+}
+
+.img-size-create {
+  width: 300px;
+  height: 300px;
+  /* background-color: red; */
 }

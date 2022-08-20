@@ -15,7 +15,6 @@ import "../Profile/Profile.scoped.css";
 import Pencil from "../../assets/img/pancil-2.png";
 import Avatar from "../../assets/img/avatar.png";
 
-
 class Profile extends Component {
   constructor(props) {
     super(props);
@@ -28,7 +27,7 @@ class Profile extends Component {
       firstName: "",
       lastName: "",
       email: "",
-      image: this.props.userData.image_profile,
+      image: this.props.userData?.image_profile,
       imgPreview: null,
       imgDefault: Avatar,
       useSrc: true,
@@ -172,6 +171,7 @@ class Profile extends Component {
       lastName,
       birthdate,
       gender,
+      imgDefault,
     } = this.state;
     return (
       <>
@@ -193,7 +193,13 @@ class Profile extends Component {
                 <div className="col-10 col-lg-4">
                   <div className="card pt-3 text-center align-items-center edit-column-first">
                     <img
-                      src={this.props.userData?.image_profile ? this.props.userData?.image_profile  : imgPreview}
+                      src={
+                        this.props.userData?.image_profile
+                          ? this.props.userData?.image_profile
+                          : !imgPreview
+                          ? imgDefault
+                          : imgPreview
+                      }
                       className="card-img-top rounded-circle"
                       alt="profile"
                     />
