@@ -5,7 +5,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import { store, persistor } from "./redux/store"
 
 import Login from "./pages/Login/Login";
-import Register from "./pages/Register/SignUp";
+import Register from "./pages/Register/Register";
 import ForgotPassword from "./pages/Forgot/Forgot";
 import Home from "./pages/Home/Home";
 import Products from "./pages/Products/Products";

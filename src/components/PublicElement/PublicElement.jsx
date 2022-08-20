@@ -9,7 +9,7 @@ function PublicElement({
   extraData = null,
   authData,
 }) {
-  const token = authData.token || "";
+  const token = authData?.token || "";
   if (token) {
     return (
       <Navigate to={redirectTo} replace={isRouteReplace} state={extraData} />

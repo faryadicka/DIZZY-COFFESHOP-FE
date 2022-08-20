@@ -2,7 +2,7 @@ import { loginAuthService } from "../../services/login";
 import { getProfile } from "../../services/profile";
 import { authLogin, getUser, authLogout } from "./actionString";
 
-export const authActionRedux = (body) => {
+export const loginAction = (body) => {
   return {
     type: authLogin,
     payload: loginAuthService(body),
