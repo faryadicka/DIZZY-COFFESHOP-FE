@@ -14,7 +14,6 @@ import { getAllhistories } from "../../services/history";
 function Histories() {
   const token = useSelector((state) => state.auth.authData?.token);
   const [histories, setHsitories] = useState([]);
-  // const [showModal, setShowModal] = useState(false);
 
   const getHistoryProducts = (token) => {
     getAllhistories(token)

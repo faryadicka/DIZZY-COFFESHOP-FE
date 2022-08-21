@@ -46,7 +46,6 @@ function ProductDetail() {
   const getProductDetailPage = (id) => {
     getProductDetail(id)
       .then((res) => {
-        // console.log(res.data);
         setProduct(res.data.data);
       })
       .catch((err) => {
@@ -87,7 +86,7 @@ function ProductDetail() {
                     Favorite & Promo {">"}
                   </span>
                 </Link>
-                <span className="fw-bold">{product?.name}</span>
+                <span className="fw-bold">{" "}{product?.name}</span>
               </div>
             </div>
             <form

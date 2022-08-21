@@ -12,6 +12,24 @@
   background-repeat: no-repeat;
 }
 
+.box-img {
+  width: 40px;
+  height: 30px;
+  border-radius: 5px;
+}
+
+.color-box-orange {
+  background-color: #f47b0a;
+}
+
+.color-box-choco {
+  background-color: #895537;
+}
+
+.color-box-yellow {
+  background-color: #ffba33;
+}
+
 .header-payment {
   margin-top: 100px;
   font-size: 50px;
@@ -52,6 +70,14 @@
 .adress-payment {
   font-size: 30px;
   font-weight: bold;
+}
+
+.edit-address {
+  cursor: pointer;
+}
+
+.edit-address:hover {
+  font-size: 15px;
 }
 
 @media only screen and (max-width: 600px) {

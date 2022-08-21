@@ -96,11 +96,8 @@ export const setCheckOut = (checkOut) => {
   };
 };
 
-export const clearCartAction = (clear) => {
+export const clearCartAction = () => {
   return {
     type: clearCart,
-    payload: {
-      clear,
-    },
   };
 };

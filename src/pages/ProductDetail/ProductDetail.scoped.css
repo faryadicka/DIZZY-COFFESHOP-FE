@@ -65,8 +65,9 @@
 }
 
 .btn-outline-order {
-  border: 1px solid #9f9f9f;
-  color: #9f9f9f;
+  /* border: 1px solid #9f9f9f; */
+  color: #6a4029;
+  background-color: #ffc107;
 }
 
 .btn-outline-order:hover {
@@ -112,9 +113,11 @@
 }
 
 .btn-warning-pd:hover,
-.btn-warning-pd:focus {
+.btn-warning-pd:focus,
+.btn-warning-pd:active,
+.btn-warning-pd:visited {
   background-color: #6a4029;
-  color: #ffc107;
+  color: #fff;
   font-weight: bold;
   border: none;
 }

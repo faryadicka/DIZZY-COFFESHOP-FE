@@ -12,7 +12,7 @@ import Products from "./pages/Products/Products";
 import ProductDetail from "./pages/ProductDetail/ProductDetail";
 import History from "./pages/History/Histories";
 import Profile from "./pages/Profile/Profile";
-import Payment from "./pages/Payment/Payment.jsx";
+import Payment from "./pages/Payment/Payment";
 import PrivateElementLogin from "./components/PrivateElement/PrivateElementLogin.jsx";
 import PublicElement from "./components/PublicElement/PublicElement";
 import CreateProduct from "./pages/CreateProduct/NewProduct";

@@ -54,8 +54,18 @@ const cartReducer = (state = initialState, action) => {
       const { checkOut } = action.payload;
       return { ...state, checkOut };
     case clearCart:
-      const { clear } = action.payload;
-      return { ...state, clear };
+      return {
+        ...state,
+        id: "",
+        price: 0,
+        size: "",
+        delivery: "",
+        time: "",
+        qty: 0,
+        name: "",
+        image: "",
+        checkOut: false,
+      };
     default:
       return state;
   }
