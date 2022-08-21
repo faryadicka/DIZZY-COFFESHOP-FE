@@ -6,7 +6,8 @@ export const getAllhistories = (token) => {
   return axios.get(URL, { headers: { "x-access-token": token } });
 };
 
-export const softDeleteHistories = (token, id) => {
-  const URL = `${REACT_APP_HOST}/api/transactions/${id}`;
-  return axios.patch(URL, { headers: { "x-access-token": token } });
+
+export const softDeleteAxios = (token, body) => {
+  const URL = `${REACT_APP_HOST}/api/transactions/soft-delete`;
+  return axios.patch(URL, body, {headers: {'x-access-token': token}});
 };

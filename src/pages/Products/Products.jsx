@@ -17,7 +17,7 @@ import HalloweenDay from "../../assets/img/ava-coupon-1.png";
 import { getFixProducts, getFavorite } from "../../services/product";
 
 function Products() {
-  const dataLogin = useSelector((state) => state.auth.authData);
+  const dataLogin = useSelector((state) => state.auth?.authData);
 
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -198,14 +198,14 @@ function Products() {
                             setSort(true);
                             !searchParams.get("category")
                               ? navigate(
-                                  `/products?sort=name&order=${paramsOrder}&page=1`
+                                  `/products?sort=name&order=${paramsOrder}&page=${paramsPage}`
                                 )
                               : navigate(
                                   `/products?category=${searchParams.get(
                                     "category"
                                   )}&sort=name&order=${
                                     searchParams.get("order") || "asc"
-                                  }&page=1`
+                                  }&page=${paramsPage}`
                                 );
                           }}
                         >
@@ -216,14 +216,14 @@ function Products() {
                             setSort(true);
                             !searchParams.get("category")
                               ? navigate(
-                                  `/products?sort=price&order=${paramsOrder}&page=1`
+                                  `/products?sort=price&order=${paramsOrder}&page=${paramsPage}`
                                 )
                               : navigate(
                                   `/products?category=${searchParams.get(
                                     "category"
                                   )}&sort=price&order=${searchParams.get(
                                     "order"
-                                  )}&page=1`
+                                  )}&page=${paramsPage}`
                                 );
                           }}
                         >
@@ -250,14 +250,14 @@ function Products() {
                             setOrder(true);
                             !searchParams.get("category")
                               ? navigate(
-                                  `/products?sort=${paramsSort}&order=asc&page=1`
+                                  `/products?sort=${paramsSort}&order=asc&page=${paramsPage}`
                                 )
                               : navigate(
                                   `/products?category=${searchParams.get(
                                     "category"
                                   )}&sort=${searchParams.get(
                                     "sort"
-                                  )}&order=asc&page=1`
+                                  )}&order=asc&page=${paramsPage}`
                                 );
                           }}
                         >
@@ -268,14 +268,14 @@ function Products() {
                             setOrder(true);
                             !searchParams.get("category")
                               ? navigate(
-                                  `/products?sort=${paramsSort}&order=desc&page=1`
+                                  `/products?sort=${paramsSort}&order=desc&page=${paramsPage}`
                                 )
                               : navigate(
                                   `/products?category=${searchParams.get(
                                     "category"
                                   )}&sort=${searchParams.get(
                                     "sort"
-                                  )}&order=desc&page=1`
+                                  )}&order=desc&page=${paramsPage}`
                                 );
                           }}
                         >
@@ -485,7 +485,7 @@ function Products() {
                     <></>
                   )}
                 </div>
-                {dataLogin.role !== 1 ? (
+                {dataLogin?.role !== 1 ? (
                   <></>
                 ) : (
                   <div className="col-auto">

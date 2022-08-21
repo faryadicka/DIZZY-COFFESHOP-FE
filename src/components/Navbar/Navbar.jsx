@@ -6,7 +6,7 @@ import {
   useSearchParams,
 } from "react-router-dom";
 import { Dropdown } from "react-bootstrap";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 
 // assets
 import "../Navbar/Navbar.scoped.css";
@@ -22,11 +22,13 @@ import { logOutAuthRedux } from "../../redux/actionCreator/auth";
 function Navbar(props) {
   let navigate = useNavigate();
   let location = useLocation();
+  let dispatch = useDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
   const [name, setName] = useState("");
-  const { dispatch, userData } = props;
+  const [showDrop, setShowDrop] = useState(false);
+  const { userData } = props;
   const paramsCategory = searchParams.get("category") || "";
-  const paramsName = searchParams.get("name") || "";
+  // const paramsName = searchParams.get("name") || "";
   const paramsSort = searchParams.get("sort") || "name";
   const paramsOrder = searchParams.get("order") || "asc";
   const paramsPage = searchParams.get("page") || "1";
@@ -103,8 +105,41 @@ function Navbar(props) {
                 <img src={Chat} alt="search" />
               </Link>
             </div>
-            <div className="col-2 col-md-2">
-              <Dropdown>
+            <div className="col-2 col-md-2 position-relative">
+              <img
+                src={
+                  userData?.image_profile ? userData?.image_profile : Default
+                }
+                alt="avatar"
+                className="img-avatar-navbar"
+                onClick={() => {
+                  setShowDrop(!showDrop);
+                }}
+              />
+              {showDrop ? (
+                <div className="dropdown-navbar">
+                  <button
+                    onClick={() => {
+                      navigate(`/profile`);
+                    }}
+                    className="text-decoration-none text-dark btn border-0 btn-drop"
+                  >
+                    Profile
+                  </button>
+                  <button
+                    onClick={() => {
+                      dispatch(logOutAuthRedux());
+                      navigate(`/`);
+                    }}
+                    className="text-decoration-none text-dark btn border-0 btn-drop"
+                  >
+                    Logout
+                  </button>
+                  <p className="email-drop">{userData?.email}</p>
+                </div>
+              ) : null}
+
+              {/* <Dropdown>
                 <Dropdown.Toggle variant="none" id="dropdown-basic">
                   <img
                     src={
@@ -115,9 +150,9 @@ function Navbar(props) {
                     alt="avatar"
                     className="img-avatar-navbar"
                   />
-                </Dropdown.Toggle>
+                </Dropdown.Toggle> */}
 
-                <Dropdown.Menu className="dropdown-navbar position-fixed">
+              {/* <Dropdown.Menu className="dropdown-navbar position-relative">
                   <Dropdown.Item>
                     <button
                       onClick={() => {
@@ -140,7 +175,7 @@ function Navbar(props) {
                     </button>
                   </Dropdown.Item>
                 </Dropdown.Menu>
-              </Dropdown>
+              </Dropdown> */}
             </div>
           </div>
         </div>
@@ -151,7 +186,8 @@ function Navbar(props) {
 
 const mapStateToProps = (state) => {
   const {
-    auth: { userData, authData },
+    auth: { authData },
+    users: { userData },
   } = state;
   return {
     userData,

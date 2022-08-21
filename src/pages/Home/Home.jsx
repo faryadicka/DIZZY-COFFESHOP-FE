@@ -177,6 +177,7 @@ function Home() {
                   title={item.name}
                   price={`IDR ${item.price}`}
                   key={item.id}
+                  id={item.id}
                 />
               );
             })

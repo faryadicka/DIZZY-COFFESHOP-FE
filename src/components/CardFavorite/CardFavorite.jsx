@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 import currencyPeriod from "../../helpers/formatCurrency";
 
@@ -7,6 +8,7 @@ import "../CardFavorite/CardFavorite.scoped.css";
 import Checklist from "../../assets/img/checklist.png";
 
 export default function CardFavorite(props) {
+  const navigate = useNavigate();
   return (
     <div className="col-12 col-sm-8 col-md-3">
       <div className="card p-3 rounded-4 card-fav-600">
@@ -32,7 +34,13 @@ export default function CardFavorite(props) {
         </div>
         <div className="price mt-4 text-center">
           <h3 className="price-detail">{currencyPeriod(props.price)}</h3>
-          <button type="button" className="btn btn-outline-warning btn-select">
+          <button
+            onClick={() => {
+              navigate(`/products/detail/${props.id}`);
+            }}
+            type="button"
+            className="btn btn-outline-warning btn-select"
+          >
             SELECT
           </button>
         </div>

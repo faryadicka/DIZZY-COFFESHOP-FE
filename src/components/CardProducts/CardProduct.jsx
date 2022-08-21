@@ -20,24 +20,22 @@ export default function CardProduct(props) {
   };
 
   return (
-    <div
-      onClick={handleClick}
-      className="btn-products-card col-4 col-md-4 col-lg-3 ms-md-0"
-    >
-      <div className="card card-products border-0 align-items-center text-center mb-md-5 mb-5">
-        {show ? (
-          <button
-            onClick={() => {
-              navigate(`/products/edit/${id}`);
-              window.scrollTo(0, 0);
-            }}
-            className="btn rounded-circle btn-edit"
-          >
-            <FaPencilAlt />
-          </button>
-        ) : (
-          <></>
-        )}
+    <div className="btn-products-card col-4 col-md-4 col-lg-3 ms-md-0">
+      {show ? (
+        <button
+          onClick={() => {
+            navigate(`/products/edit/${id}`);
+            window.scrollTo(0, 0);
+          }}
+          className="btn rounded-circle btn-edit"
+        >
+          <FaPencilAlt />
+        </button>
+      ) : null}
+      <div
+        onClick={handleClick}
+        className="card card-products border-0 align-items-center text-center mb-md-5 mb-5"
+      >
         <img
           src={props.image}
           className="card-img-top rounded-circle"

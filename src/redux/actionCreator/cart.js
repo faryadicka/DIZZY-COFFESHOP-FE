@@ -1,85 +1,106 @@
-import { sizeProduct, idProduct, timeProduct, deliveryProduct, countDec, countInc, imgProduct, nameProduct, priceProduct, checkOutProduct } from "./actionString"
+import {
+  sizeProduct,
+  idProduct,
+  timeProduct,
+  deliveryProduct,
+  countDec,
+  countInc,
+  imgProduct,
+  nameProduct,
+  priceProduct,
+  checkOutProduct,
+  clearCart,
+} from "./actionString";
 
 export const increment = () => {
   return {
-    type: countInc
-  }
-}
+    type: countInc,
+  };
+};
 
 export const decrement = () => {
   return {
-    type: countDec
-  }
-}
+    type: countDec,
+  };
+};
 
 export const setIdProduct = (id) => {
   return {
     type: idProduct,
     payload: {
-      id
-    }
-  }
-}
+      id,
+    },
+  };
+};
 
 export const setSize = (size) => {
   return {
     type: sizeProduct,
     payload: {
-      size
-    }
-  }
-}
+      size,
+    },
+  };
+};
 
 export const setDelivery = (delivery) => {
   return {
     type: deliveryProduct,
     payload: {
-      delivery
-    }
-  }
-}
+      delivery,
+    },
+  };
+};
 
 export const setTime = (time) => {
   return {
     type: timeProduct,
     payload: {
-      time
-    }
-  }
-}
+      time,
+    },
+  };
+};
 
 export const setImage = (image) => {
   return {
     type: imgProduct,
     payload: {
-      image
-    }
-  }
-}
+      image,
+    },
+  };
+};
 
 export const setName = (name) => {
   return {
     type: nameProduct,
     payload: {
-      name
-    }
-  }
-}
+      name,
+    },
+  };
+};
 
 export const setPrice = (price) => {
   return {
     type: priceProduct,
     payload: {
-      price
-    }
-  }
-}
+      price,
+    },
+  };
+};
 
 export const setCheckOut = (checkOut) => {
   return {
     type: checkOutProduct,
     payload: {
-      checkOut
-    }
-  }
-}
+      checkOut,
+    },
+  };
+};
+
+export const clearCartAction = (clear) => {
+  return {
+    type: clearCart,
+    payload: {
+      clear,
+    },
+  };
+};

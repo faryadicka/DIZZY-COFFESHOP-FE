@@ -40,7 +40,7 @@
 }
 
 .title-product-detail {
-  font-size: 60px;
+  font-size: 40px;
   font-weight: 900;
 }
 
@@ -111,7 +111,8 @@
   color: #6a4029;
 }
 
-.btn-warning-pd:hover {
+.btn-warning-pd:hover,
+.btn-warning-pd:focus {
   background-color: #6a4029;
   color: #ffc107;
   font-weight: bold;
@@ -136,7 +137,7 @@
   }
   .image-cart {
     width: 50px;
-  height: 50px;
+    height: 50px;
   }
   .card-col-cart {
     width: 50%;
