@@ -222,25 +222,27 @@ function SignIn() {
                 aria-label="Close"
               ></button>
             </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-success"
-                data-bs-dismiss="modal"
-                onClick={() => {
-                  if (isLoggedIn) {
-                    navigate("/");
-                    return window.scrollTo(0, 0);
-                  }
-                  setForm({
-                    email: "",
-                    password: "",
-                  });
-                }}
-              >
-                Close
-              </button>
-            </div>
+            {loading ? null : (
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-success"
+                  data-bs-dismiss="modal"
+                  onClick={() => {
+                    if (isLoggedIn) {
+                      navigate("/");
+                      return window.scrollTo(0, 0);
+                    }
+                    setForm({
+                      email: "",
+                      password: "",
+                    });
+                  }}
+                >
+                  Close
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>
