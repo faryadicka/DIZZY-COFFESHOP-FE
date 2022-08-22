@@ -55,11 +55,9 @@ function Home() {
   }, []);
 
   useEffect(() => {
-    if (auth.isLoggedin) {
-      dispatch(getProfileRedux(auth.authData?.token));
-    }
-  }, [auth, dispatch]);
-
+    dispatch(getProfileRedux(auth.authData?.token));
+  }, [auth.authData?.token, dispatch]);
+  console.log(auth.isLoggedin);
   return (
     <>
       {auth.authData?.token ? (

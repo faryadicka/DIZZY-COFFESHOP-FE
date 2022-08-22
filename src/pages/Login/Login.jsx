@@ -113,7 +113,7 @@ function SignIn() {
                 }}
               />
               <Link
-                to="/forgot"
+                to="/auth/forgot"
                 className="mt-2 forgot-password text-decoration-none"
               >
                 Forgot password?
@@ -139,7 +139,7 @@ function SignIn() {
                 <p className="already-account">Already have an account?</p>
                 <div className="underline"></div>
               </section>
-              <Link to="/register" className="button-auth login">
+              <Link to="/auth/register" className="button-auth login">
                 <p className="register-google-text">Sign up Here</p>
               </Link>
             </form>
@@ -187,7 +187,7 @@ function SignIn() {
         showModal={showModal}
         hideModal={() => {
           setShowModal(false);
-          navigate("/login", { replace: true, state: null });
+          navigate("/auth/login", { replace: true, state: null });
         }}
       />
       <div

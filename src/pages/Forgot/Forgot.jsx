@@ -6,10 +6,39 @@ import Footer from "../../components/Footer/Footer";
 // Assets
 import "../Forgot/Forgot.scoped.css";
 
+//Axios
+import { forgotAxios } from "../../services/auth";
+
 function Forgot() {
   const [email, setEmail] = useState("");
+  const [message, setMessage] = useState({
+    error: "",
+    success: "",
+    show: false,
+  });
+  const [isError, setIsError] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const sendLinkHandler = () => {};
+  const sendLinkHandler = () => {
+    setLoading(true);
+    const body = { email };
+    forgotAxios(body)
+      .then((res) => {
+        console.log(res);
+        setMessage({ ...message, success: res.data.data?.message });
+        setMessage({ ...message, show: true });
+        setIsError(false);
+        setLoading(false);
+        setEmail("");
+      })
+      .catch((err) => {
+        console.log(err);
+        setMessage({ ...message, error: err.response?.data.message });
+        setMessage({ ...message, show: true });
+        setIsError(true);
+        setLoading(false);
+      });
+  };
   return (
     <>
       <div className="container-forgot">
@@ -40,20 +69,23 @@ function Forgot() {
                       onClick={sendLinkHandler}
                       className="fw-bold btn btn-warning w-100 py-4 rounded-4"
                     >
-                      Send
+                      {loading ? "Please wait ..." : "Send"}
                     </button>
                   </div>
                 </div>
-                <div className="row justify-content-center">
-                  <div className="col-md-5">
-                    <p className="ms-4 ms-lg-0 waiting-text text-white fw-bold">
-                      Click here if you didn’t receive any link in 2 minutes
-                    </p>
-                    <button className="mt-4 w-50 py-4 rounded-4 btn btn-choco">
-                      Resend Link
-                    </button>
-                  </div>
-                </div>
+                {message.show ? (
+                  <>
+                    {isError ? (
+                      <p className="ms-4 ms-lg-0 waiting-text text-danger fw-bold">
+                        {message.error}
+                      </p>
+                    ) : (
+                      <p className="ms-4 ms-lg-0 waiting-text text-white fw-bold">
+                        Please check your email for password confirmation!
+                      </p>
+                    )}
+                  </>
+                ) : null}
               </div>
             </div>
           </div>

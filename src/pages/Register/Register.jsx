@@ -131,7 +131,7 @@ function SignUp() {
                 <p className="already-account">Already have an account?</p>
                 <div className="underline"></div>
               </section>
-              <Link to="/login" className="button-auth login">
+              <Link to="/auth/login" className="button-auth login">
                 <p className="signup-google-text">Login</p>
               </Link>
             </form>

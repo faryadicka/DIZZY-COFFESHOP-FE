@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
-
+import { FaChevronRight } from "react-icons/fa";
 // Component
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
@@ -17,6 +16,7 @@ import { getProfileAxios, updateProfileAxios } from "../../services/users";
 
 //redux
 import { getProfileRedux } from "../../redux/actionCreator/users";
+import ModalForm from "../../components/ModalForm/ModalForm";
 
 function Profile1() {
   const userData = useSelector((state) => state.auth.userData);
@@ -42,6 +42,7 @@ function Profile1() {
   const [imgPreview, setImgPreview] = useState(null);
   const [edit, setEdit] = useState(true);
   const [edit1, setEdit1] = useState(true);
+  const [show, setShowModal] = useState(false);
 
   const getProfilePage = (token) => {
     getProfileAxios(token)
@@ -438,20 +439,25 @@ function Profile1() {
                   <button type="button" className="btn-footer btn-yellow">
                     Cancel
                   </button>
-                  <Link
-                    to="/forgot"
+                  <button
+                    onClick={() => {
+                      setShowModal(true);
+                    }}
                     type="button"
-                    className="btn-footer btn-light text-start text-decoration-none"
+                    className="btn-footer btn-light text-start text-decoration-none d-flex align-items-center justify-content-between"
                   >
-                    Edit Password
-                  </Link>
-                  <Link
-                    to="/logout"
+                    {" "}
+                    <p className="fw-bold mt-2">Edit Password</p>
+                    <FaChevronRight />
+                  </button>
+                  <button
                     type="button"
-                    className="btn-footer btn-light text-start text-decoration-none"
+                    className="btn-footer btn-light text-start text-decoration-none d-flex align-items-center justify-content-between"
                   >
-                    Logout
-                  </Link>
+                    {" "}
+                    <p className="fw-bold mt-2">Logout</p>
+                    <FaChevronRight />
+                  </button>
                 </div>
               </div>
             </div>
@@ -465,6 +471,12 @@ function Profile1() {
         message={updateSuccess ? message.success : message.error}
         hideModal={() => {
           setUpdateSuccess(false);
+        }}
+      />
+      <ModalForm
+        showModal={show}
+        hideModal={() => {
+          setShowModal(false);
         }}
       />
     </>

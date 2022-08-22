@@ -1,0 +1,19 @@
+.form-pass-reset {
+  background-color: #fff;
+  outline: none;
+  padding: 30px;
+  border: none;
+  height: 50px;
+}
+
+.show-eye-1 {
+  position: relative;
+  bottom: 45px;
+  left: 200px;
+}
+
+.show-eye-2 {
+  position: relative;
+  bottom: 45px;
+  left: 200px;
+}

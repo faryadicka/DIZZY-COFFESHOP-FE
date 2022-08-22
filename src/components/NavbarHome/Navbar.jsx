@@ -53,7 +53,7 @@ export default function Navbar() {
             <div className="col-4 col-md-5">
               <button
                 onClick={() => {
-                  navigate("/login");
+                  navigate("/auth/login");
                 }}
                 className="btn"
               >
@@ -63,7 +63,7 @@ export default function Navbar() {
             <div className="col-4 col-md-2 ps-4">
               <button
                 onClick={() => {
-                  navigate("/register");
+                  navigate("/auth/register");
                 }}
                 className="btn btn-warning rounded-4"
               >

@@ -12,3 +12,10 @@ export const updateProfileAxios = (body, token) => {
     headers: { "x-access-token": token, "Content-Type": "multipart/form-data" },
   });
 };
+
+export const updatePasswordAxios = (body, token) => {
+  const URL = `${REACT_APP_HOST}/api/users/password`;
+  return axios.patch(URL, body, {
+    headers: {'x-access-token': token},
+  });
+};

@@ -7,6 +7,7 @@ import { store, persistor } from "./redux/store"
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import ForgotPassword from "./pages/Forgot/Forgot";
+import Reset from "./pages/Reset/Reset";
 import Home from "./pages/Home/Home";
 import Products from "./pages/Products/Products";
 import ProductDetail from "./pages/ProductDetail/ProductDetail";
@@ -42,12 +43,13 @@ export default function App() {
             <Route path="/promos/edit/:id" element={<PrivateElementLogin redirectTo="/login" extraData={{ isAuthenticated: false }}>
               <EditPromo />
             </PrivateElementLogin>} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={
+            <Route path="/auth/login" element={<Login />} />
+            <Route path="/auth/register" element={
               <PublicElement redirectTo="/">
                 <Register />
               </PublicElement>} />
-            <Route path="/forgot" element={<ForgotPassword />} />
+            <Route path="/auth/forgot" element={<ForgotPassword />} />
+            <Route path="/auth/reset/:otp" element={<Reset />} />
             <Route path="/products" element={<Products />} />
             <Route path="/products/:favorite" element={<Products />} />
             <Route path="/products/detail/:id" element={<ProductDetail />} />
