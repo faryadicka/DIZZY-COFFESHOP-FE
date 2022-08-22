@@ -27,17 +27,23 @@ function SignUp() {
   });
   const [isError, setIsError] = useState(false);
   const [showPass, setShowPass] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const registerhandler = (event) => {
     event.preventDefault();
+    setLoading(true);
     registerAxios(form)
-      .then(() => {
+      .then((res) => {
+        console.log(res)
         setMessage({ ...message, success: "Register successfully" });
         setIsError(false);
+        setLoading(false);
       })
       .catch((err) => {
+        console.log(err)
         setMessage({ ...message, error: err.response?.data.message });
         setIsError(true);
+        setLoading(false);
       });
   };
 
@@ -181,17 +187,18 @@ function SignUp() {
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
-        <div className="modal-dialog">
+        <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title text-center" id="exampleModalLabel">
                 {isError ? (
                   <p className="text-warning">
-                    {message.error}
-                    {"!"}
+                    {loading ? "Please wait ..." : `${message.error}`}
                   </p>
                 ) : (
-                  <p className="text-danger">{message.success}</p>
+                  <p className="text-danger">
+                    {loading ? "Please wait ..." : `${message.success}`}
+                  </p>
                 )}
               </h5>
               <button
@@ -201,23 +208,25 @@ function SignUp() {
                 aria-label="Close"
               ></button>
             </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-success"
-                data-bs-dismiss="modal"
-                onClick={() => {
-                  if (isError === true) {
-                    navigate("/register");
+            {loading ? null : (
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-success"
+                  data-bs-dismiss="modal"
+                  onClick={() => {
+                    if (isError === true) {
+                      navigate("/auth/register");
+                      return window.scrollTo(0, 0);
+                    }
+                    navigate("/auth/login");
                     return window.scrollTo(0, 0);
-                  }
-                  navigate("/login");
-                  return window.scrollTo(0, 0);
-                }}
-              >
-                Close
-              </button>
-            </div>
+                  }}
+                >
+                  Close
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>
