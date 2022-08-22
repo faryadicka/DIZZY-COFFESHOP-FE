@@ -34,6 +34,7 @@ function SignIn() {
   const [showPass, setShowPass] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   // useEffect(() => {
   //   const { state } = location;
@@ -44,14 +45,17 @@ function SignIn() {
 
   const loginHandler = (event) => {
     event.preventDefault();
+    setLoading(true);
     dispatch(loginAction(form))
       .then((res) => {
         setMessage({ ...message, success: res.value.data.message });
         setIsLoggedIn(true);
+        setLoading(false);
       })
       .catch((err) => {
         console.log(err);
         setMessage({ ...message, error: err.response.data.message });
+        setLoading(false);
       });
   };
   return (
@@ -202,9 +206,13 @@ function SignIn() {
             <div className="modal-header">
               <h5 className="modal-title text-center" id="exampleModalLabel">
                 {!isLoggedIn ? (
-                  <p className="text-warning">{message.error}</p>
+                  <p className="text-warning">
+                    {!loading ? `${message.error}` : "Please wait ..."}
+                  </p>
                 ) : (
-                  <p className="text-danger">{message.success}</p>
+                  <p className="text-danger">
+                    {!loading ? `${message.success}` : "Please wait ..."}
+                  </p>
                 )}
               </h5>
               <button

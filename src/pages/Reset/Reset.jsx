@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 // Component
@@ -13,6 +13,7 @@ import { resetAxios } from "../../services/auth";
 
 function Reset() {
   const params = useParams();
+  const navigate = useNavigate()
   const [form, setForm] = useState({
     newPassword: "",
     confirmPassword: "",
@@ -46,6 +47,9 @@ function Reset() {
         setMessage({ ...message, success: "Reset password succes!" });
         setShow(true);
         setForm({ ...form, newPassword: "", confirmPassword: "" });
+        setTimeout(() => {
+          navigate("/auth/login")
+        }, 1000)
       })
       .catch((err) => {
         setLoading(false);
